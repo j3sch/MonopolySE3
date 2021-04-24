@@ -5,3 +5,7 @@
 body {
   @apply dark:bg-gray-900 dark:text-gray-100 bg-gray-100 text-gray-900 antialiased font-sans;
 }
+
+#dssdsd {
+  @apply bg-red-500;
+}
