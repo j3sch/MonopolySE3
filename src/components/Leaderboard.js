@@ -5,7 +5,7 @@ export function Leaderboard() {
     <div>
       {playerListData.map((player) => (
         <div
-          div
+          key={player.place}
           className='grid justify-items-stretch grid-cols-6 h-16 p-1 group hover:text-2xl font-bold text-xl transition hover:p-0 hover:bg-opacity-10 '
         >
           <div
