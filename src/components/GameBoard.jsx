@@ -7,6 +7,8 @@ export function GameBoard() {
   let player3 = 2
   let player4 = 13
 
+  let borderColor = 'border-black border-2'
+
   return (
     <div className='grid grid-cols-9 h-screen'>
       <div className='row-start-2 row-end-7 col-start-3 col-end-8 bg-white' />
@@ -16,10 +18,17 @@ export function GameBoard() {
           title={gameField.title}
           price={gameField.price}
           condition={gameField.condition}
-          player1={gameField.id === player1}
-          player2={gameField.id === player2}
-          player3={gameField.id === player3}
-          player4={gameField.id === player4}
+          borderColor={
+            (gameField.id === player1 &&
+              (borderColor = 'border-red-500 border-4')) ||
+            (gameField.id === player2 &&
+              (borderColor = 'border-blue-500 border-4')) ||
+            (gameField.id === player3 &&
+              (borderColor = 'border-green-500 border-4')) ||
+            (gameField.id === player4 &&
+              (borderColor = 'border-yellow-500 border-4')) ||
+            (borderColor = 'border-black border-2')
+          }
           color={gameField.color}
         />
       ))}
