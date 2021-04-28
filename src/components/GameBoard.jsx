@@ -1,4 +1,4 @@
-import { GameField } from './GameField'
+import { GameField } from './GameFields'
 import { gameFieldData } from '~/data/GameFieldData'
 
 export function GameBoard() {
