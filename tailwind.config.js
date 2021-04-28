@@ -3,8 +3,11 @@ module.exports = {
   purge: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'media',
   theme: {
-    extend: {
-    },
+    ripple: (theme) => ({
+      colors: theme('colors'),
+      darken: 0.1,
+    }),
+    extend: {},
   },
   plugins: [],
 }

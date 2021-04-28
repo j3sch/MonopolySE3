@@ -31,7 +31,7 @@ export function GameField(props) {
       return (
         <div className={borderColor} key={props.id}>
           <div className={`${props.color} h-1/4 border-black border-1`}></div>
-          <div className='h-3/4 bg-green-200 border-black border-1 grid justify-items-center'>
+          <div className='h-3/4 bg-green-200 border-black border-1 grid justify-items-center mx-auto'>
             <p className='text-xl font-bold'>{props.title}</p>
             <p className='text-xl font-semibold'>{props.price}</p>
           </div>

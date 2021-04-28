@@ -1,4 +1,4 @@
-import { playerListData } from '~/data/playerListData'
+import { playerListData } from '~/data/PlayerListData'
 
 export function Leaderboard() {
   return (
@@ -27,5 +27,6 @@ export function Leaderboard() {
         </div>
       ))}
     </div>
+    
   )
 }

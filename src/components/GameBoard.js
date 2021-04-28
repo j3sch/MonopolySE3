@@ -1,5 +1,5 @@
 import { GameField } from './GameField'
-import { gameFieldData } from '~/data/gameFieldData'
+import { gameFieldData } from '~/data/GameFieldData'
 
 export function GameBoard() {
   let player1 = 5

@@ -7,7 +7,7 @@ import {
   colorGroup6,
   colorGroup7,
   colorGroup8,
-} from '~/data/gameFieldColor'
+} from '~/data/GameFieldColor'
 
 export const gameFieldData = [
   { id: 0, condition: 'go' },
