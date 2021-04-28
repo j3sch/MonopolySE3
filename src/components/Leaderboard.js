@@ -11,14 +11,15 @@ export function Leaderboard() {
           <div
             className={
               player.color +
-              ' mr-2 group-hover:mr-1 items-center grid justify-items-center'
+              ' mr-2 group-hover:mr-1 col-span-2 xl:col-span-1 items-center grid justify-items-center'
             }
           >
             {player.place}
           </div>
           <div
             className={
-              player.color + ' col-span-5 grid grid-cols-2 items-center px-3 '
+              player.color +
+              ' col-span-4 xl:col-span-5 grid grid-cols-2 items-center px-3 '
             }
           >
             <div className='col-span-1 '>{player.name}</div>
@@ -27,6 +28,5 @@ export function Leaderboard() {
         </div>
       ))}
     </div>
-    
   )
 }
