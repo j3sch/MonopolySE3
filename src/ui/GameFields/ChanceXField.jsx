@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
-export const ChanceXField = (props) => {
+export const ChanceXField = (id, borderColor) => {
   return (
-    <div key={props.id} className={props.borderColor + ' h-full flex'}>
+    <div key={id} className={borderColor + ' h-full flex'}>
       <Image
         alt='Picture of the chance field'
         src='/images/chance.png'

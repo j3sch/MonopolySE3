@@ -1,11 +1,8 @@
 import Image from 'next/image'
 
-export const JailField = (props) => {
+export const JailField = (id, borderColor) => {
   return (
-    <div
-      key={props.id}
-      className={props.borderColor + ' max-h-64 flex col-span-2'}
-    >
+    <div key={id} className={borderColor + ' max-h-64 flex col-span-2'}>
       <Image
         alt='Picture of the jail field'
         src='/images/jail.png'
