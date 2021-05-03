@@ -25,7 +25,7 @@ export const gameFieldData = [
     condition: 'top',
     color: colorGroup1,
   },
-  { id: 3, title: 'CHANCE', price: '1$', condition: 'chance-x' },
+  { id: 3, title: 'CHANCE', price: '1$', condition: 'chanceX' },
   {
     id: 4,
     title: 'CANDY STORE',
@@ -69,8 +69,8 @@ export const gameFieldData = [
     condition: 'right',
     color: colorGroup3,
   },
-  { id: 21, title: 'CHANCE', price: '1$', condition: 'chance-y' },
-  { id: 9, title: 'CHANCE', price: '1$', condition: 'chance-y' },
+  { id: 21, title: 'CHANCE', price: '1$', condition: 'chanceY' },
+  { id: 9, title: 'CHANCE', price: '1$', condition: 'chanceY' },
   {
     id: 20,
     title: 'THE ZOO',
@@ -99,7 +99,7 @@ export const gameFieldData = [
     condition: 'right',
     color: colorGroup4,
   },
-  { id: 18, condition: 'go to jail' },
+  { id: 18, condition: 'goToJail' },
   {
     id: 17,
     title: 'PET STORE',
@@ -114,7 +114,7 @@ export const gameFieldData = [
     condition: 'bottom',
     color: colorGroup6,
   },
-  { id: 15, title: 'CHANCE', price: '1$', condition: 'chance-x' },
+  { id: 15, title: 'CHANCE', price: '1$', condition: 'chanceX' },
   {
     id: 14,
     title: 'MOVIE THEATER',
@@ -129,5 +129,5 @@ export const gameFieldData = [
     condition: 'bottom',
     color: colorGroup5,
   },
-  { id: 12, condition: 'free parking' },
+  { id: 12, condition: 'freeParking' },
 ]

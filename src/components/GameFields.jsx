@@ -9,27 +9,20 @@ import { GoToJailField as GoToJailField } from '~/ui/GameFields/GoToJailField'
 import { ChanceXField as ChanceXField } from '~/ui/GameFields/ChanceXField'
 import { ChanceYField as ChanceYField } from '~/ui/GameFields/ChanceYField'
 
+const gameField = {
+  top: TopField,
+  bottom: BottomField,
+  left: LeftField,
+  right: RightField,
+  go: GoField,
+  jail: JailField,
+  freeParking: FreeParkingField,
+  goToJail: GoToJailField,
+  chanceX: ChanceXField,
+  chanceY: ChanceYField,
+}
+
 export function GameField(props) {
-  switch (props.condition) {
-    case 'top':
-      return <TopField {...props} />
-    case 'bottom':
-      return <BottomField {...props} />
-    case 'left':
-      return <LeftField {...props} />
-    case 'right':
-      return <RightField {...props} />
-    case 'go':
-      return <GoField {...props} />
-    case 'jail':
-      return <JailField {...props} />
-    case 'free parking':
-      return <FreeParkingField {...props} />
-    case 'go to jail':
-      return <GoToJailField {...props} />
-    case 'chance-x':
-      return <ChanceXField {...props} />
-    case 'chance-y':
-      return <ChanceYField {...props} />
-  }
+  const GameField = gameField[props.condition]
+  return <GameField {...props} />
 }
