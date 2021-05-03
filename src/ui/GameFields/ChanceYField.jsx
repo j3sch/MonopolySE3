@@ -4,7 +4,7 @@ export const ChanceYField = (id, borderColor) => {
   return (
     <div key={id} className={borderColor + ' h-full flex col-span-2'}>
       <Image
-        alt='Picture of the chance field'
+        alt='Chance field'
         src='/images/chance.png'
         height={100}
         width={600}
