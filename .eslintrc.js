@@ -17,6 +17,12 @@ module.exports = {
 	},
 	plugins: ['react'],
 	rules: {
-		'jsx-a11y/anchor-is-valid': 'off',
+		'react/react-in-jsx-scope': 'off', // not required in Next.js
+		'jsx-a11y/anchor-is-valid': 'off', // Link instead href in Next.js
+		'react/jsx-props-no-spreading': 'off',
+		'import/prefer-default-export': 'off',
+		'import/no-unresolved': 'off',
+		'import/extensions': 'off',
+		'react/require-default-props': 'off', // gamefield data is static
 	},
 };
