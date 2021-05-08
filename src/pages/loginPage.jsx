@@ -1,7 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import LoginNotification from '~/components/LoginNotification';
-
-import { reducer } from '../utils/reducer';
+import { reducer } from '~/utils/reducer';
 
 const defaultState = {
 	people: [],
