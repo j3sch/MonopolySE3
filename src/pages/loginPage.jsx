@@ -2,12 +2,16 @@ import React, { useState, useReducer } from 'react';
 import LoginNotification from '~/components/LoginNotification';
 import { reducer } from '~/utils/reducer';
 
+/* eslint-disable */
 const defaultState = {
 	people: [],
 	isNotificationActiv: false,
 	message: '',
 };
-const LoginPage = () => {
+
+let client;
+const LoginPage = ({ stompClient }) => {
+	client = stompClient;
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
 
@@ -15,7 +19,9 @@ const LoginPage = () => {
 		e.preventDefault();
 		if (name) {
 			const newItem = { id: new Date().getTime().toString(), name };
+			sendMessage(newItem.id, newItem.name);
 			dispatch({ type: 'USER_ADDED', payload: newItem });
+
 			setName('');
 		} else {
 			dispatch({ type: 'NO_INPUT' });
@@ -24,6 +30,10 @@ const LoginPage = () => {
 
 	const closeNotification = () => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
+	};
+
+	const sendMessage = (id, name) => {
+		client.send('/app/hello', {}, JSON.stringify({ id, name }));
 	};
 
 	return (

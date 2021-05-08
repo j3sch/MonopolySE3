@@ -1,11 +1,21 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
+/* eslint-disable */
 const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
+	const router = useRouter();
 	useEffect(() => {
-		setTimeout(() => {
-			closeNotification();
-		}, 3000);
+		{
+			backgroundColor === 'bg-green-500'
+				? setTimeout(() => {
+						closeNotification();
+						router.push('/gamePage');
+				  }, 500)
+				: setTimeout(() => {
+						closeNotification();
+				  }, 3000);
+		}
 	});
 
 	return (
