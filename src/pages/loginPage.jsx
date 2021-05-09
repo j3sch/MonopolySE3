@@ -1,6 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import LoginNotification from '~/components/LoginNotification';
 import { reducer } from '~/utils/reducer';
+import { PlayerContext } from '~/utils/PlayerContext';
 
 /* eslint-disable */
 const defaultState = {
@@ -8,13 +9,12 @@ const defaultState = {
 	isNotificationActiv: false,
 	message: '',
 };
-
 let client;
-const LoginPage = ({ stompClient }) => {
+const LoginPage = () => {
+	const { stompClient } = useContext(PlayerContext);
 	client = stompClient;
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (name) {
@@ -33,7 +33,7 @@ const LoginPage = ({ stompClient }) => {
 	};
 
 	const sendMessage = (id, name) => {
-		client.send('/app/hello', {}, JSON.stringify({ id, name }));
+		stompClient.send('/app/hello', {}, JSON.stringify({ id, name }));
 	};
 
 	return (
