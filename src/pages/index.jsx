@@ -8,12 +8,13 @@ import React, { useState } from 'react';
 /* eslint-disable */
 const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
+
 	const onConnected = () => {
 		console.log('connected');
 		stompClient.subscribe('/topic/greetings', function (greeting) {
+			players.push({ name: JSON.parse(greeting.body).content });
 			setUserJoint(true);
-			console.log(JSON.parse(greeting.body).content);
-			// players = JSON.parse(greeting.body).content;
+			console.log('Hello :' + JSON.parse(greeting.body).content);
 		});
 	};
 
@@ -29,7 +30,9 @@ const Home = () => {
 		stompClient.connect({}, onConnected, onError);
 	};
 
-	connect();
+	if (stompClient === undefined) {
+		connect();
+	}
 
 	const sendMessage = (msg) => {
 		stompClient.send('/app/hello', {}, JSON.stringify({ name: msg }));
@@ -42,4 +45,5 @@ const Home = () => {
 		</PlayerContext.Provider>
 	);
 };
+
 export default Home;
