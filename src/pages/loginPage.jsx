@@ -10,7 +10,7 @@ const defaultState = {
 	message: '',
 };
 let client;
-const LoginPage = () => {
+const LoginPage = ({ userJoint }) => {
 	const { stompClient } = useContext(PlayerContext);
 	client = stompClient;
 	const [name, setName] = useState('');
@@ -36,7 +36,9 @@ const LoginPage = () => {
 		stompClient.send('/app/hello', {}, JSON.stringify({ id, name }));
 	};
 
-	return (
+	return userJoint === true ? (
+		<div></div>
+	) : (
 		<div className="flex h-full">
 			<div className="mx-auto text-white">
 				<h1 className="text-white font-semibold text-4xl mt-28 mb-6">

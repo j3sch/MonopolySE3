@@ -6,9 +6,9 @@ import React, { useContext } from 'react';
 export function Leaderboard() {
 	const { players } = useContext(PlayerContext);
 
-	players.map((player) => {
-		console.log(player.name);
-	});
+	// players.map((player) => {
+	// 	console.log(player.name);
+	// });
 
 	return (
 		<div>
