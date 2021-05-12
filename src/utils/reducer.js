@@ -17,6 +17,14 @@ export const reducer = (state, action) => {
 			backgroundColor: 'bg-red-500',
 		};
 	}
+	if (action.type === 'PARTY_FULL') {
+		return {
+			...state,
+			isNotificationActiv: true,
+			message: 'Sry, party is full',
+			backgroundColor: 'bg-red-500',
+		};
+	}
 	if (action.type === 'CLOSE_NOTIFICATION') {
 		return {
 			...state,

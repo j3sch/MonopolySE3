@@ -11,15 +11,21 @@ const defaultState = {
 };
 let client;
 const LoginPage = ({ userJoint }) => {
+	const { isPartyFullHooks } = useContext(PlayerContext);
 	const { stompClient } = useContext(PlayerContext);
+
 	client = stompClient;
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
+
 	const handleSubmit = (e) => {
+		sendMessage(name);
 		e.preventDefault();
-		if (name) {
+		console.log(`login: is party full? ${isPartyFullHooks}`);
+		if (isPartyFullHooks) {
+			dispatch({ type: 'PARTY_FULL' });
+		} else if (name) {
 			const newItem = { id: new Date().getTime().toString(), name };
-			sendMessage(newItem.id, newItem.name);
 			dispatch({ type: 'USER_ADDED', payload: newItem });
 
 			setName('');
@@ -32,8 +38,8 @@ const LoginPage = ({ userJoint }) => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
 	};
 
-	const sendMessage = (id, name) => {
-		stompClient.send('/app/hello', {}, JSON.stringify({ id, name }));
+	const sendMessage = (name) => {
+		stompClient.send('/server/playerName', {}, JSON.stringify({ name }));
 	};
 
 	return userJoint === true ? (

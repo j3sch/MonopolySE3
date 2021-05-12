@@ -308,6 +308,11 @@
     "get-intrinsic" "^1.1.1"
     "is-string" "^1.0.5"
 
+"array-uniq@1.0.2":
+  "integrity" "sha1-X8w3OSB3VyPP1k1lxkvvU7+eum0="
+  "resolved" "https://registry.npmjs.org/array-uniq/-/array-uniq-1.0.2.tgz"
+  "version" "1.0.2"
+
 "array.prototype.flat@^1.2.3":
   "integrity" "sha512-4470Xi3GAPAjZqFcljX2xzckv1qeKPizoNkiS0+O4IoPR2ZNpcjE0pkhdihlDouK+x6QOast26B4Q/O9DJnwSg=="
   "resolved" "https://registry.npmjs.org/array.prototype.flat/-/array.prototype.flat-1.2.4.tgz"
@@ -3091,6 +3096,11 @@
   dependencies:
     "safe-buffer" "^5.1.0"
 
+"randombytes@2.0.3":
+  "integrity" "sha1-Z0yZdgkBw8QRJ3GjHlIdw0nMCew="
+  "resolved" "https://registry.npmjs.org/randombytes/-/randombytes-2.0.3.tgz"
+  "version" "2.0.3"
+
 "randomfill@^1.0.3":
   "integrity" "sha512-87lcbR8+MhcWcUiQ+9e+Rwx8MyR2P7qnt15ynUlbm3TU/fjbgz4GsvfSUDTemtCCtVCqb4ZcEFlyPNTh9bBTLw=="
   "resolved" "https://registry.npmjs.org/randomfill/-/randomfill-1.0.4.tgz"
@@ -3098,6 +3108,14 @@
   dependencies:
     "randombytes" "^2.0.5"
     "safe-buffer" "^5.1.0"
+
+"randomstring@^1.2.1":
+  "integrity" "sha512-eMnfell9XuU3jfCx3f4xCaFAt0YMFPZhx9R3PSStmLarDKg5j5vivqKhf/8pvG+VX/YkxsckHK/VPUrKa5V07A=="
+  "resolved" "https://registry.npmjs.org/randomstring/-/randomstring-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "array-uniq" "1.0.2"
+    "randombytes" "2.0.3"
 
 "raw-body@2.4.1":
   "integrity" "sha512-9WmIKF6mkvA0SLmA2Knm9+qj89e+j1zqgyn8aXGd7+nAduPoqgI9lO57SAZNn/Byzo5P7JhXTyg9PzaJbH73bA=="

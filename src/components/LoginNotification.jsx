@@ -5,13 +5,9 @@ import PropTypes from 'prop-types';
 const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
 	useEffect(() => {
 		{
-			backgroundColor === 'bg-green-500'
-				? setTimeout(() => {
-						closeNotification();
-				  }, 500)
-				: setTimeout(() => {
-						closeNotification();
-				  }, 3000);
+			setTimeout(() => {
+				closeNotification();
+			}, 4000);
 		}
 	});
 
