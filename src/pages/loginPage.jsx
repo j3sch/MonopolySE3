@@ -3,14 +3,12 @@ import LoginNotification from '~/components/LoginNotification';
 import { reducer } from '~/utils/reducer';
 import { PlayerContext } from '~/utils/PlayerContext';
 
-/* eslint-disable */
 const defaultState = {
 	people: [],
 	isNotificationActiv: false,
 	message: '',
 };
-let client;
-const LoginPage = ({ userJoint }) => {
+const LoginPage = () => {
 	const { isPartyFullHooks } = useContext(PlayerContext);
 	const { stompClient } = useContext(PlayerContext);
 
@@ -42,9 +40,7 @@ const LoginPage = ({ userJoint }) => {
 		stompClient.send('/server/playerName', {}, JSON.stringify({ name }));
 	};
 
-	return userJoint === true ? (
-		<div></div>
-	) : (
+	return (
 		<div className="flex h-full">
 			<div className="mx-auto text-white">
 				<h1 className="text-white font-semibold text-4xl mt-28 mb-6">

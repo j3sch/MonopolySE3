@@ -5,7 +5,6 @@ import GamePage from '~/pages/gamePage';
 let stompClient;
 import React, { useState } from 'react';
 
-/* eslint-disable */
 const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
 	const [players, setPlayers] = useState([{}]);
@@ -22,10 +21,12 @@ const Home = () => {
 			}
 		});
 		stompClient.subscribe('/user/client/reply', function (greeting) {
-			console.log(greeting.body);
-			isPartyFull = greeting.body == 'true';
+			isPartyFull = greeting.body === 'true';
 			setPartyFull(isPartyFull);
 			console.log(isPartyFull);
+		});
+		stompClient.subscribe('/user/client/something', function (greeting) {
+			console.log(greeting.body);
 		});
 	};
 
@@ -56,10 +57,18 @@ const Home = () => {
 		stompClient.send('/server/message', {}, JSON.stringify({ name: msg }));
 	};
 
+	if (userJoint) {
+		return (
+			<PlayerContext.Provider
+				value={{ players, stompClient, isPartyFullHooks }}
+			>
+				<GamePage />
+			</PlayerContext.Provider>
+		);
+	}
 	return (
 		<PlayerContext.Provider value={{ players, stompClient, isPartyFullHooks }}>
-			<LoginPage userJoint={userJoint} />
-			<GamePage userJoint={userJoint} />
+			<LoginPage />;
 		</PlayerContext.Provider>
 	);
 };

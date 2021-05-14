@@ -2,10 +2,8 @@ import { GameBoard } from '~/components/GameBoard';
 import { Leaderboard } from '~/components/Leaderboard';
 import { GameMenu } from '~/components/GameMenu';
 
-const GamePage = ({ userJoint }) => {
-	return userJoint === false ? (
-		<div></div>
-	) : (
+const GamePage = () => {
+	return (
 		<div className="flex mx-auto">
 			<div className="grid grid-cols-5">
 				<div className="text-white">
