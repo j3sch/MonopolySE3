@@ -12,7 +12,6 @@ const LoginPage = () => {
 	const { isPartyFullHooks } = useContext(PlayerContext);
 	const { stompClient } = useContext(PlayerContext);
 
-	client = stompClient;
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
 

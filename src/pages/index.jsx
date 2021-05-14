@@ -1,7 +1,6 @@
 import LoginPage from '~/pages/loginPage';
 import { PlayerContext } from '~/utils/PlayerContext';
 import GamePage from '~/pages/gamePage';
-// let players = [{ name: 'tim' }, { name: 'anne' }];
 let stompClient;
 import React, { useState } from 'react';
 
