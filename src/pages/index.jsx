@@ -8,6 +8,8 @@ const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
 	const [players, setPlayers] = useState([{}]);
 	const [isPartyFullHooks, setPartyFull] = useState(false);
+	const [isButtonDisabled, setButtonAktiv] = useState(true);
+
 	let isPartyFull;
 	const onConnected = () => {
 		console.log('connected');
@@ -24,9 +26,16 @@ const Home = () => {
 			setPartyFull(isPartyFull);
 			console.log(isPartyFull);
 		});
-		stompClient.subscribe('/user/client/something', function (greeting) {
+		stompClient.subscribe('/user/client/notification', function (greeting) {
 			console.log(greeting.body);
 		});
+		stompClient.subscribe(
+			'/user/client/enablePlayerButton',
+			function (greeting) {
+				console.log(greeting.body);
+				setButtonAktiv(greeting.body === 'true');
+			},
+		);
 	};
 
 	const onError = () => {
@@ -59,7 +68,7 @@ const Home = () => {
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
-				value={{ players, stompClient, isPartyFullHooks }}
+				value={{ players, stompClient, isPartyFullHooks, isButtonDisabled }}
 			>
 				<GamePage />
 			</PlayerContext.Provider>
