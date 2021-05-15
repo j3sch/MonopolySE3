@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
-export const FreeParkingField = (id, borderColor) => {
+export const FreeParkingField = (props) => {
+	const { id, borderColor } = props;
+
 	return (
 		<div key={id} className={`${borderColor} max-h-64  flex col-span-2`}>
 			<Image
