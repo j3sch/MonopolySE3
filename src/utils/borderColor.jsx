@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
 // fehler nicht gefunden
 export const borderColor = (id) => {
-	const player1 = 6;
+	const player1 = 11;
 	const player2 = 21;
-	const player3 = 2;
+	const player3 = 6;
 	const player4 = 13;
 	let color;
 

@@ -11,8 +11,8 @@ const Home = () => {
 	const [isButtonDisabled, setButtonAktiv] = useState(true);
 
 	let isPartyFull;
+
 	const onConnected = () => {
-		console.log('connected');
 		sendMessage('connected');
 		stompClient.subscribe('/client/playerList', function (greeting) {
 			setPlayers(JSON.parse(greeting.body));
@@ -24,13 +24,12 @@ const Home = () => {
 		stompClient.subscribe('/user/client/reply', function (greeting) {
 			isPartyFull = greeting.body === 'true';
 			setPartyFull(isPartyFull);
-			console.log(isPartyFull);
 		});
-		stompClient.subscribe('/user/client/notification', function (greeting) {
+		stompClient.subscribe('/client/notification', function (greeting) {
 			console.log(greeting.body);
 		});
 		stompClient.subscribe(
-			'/user/client/enablePlayerButton',
+			'/user/client/toggleAllBtn',
 			function (greeting) {
 				console.log(greeting.body);
 				setButtonAktiv(greeting.body === 'true');
@@ -54,6 +53,7 @@ const Home = () => {
 			},
 		});
 		stompClient = Stomp.over(SockJS);
+
 		stompClient.connect({}, onConnected, onError);
 	};
 
@@ -68,14 +68,14 @@ const Home = () => {
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
-				value={{ players, stompClient, isPartyFullHooks, isButtonDisabled }}
+				value={{ players, isButtonDisabled, stompClient }}
 			>
 				<GamePage />
 			</PlayerContext.Provider>
 		);
 	}
 	return (
-		<PlayerContext.Provider value={{ players, stompClient, isPartyFullHooks }}>
+		<PlayerContext.Provider value={{ stompClient, isPartyFullHooks }}>
 			<LoginPage />;
 		</PlayerContext.Provider>
 	);

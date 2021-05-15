@@ -18,7 +18,6 @@ const LoginPage = () => {
 	const handleSubmit = (e) => {
 		sendMessage(name);
 		e.preventDefault();
-		console.log(`login: is party full? ${isPartyFullHooks}`);
 		if (isPartyFullHooks) {
 			dispatch({ type: 'PARTY_FULL' });
 		} else if (name) {
