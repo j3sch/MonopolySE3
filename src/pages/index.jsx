@@ -8,7 +8,9 @@ const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
 	const [players, setPlayers] = useState([{}]);
 	const [isPartyFullHooks, setPartyFull] = useState(false);
-	const [isButtonDisabled, setButtonAktiv] = useState(true);
+	const [isDiceNumberBtnDisabled, setDiceNumberBtn] = useState(true);
+	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
+	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 
 	let isPartyFull;
 
@@ -28,11 +30,27 @@ const Home = () => {
 		stompClient.subscribe('/client/notification', function (greeting) {
 			console.log(greeting.body);
 		});
+		stompClient.subscribe('/user/client/toggleAllBtn', function (greeting) {
+			setDiceNumberBtn(greeting.body === 'true');
+			setNextPlayerBtn(greeting.body === 'true');
+			setBuyEstateBtn(greeting.body === 'true');
+		});
 		stompClient.subscribe(
-			'/user/client/toggleAllBtn',
+			'/user/client/toggleDiceNumberBtn',
 			function (greeting) {
-				console.log(greeting.body);
-				setButtonAktiv(greeting.body === 'true');
+				setDiceNumberBtn(greeting.body === 'true');
+			},
+		);
+		stompClient.subscribe(
+			'/user/client/toggleNextPlayerBtn',
+			function (greeting) {
+				setNextPlayerBtn(greeting.body === 'true');
+			},
+		);
+		stompClient.subscribe(
+			'/user/client/toggleBuyEstateBtn',
+			function (greeting) {
+				setBuyEstateBtn(greeting.body === 'true');
 			},
 		);
 	};
@@ -68,7 +86,13 @@ const Home = () => {
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
-				value={{ players, isButtonDisabled, stompClient }}
+				value={{
+					players,
+					isDiceNumberBtnDisabled,
+					stompClient,
+					isNextPlayerBtnDisabled,
+					isBuyEstateBtnDisabled,
+				}}
 			>
 				<GamePage />
 			</PlayerContext.Provider>
