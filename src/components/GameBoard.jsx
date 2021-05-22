@@ -9,6 +9,7 @@ export function GameBoard() {
 			{gameFieldData.map((gameField) => (
 				<GameField
 					key={gameField.id.toString()}
+					id={gameField.id}
 					title={gameField.title}
 					price={gameField.price}
 					condition={gameField.condition}

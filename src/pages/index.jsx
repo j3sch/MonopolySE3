@@ -12,13 +12,19 @@ const Home = () => {
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 
+	const [fieldPosition, setFieldPosition] = useState(-1);
+	const [estateColor, setEstateColor] = useState();
+
 	let isPartyFull;
+
+	const sendMessage = (msg) => {
+		stompClient.send('/server/message', {}, JSON.stringify({ name: msg }));
+	};
 
 	const onConnected = () => {
 		sendMessage('connected');
 		stompClient.subscribe('/client/playerList', function (greeting) {
 			setPlayers(JSON.parse(greeting.body));
-			console.log(isPartyFull);
 			if (JSON.parse(greeting.body).length <= 4 && !isPartyFull) {
 				setUserJoint(true);
 			}
@@ -27,9 +33,7 @@ const Home = () => {
 			isPartyFull = greeting.body === 'true';
 			setPartyFull(isPartyFull);
 		});
-		stompClient.subscribe('/client/notification', function (greeting) {
-			console.log(greeting.body);
-		});
+		stompClient.subscribe('/client/notification', function (greeting) {});
 		stompClient.subscribe('/user/client/toggleAllBtn', function (greeting) {
 			setDiceNumberBtn(greeting.body === 'true');
 			setNextPlayerBtn(greeting.body === 'true');
@@ -41,6 +45,10 @@ const Home = () => {
 				setDiceNumberBtn(greeting.body === 'true');
 			},
 		);
+		stompClient.subscribe('/client/buyEstate', function (greeting) {
+			setFieldPosition(parseInt(greeting.body.split(' ')[0], 10));
+			setEstateColor(greeting.body.split(' ')[1]);
+		});
 		stompClient.subscribe(
 			'/user/client/toggleNextPlayerBtn',
 			function (greeting) {
@@ -66,7 +74,6 @@ const Home = () => {
 		let SockJS = require('sockjs-client');
 		SockJS = new SockJS('http://localhost:8080//ws-monopoly', [], {
 			sessionId: () => {
-				console.log(`SessionId: ${sessionId}`);
 				return sessionId;
 			},
 		});
@@ -79,10 +86,6 @@ const Home = () => {
 		connect();
 	}
 
-	const sendMessage = (msg) => {
-		stompClient.send('/server/message', {}, JSON.stringify({ name: msg }));
-	};
-
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
@@ -92,6 +95,8 @@ const Home = () => {
 					stompClient,
 					isNextPlayerBtnDisabled,
 					isBuyEstateBtnDisabled,
+					fieldPosition,
+					estateColor,
 				}}
 			>
 				<GamePage />
