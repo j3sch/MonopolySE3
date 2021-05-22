@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 
 export const ChanceXField = (props) => {
-	const { id, borderColor } = props;
+	const { borderColor } = props;
 
 	return (
-		<div key={id} className={`${borderColor} h-full flex`}>
+		<div className={`${borderColor} h-full flex`}>
 			<Image
 				alt="Picture of the chance field"
 				src="/images/chance.png"
@@ -15,4 +16,8 @@ export const ChanceXField = (props) => {
 			/>
 		</div>
 	);
+};
+
+ChanceXField.propTypes = {
+	borderColor: PropTypes.string,
 };

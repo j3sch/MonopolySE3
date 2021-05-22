@@ -8,7 +8,7 @@ export function GameBoard() {
 			<div className="row-start-2 row-end-7 col-start-3 col-end-8 bg-white" />
 			{gameFieldData.map((gameField) => (
 				<GameField
-					key={gameField.id}
+					key={gameField.id.toString()}
 					title={gameField.title}
 					price={gameField.price}
 					condition={gameField.condition}

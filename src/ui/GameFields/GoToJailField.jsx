@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 
 export const GoToJailField = (props) => {
-	const { id, borderColor } = props;
+	const { borderColor } = props;
 
 	return (
-		<div key={id} className={`${borderColor} max-h-64  flex col-span-2`}>
+		<div className={`${borderColor} max-h-64  flex col-span-2`}>
 			<Image
 				alt="Go to jail field"
 				src="/images/goToJail.png"
@@ -15,4 +16,8 @@ export const GoToJailField = (props) => {
 			/>
 		</div>
 	);
+};
+
+GoToJailField.propTypes = {
+	borderColor: PropTypes.string,
 };

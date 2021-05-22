@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 
 export const FreeParkingField = (props) => {
-	const { id, borderColor } = props;
+	const { borderColor } = props;
 
 	return (
-		<div key={id} className={`${borderColor} max-h-64  flex col-span-2`}>
+		<div className={`${borderColor} max-h-64 flex col-span-2`}>
 			<Image
 				alt="Free parking field"
 				src="/images/freeParking.png"
@@ -15,4 +16,8 @@ export const FreeParkingField = (props) => {
 			/>
 		</div>
 	);
+};
+
+FreeParkingField.propTypes = {
+	borderColor: PropTypes.string,
 };
