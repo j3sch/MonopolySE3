@@ -23,7 +23,7 @@ const Home = () => {
 
 	const onConnected = () => {
 		sendMessage('connected');
-		stompClient.subscribe('/client/playerList', function (greeting) {
+		stompClient.subscribe('/user/client/playerList', function (greeting) {
 			setPlayers(JSON.parse(greeting.body));
 			if (JSON.parse(greeting.body).length <= 4 && !isPartyFull) {
 				setUserJoint(true);
