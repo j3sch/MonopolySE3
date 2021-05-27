@@ -24,7 +24,7 @@ export function Leaderboard() {
 							>
 								<div className="col-span-1 ">{player.name}</div>
 								<div className="col-span-1 justify-self-end">
-									{player.credit}
+									{player.playerBankBalance}
 								</div>
 							</div>
 						</div>
