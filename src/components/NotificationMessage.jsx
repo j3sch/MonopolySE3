@@ -6,7 +6,7 @@ const NotificationMessage = ({ message, closeNotification }) => {
 		{
 			setTimeout(() => {
 				closeNotification();
-			}, 6000);
+			}, 4000);
 		}
 	});
 

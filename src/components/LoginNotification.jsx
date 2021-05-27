@@ -6,7 +6,7 @@ const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
 		{
 			setTimeout(() => {
 				closeNotification();
-			}, 4000);
+			}, 6000);
 		}
 	});
 
