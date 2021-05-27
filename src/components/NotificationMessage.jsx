@@ -12,7 +12,7 @@ const NotificationMessage = ({ message, closeNotification }) => {
 
 	return (
 		<div
-			className={`p-20 bg-[#111827] rounded-xl absolute left-[50%] top-[50%] transform translate-y-[-50%] translate-x-[-50%]`}
+			className={`p-20 bg-gray-900 rounded-xl absolute left-[50%] top-[50%] transform translate-y-[-50%] translate-x-[-50%]`}
 		>
 			<p className="truncate font-semibold text-lg text-white pt-3 text-center">
 				{message}
