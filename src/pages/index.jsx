@@ -3,6 +3,7 @@ import { PlayerContext } from '~/utils/PlayerContext';
 import GamePage from '~/pages/gamePage';
 let stompClient;
 import React, { useState } from 'react';
+import NotificationMessage from '~/components/NotificationMessage';
 
 const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
@@ -14,6 +15,10 @@ const Home = () => {
 
 	const [fieldPosition, setFieldPosition] = useState(-1);
 	const [estateColor, setEstateColor] = useState();
+
+	//for receiving messages
+	const [isNotificationActiv, setNotification] = useState(false);
+	const [message, setMessage] = useState('');
 
 	let isPartyFull;
 
@@ -33,7 +38,6 @@ const Home = () => {
 			isPartyFull = greeting.body === 'true';
 			setPartyFull(isPartyFull);
 		});
-		stompClient.subscribe('/client/notification', function (greeting) {});
 		stompClient.subscribe('/user/client/toggleAllBtn', function (greeting) {
 			setDiceNumberBtn(greeting.body === 'true');
 			setNextPlayerBtn(greeting.body === 'true');
@@ -61,6 +65,10 @@ const Home = () => {
 				setBuyEstateBtn(greeting.body === 'true');
 			},
 		);
+		stompClient.subscribe('/client/notification', function (greeting) {
+			setNotification(true);
+			setMessage(greeting.body);
+		});
 	};
 
 	const onError = () => {
@@ -86,6 +94,10 @@ const Home = () => {
 		connect();
 	}
 
+	const closeNotification = () => {
+		setNotification(false);
+	};
+
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
@@ -100,6 +112,12 @@ const Home = () => {
 				}}
 			>
 				<GamePage />
+				{isNotificationActiv && (
+					<NotificationMessage
+						closeNotification={closeNotification}
+						message={message}
+					/>
+				)}
 			</PlayerContext.Provider>
 		);
 	}

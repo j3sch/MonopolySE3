@@ -21,7 +21,7 @@ const LoginPage = () => {
 		if (isPartyFullHooks) {
 			dispatch({ type: 'PARTY_FULL' });
 		} else if (name) {
-			const newItem = { id: new Date().getTime().toString(), name };
+			const newItem = { name };
 			dispatch({ type: 'USER_ADDED', payload: newItem });
 
 			setName('');

@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 body {
-  @apply dark:bg-gray-900 bg-gray-100 text-gray-900 antialiased font-sans;
+	@apply dark:bg-gray-900 bg-gray-100 text-gray-900 antialiased font-sans;
 }
 
 button:focus {
-  outline: 0px dotted;
+	outline: 0px dotted;
 }
 
-
+.centered {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

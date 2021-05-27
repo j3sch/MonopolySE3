@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-/* eslint-disable */
 const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
 	useEffect(() => {
 		{
 			setTimeout(() => {
 				closeNotification();
-			}, 4000);
+			}, 6000);
 		}
 	});
 
