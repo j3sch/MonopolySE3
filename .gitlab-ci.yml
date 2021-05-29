@@ -1,0 +1,15 @@
+stages:
+    - build
+    - test
+build:
+  stage: build
+  image: maven:latest
+  script: echo "mvn run build -B"
+
+tests:
+    stage: test
+    image: maven:latest
+    script: echo "mvn test"
+
+
+
