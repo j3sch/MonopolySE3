@@ -49,17 +49,17 @@ public class Street implements Field {
         currentPlayer = player;
         if (owner == null) {
             if(player.getPlayerBankBalance()-price >=0){
-                sendMessage.sendToUser(sessionIds[player.getID()], "/client/notification", "Willst du das kaufen");
-
+                sendMessage.sendToUser(sessionIds[currentPlayer.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
             }
 
-            //TODO ask player if he wants to buy that field
         } else {
             //player on field has to pay rent to the owner
             if(player != owner){
                 player.PlayerPaysMoney(rent);
+                sendMessage.sendToUser(sessionIds[currentPlayer.getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
                 owner.PlayerGetsMoney(rent);
-                //TODO send Messages to players for losing money and receiving money
+                sendMessage.sendToUser(sessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + player.getName());
+
             }
         }
     }
@@ -94,6 +94,8 @@ public class Street implements Field {
             throws JsonProcessingException {
         currentPlayer.PlayerPaysMoney(getPrice());
         setOwner(currentPlayer);
+
+        sendMessage.sendToAll("/client/notification", currentPlayer.getName() + " bought " + streetName);
 
     }
 
