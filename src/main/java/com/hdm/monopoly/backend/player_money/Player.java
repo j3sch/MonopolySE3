@@ -19,6 +19,10 @@ public class Player {
         this.position = 0;
     }
 
+    public int getID() {
+        return ID;
+    }
+
     public void setPosition(int position) {
         this.position = position;
     }

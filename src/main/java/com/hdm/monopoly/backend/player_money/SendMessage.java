@@ -18,7 +18,7 @@ public class SendMessage {
         this.messagingTemplate = messagingTemplate;
     }
 
-    protected void sendToUser(String sessionId, String destination, String message) {
+    public void sendToUser(String sessionId, String destination, String message) {
         SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor
                 .create(SimpMessageType.MESSAGE);
         headerAccessor.setSessionId(sessionId);
@@ -29,7 +29,7 @@ public class SendMessage {
                 headerAccessor.getMessageHeaders());
     }
 
-    protected void sendToAll(String destination, String message) {
+    public void sendToAll(String destination, String message) {
         messagingTemplate.convertAndSend(destination, message);
     }
 }
