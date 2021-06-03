@@ -55,7 +55,7 @@ public class CreatePlayers {
         }
         for (String id: sessionIds) {
             if (id != null) {
-                sendMessage.sendToUser(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));
+                sendMessage.sendToPlayer(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));
             }
         }
     }
@@ -74,7 +74,7 @@ public class CreatePlayers {
     sends this message only to the player whose turn it is now, so that the buttons can be activated
      */
     public void playerXTurn() {
-        sendMessage.sendToUser(sessionIds[0], "/client/toggleDiceNumberBtn", "false");
+        sendMessage.sendToPlayer(sessionIds[0], "/client/toggleDiceNumberBtn", "false");
     }
 
     //Define previous Player for everyone

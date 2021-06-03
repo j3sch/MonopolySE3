@@ -18,7 +18,7 @@ public class SendMessage {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void sendToUser(String sessionId, String destination, String message) {
+    public void sendToPlayer(String sessionId, String destination, String message) {
         SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor
                 .create(SimpMessageType.MESSAGE);
         headerAccessor.setSessionId(sessionId);

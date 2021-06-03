@@ -5,7 +5,6 @@ import com.hdm.monopoly.backend.player_money.Player;
 import com.hdm.monopoly.backend.player_money.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -49,16 +48,16 @@ public class Street implements Field {
         currentPlayer = player;
         if (owner == null) {
             if(player.getPlayerBankBalance()-price >=0){
-                sendMessage.sendToUser(sessionIds[currentPlayer.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
+                sendMessage.sendToPlayer(sessionIds[currentPlayer.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
             }
 
         } else {
             //player on field has to pay rent to the owner
             if(player != owner){
                 player.PlayerPaysMoney(rent);
-                sendMessage.sendToUser(sessionIds[currentPlayer.getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
+                sendMessage.sendToPlayer(sessionIds[currentPlayer.getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
                 owner.PlayerGetsMoney(rent);
-                sendMessage.sendToUser(sessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + player.getName());
+                sendMessage.sendToPlayer(sessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + player.getName());
 
             }
         }

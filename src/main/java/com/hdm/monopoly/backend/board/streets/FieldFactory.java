@@ -12,6 +12,8 @@ public class FieldFactory {
                 return new Go(name, goValue);
             case "Jail":
                 return new Jail(name);
+            case "FreeParking":
+                return new FreeParking(name);
             case "GoToJail":
                 return new GoToJail(name);
             case "EventField":
