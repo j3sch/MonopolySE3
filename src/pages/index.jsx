@@ -34,6 +34,9 @@ const Home = () => {
 				setUserJoint(true);
 			}
 		});
+		stompClient.subscribe('/client/playerList', function (greeting) {
+			setPlayers(JSON.parse(greeting.body));
+		});
 		stompClient.subscribe('/user/client/reply', function (greeting) {
 			isPartyFull = greeting.body === 'true';
 			setPartyFull(isPartyFull);
