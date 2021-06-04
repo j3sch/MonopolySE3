@@ -1,6 +1,7 @@
 package com.hdm.monopoly.backend.player_money;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -18,7 +19,7 @@ public class SendMessage {
         this.messagingTemplate = messagingTemplate;
     }
 
-    protected void sendToPlayer(String sessionId, String destination, String message) {
+    public void sendToPlayer(String sessionId, String destination, String message) {
         SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor
                 .create(SimpMessageType.MESSAGE);
         headerAccessor.setSessionId(sessionId);
@@ -29,7 +30,7 @@ public class SendMessage {
                 headerAccessor.getMessageHeaders());
     }
 
-    protected void sendToAll(String destination, String message) {
+    public void sendToAll(String destination, String message) {
         messagingTemplate.convertAndSend(destination, message);
     }
 }

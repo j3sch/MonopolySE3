@@ -3,6 +3,7 @@ package com.hdm.monopoly.backend.player_money;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.game_logic.Game;
+import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -19,16 +20,16 @@ public class DiceNumber {
     private final SendMessage sendMessage;
     private final String[] sessionIds;
     private final Player[] players;
+    private final SendPlayerData sendPlayerData;
 
     @Autowired
-    public DiceNumber(Game game, @Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds, Player[] players) {
+    public DiceNumber(Game game, @Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds, Player[] players, SendPlayerData sendPlayerData) {
         this.game = game;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.players = players;
-
+        this.sendPlayerData = sendPlayerData;
     }
-
 
     /*
     get message, if player clicked on button
@@ -47,7 +48,7 @@ public class DiceNumber {
             }
         }else {
             game.movePlayer(diceNumber);
-            sendPlayerToClient();
+            sendPlayerData.sendPlayerToClient();
             activateNextPlayerBtn();
         }
         game.endOfTurn();//maybe not the best moment to change the current player
@@ -69,8 +70,8 @@ public class DiceNumber {
         return new ObjectMapper().writeValueAsString(true);
     }
 
-    public void sendPlayerToClient() throws JsonProcessingException {
-        sendMessage.sendToAll("/client/playerList", new ObjectMapper().writeValueAsString(players));
-
-    }
+//    public void sendPlayerToClient() throws JsonProcessingException {
+//        sendMessage.sendToAll("/client/playerList", new ObjectMapper().writeValueAsString(players));
+//
+//    }
 }
