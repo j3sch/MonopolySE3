@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
 import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.Header;

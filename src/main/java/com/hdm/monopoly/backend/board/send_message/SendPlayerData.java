@@ -3,7 +3,6 @@ package com.hdm.monopoly.backend.board.send_message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.player_money.Player;
-import com.hdm.monopoly.backend.player_money.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

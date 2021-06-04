@@ -1,7 +1,6 @@
-package com.hdm.monopoly.backend.player_money;
+package com.hdm.monopoly.backend.board.send_message;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

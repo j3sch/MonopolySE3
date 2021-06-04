@@ -1,7 +1,6 @@
 package com.hdm.monopoly.backend.board.send_message;
 
 import com.hdm.monopoly.backend.board.game_logic.Game;
-import com.hdm.monopoly.backend.player_money.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

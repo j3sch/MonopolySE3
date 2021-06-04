@@ -1,9 +1,6 @@
 package com.hdm.monopoly.backend.board.streets;
 
-import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
-import com.hdm.monopoly.backend.di.GameConfig;
 import com.hdm.monopoly.backend.player_money.Player;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class GoToJail implements Field{
 
@@ -15,7 +12,6 @@ public class GoToJail implements Field{
 
     @Override
     public void moveOnField(Player player) {
-
         player.setPosition(6);
         player.getArrested();
     }
