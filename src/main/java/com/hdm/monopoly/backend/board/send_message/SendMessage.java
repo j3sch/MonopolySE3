@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Component("sendMessage")
+@Component
 public class SendMessage {
 
     private SimpMessagingTemplate messagingTemplate;

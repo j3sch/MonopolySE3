@@ -2,10 +2,9 @@ package com.hdm.monopoly.backend.board.send_message;
 
 import com.hdm.monopoly.backend.board.game_logic.Game;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("Notified")
+@Component
 public class Notified {
 
     private final SendMessage sendMessage;
@@ -13,7 +12,7 @@ public class Notified {
     private final Game game;
 
     @Autowired
-    public Notified(@Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds, Game game) {
+    public Notified(SendMessage sendMessage, String[] sessionIds, Game game) {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.game = game;

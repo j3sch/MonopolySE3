@@ -26,8 +26,8 @@ public class CreatePlayers {
     private final Notified notified;
 
     @Autowired
-    public CreatePlayers(Player[] players, @Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds,
-                         @Qualifier("getActivateButton") ActivateButton activateButton, Notified notified) {
+    public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
+                         ActivateButton activateButton, Notified notified) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
