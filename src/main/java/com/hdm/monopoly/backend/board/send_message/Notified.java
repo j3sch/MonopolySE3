@@ -27,4 +27,8 @@ public class Notified {
     public void allPlayers(String message) {
         sendMessage.sendToAll("/client/notification", message );
     }
+
+    public void playerXOnTurn() {
+        sendMessage.sendToAll("/client/notification", "Player " + game.getCurrentPlayer().getName() + " is on turn");
+    }
 }

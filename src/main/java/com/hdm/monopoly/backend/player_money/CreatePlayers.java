@@ -2,6 +2,8 @@ package com.hdm.monopoly.backend.player_money;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.backend.board.send_message.ActivateButton;
+import com.hdm.monopoly.backend.board.send_message.Notified;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.Header;
@@ -19,12 +21,17 @@ public class CreatePlayers {
     private final String[] sessionIds;
     private final Player[] players;
     private final SendMessage sendMessage;
+    private final ActivateButton activateButton;
+    private final Notified notified;
 
     @Autowired
-    public CreatePlayers(Player[] players, @Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds) {
+    public CreatePlayers(Player[] players, @Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds,
+                         @Qualifier("getActivateButton") ActivateButton activateButton, Notified notified) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
+        this.activateButton = activateButton;
+        this.notified = notified;
     }
 
     /*
@@ -49,8 +56,8 @@ public class CreatePlayers {
 
             if (playerNumber == 4) {
                 isPartyFull = true;
-                playerXTurn();
-                notificationEvent();
+                activateButton.diceNumber();
+                notified.playerXOnTurn();
             }
         }
         for (String id: sessionIds) {
@@ -60,23 +67,9 @@ public class CreatePlayers {
         }
     }
 
-    public Player[] getPlayers() {
-        return players;
-    }
-    /*
-    when party is full, message is sent that first player is on turn
-    */
-    private void notificationEvent() {
-        sendMessage.sendToAll("/client/notification", "Player " + getPlayers()[0].getName() + " is on turn");
-    }
-
     /*
     sends this message only to the player whose turn it is now, so that the buttons can be activated
      */
-    public void playerXTurn() {
-        sendMessage.sendToPlayer(sessionIds[0], "/client/toggleDiceNumberBtn", "false");
-    }
-
     //Define previous Player for everyone
     public void setPreviousPlayers() {
         for(int i = 0; i < playerNumber; i++){
