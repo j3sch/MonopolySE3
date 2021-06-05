@@ -46,7 +46,7 @@ public class DiceNumber {
             sendPlayerData.sendPlayerToClient();
             activateButton.nextPlayer();
         }
-        game.endOfTurn();//maybe not the best moment to change the current player
+//        game.endOfTurn();//maybe not the best moment to change the current player
         return new ObjectMapper().writeValueAsString(true);
     }
 

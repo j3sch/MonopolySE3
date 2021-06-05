@@ -1,10 +1,13 @@
 package com.hdm.monopoly.backend.board.streets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.backend.board.game_logic.Game;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -21,17 +24,18 @@ public class Street implements Field {
     private Player owner;
     SendMessage sendMessage;
     String[] sessionIds;
-    private Player currentPlayer;
-
-
+    private Game game;
+    private Map map;
 
     //Konstruktor
 //Constructor
 
     @Autowired
-    public Street(SendMessage sendMessage, String[] sessionIds) {
+    public Street(SendMessage sendMessage, String[] sessionIds, Game game, Map map) {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
+        this.game = game;
+        this.map = map;
     }
 
     public Street(String streetName, int price, int rent, Color color) {
@@ -44,19 +48,17 @@ public class Street implements Field {
     //Methods
     @Override
     public void moveOnField(Player player) {
-        currentPlayer = player;
         if (owner == null) {
-            if(player.getPlayerBankBalance()-price >=0){
-                sendMessage.sendToPlayer(sessionIds[currentPlayer.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
+            if(game.getCurrentPlayer().getPlayerBankBalance()-price >=0){
+                sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayer().getID()], "/client/notification", "Buy " + streetName + " for $" + price);
             }
-
         } else {
             //player on field has to pay rent to the owner
-            if(player != owner){
-                player.PlayerPaysMoney(rent);
-                sendMessage.sendToPlayer(sessionIds[currentPlayer.getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
+            if(game.getCurrentPlayer() != owner){
+                game.getCurrentPlayer().PlayerPaysMoney(rent);
+                sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayer().getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
                 owner.PlayerGetsMoney(rent);
-                sendMessage.sendToPlayer(sessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + player.getName());
+                sendMessage.sendToPlayer(sessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + game.getCurrentPlayer().getName());
 
             }
         }
@@ -87,14 +89,16 @@ public class Street implements Field {
         this.owner = owner;
     }
 
-    @MessageMapping("/buyEstate")
-    public void buyEstate()
-            throws JsonProcessingException {
-        currentPlayer.PlayerPaysMoney(getPrice());
-        setOwner(currentPlayer);
+    @MessageMapping("/buyEstateBtnClicked")
+    @SendToUser("/client/toggleBuyEstateBtn")
+    public String buyEstate() throws JsonProcessingException {
+        System.out.println("test");
+        game.getCurrentPlayer().PlayerPaysMoney(getPrice());
+        setOwner(game.getCurrentPlayer());
+        sendMessage.sendToAll("/client/buyEstate", game.getCurrentPlayer().getPosition() + " " + game.getCurrentPlayer().getColour());
+        sendMessage.sendToAll("/client/notification", game.getCurrentPlayer().getName() + " bought " + map.getField(game.getCurrentPlayer().getPosition()).getFieldName());
 
-        sendMessage.sendToAll("/client/notification", currentPlayer.getName() + " bought " + streetName);
-
+        return new ObjectMapper().writeValueAsString(true);
     }
 
 
