@@ -1,12 +1,10 @@
 package com.hdm.monopoly.backend.board.send_message;
 
 import com.hdm.monopoly.backend.board.game_logic.Game;
-import com.hdm.monopoly.backend.player_money.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("ActivateButton")
+@Component
 public class ActivateButton {
 
     private final SendMessage sendMessage;
@@ -14,7 +12,7 @@ public class ActivateButton {
     private final Game game;
 
     @Autowired
-    public ActivateButton(@Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds, Game game) {
+    public ActivateButton(SendMessage sendMessage, String[] sessionIds, Game game) {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.game = game;

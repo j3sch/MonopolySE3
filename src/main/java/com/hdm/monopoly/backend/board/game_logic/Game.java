@@ -1,7 +1,5 @@
 package com.hdm.monopoly.backend.board.game_logic;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,6 @@ public class Game {
 
     private int currentPlayer = 0;
 
-
-
     /**
      * Constructor for Game
      * @param players Array with players
@@ -36,7 +32,6 @@ public class Game {
         //based on the playerCount the Players are created and gets put into the players ArrayList
 
     }
-
 
     /**
      * Standard getter for the board.

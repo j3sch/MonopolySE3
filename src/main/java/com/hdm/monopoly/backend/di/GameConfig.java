@@ -6,11 +6,10 @@ import com.hdm.monopoly.backend.board.send_message.Notified;
 import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
-import com.hdm.monopoly.backend.player_money.SendMessage;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
 @Configuration
 @ComponentScan("com.hdm.monopoly.backend")
@@ -22,7 +21,7 @@ public class GameConfig {
     private final SendMessage sendMessage = new SendMessage();
     private final Game game = new Game(players, map);
 
-    //for send data to client
+    //to send data to client
     SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
     Notified notified = new Notified(sendMessage, sessionIds, game);
     ActivateButton activateButton = new ActivateButton(sendMessage, sessionIds, game);
@@ -53,7 +52,7 @@ public class GameConfig {
         return sendMessage;
     }
 
-    //for send data to client
+    //to send data to client
     @Bean
     public SendPlayerData getSendPlayerData() {
         return sendPlayerData;
