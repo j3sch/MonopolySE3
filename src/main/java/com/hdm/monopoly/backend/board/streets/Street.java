@@ -1,10 +1,9 @@
 package com.hdm.monopoly.backend.board.streets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.player_money.Player;
-import com.hdm.monopoly.backend.player_money.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -30,7 +29,7 @@ public class Street implements Field {
 //Constructor
 
     @Autowired
-    public Street(@Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds){
+    public Street(SendMessage sendMessage, String[] sessionIds) {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
     }
