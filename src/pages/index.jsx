@@ -72,6 +72,10 @@ const Home = () => {
 			setNotification(true);
 			setMessage(greeting.body);
 		});
+		stompClient.subscribe('/user/client/notification', function (greeting) {
+			setNotification(true);
+			setMessage(greeting.body);
+		});
 	};
 
 	const onError = () => {
