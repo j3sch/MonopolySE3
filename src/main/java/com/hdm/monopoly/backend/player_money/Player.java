@@ -9,6 +9,7 @@ public class Player {
     private String colour;
     private int ID;
     private Player previousPlayer;
+    private int jailTime = 0;
 
     public Player(int ID, String name, String colour) {
 
@@ -70,5 +71,24 @@ public class Player {
 
     public int getPlayerBankBalance() {
         return account.getBankBalance();
+    }
+
+    public int getJailTime(){
+        return jailTime;
+    }
+
+    /**
+     * to be called when the player gets arrested
+     */
+    public void getArrested(){
+        jailTime = 3;
+    }
+
+    public void jailed(){
+        --jailTime;
+    }
+
+    public void getReleased(){
+        jailTime = 0;
     }
 }

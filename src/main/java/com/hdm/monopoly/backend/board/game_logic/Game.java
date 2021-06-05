@@ -1,13 +1,9 @@
 package com.hdm.monopoly.backend.board.game_logic;
 
-import com.hdm.monopoly.backend.player_money.DiceNumber;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-
-import java.util.ArrayList;
 
 /**
  * Class that starts and manages the game, is implemented as a singleton
@@ -15,7 +11,7 @@ import java.util.ArrayList;
 @Component("game")
 public class Game {
 
-    public int playerCount; // helper for constructor
+    private final int PLAYERCOUNT = 4; // helper for constructor
 
     // These two attributes enable a connection between a map and players
     private Player[] players; /*we assume the game knows on its creation how many players there are.
@@ -23,8 +19,6 @@ public class Game {
     private Map board;
 
     private int currentPlayer = 0;
-
-
 
     /**
      * Constructor for Game
@@ -38,7 +32,6 @@ public class Game {
         //based on the playerCount the Players are created and gets put into the players ArrayList
 
     }
-
 
     /**
      * Standard getter for the board.
@@ -54,16 +47,26 @@ public class Game {
      * @param steps Number of fields the player should be moved
      */
 
-    public void movePlayer(int steps){
+
+    public void movePlayer(int steps) {
         //Calculating players new position and checking if he made a whole round around the map and is at the start again
         int newPosition = (getCurrentPlayer().getPosition() + steps) % board.size();
-        if(getCurrentPlayer().getPosition()>newPosition){
+        if (getCurrentPlayer().getPosition() > newPosition) {
             //TODO get money for crossing map start = yet to be implemented
         }
         getCurrentPlayer().setPosition(newPosition);
         //activates the moveOnField function which is the field action
         board.getField(newPosition).moveOnField(getCurrentPlayer());
     }
+
+    public void teleport(Player playerToBeTeleported, int position) {
+        if (position < board.size() && position >= 0) {
+            playerToBeTeleported.setPosition(position);
+        } else {
+            //TODO Error correction
+        }
+    }
+
 
     /**
      * A getter for the player that is now on the turn. So he is the current player.
@@ -73,12 +76,14 @@ public class Game {
         return players[currentPlayer];
     }
 
+    public int getCurrentPlayerIndex() { return currentPlayer; }
+
     /**
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
     public void endOfTurn(){
         //TODO check if game has to end
-        currentPlayer=++currentPlayer%playerCount;
+        currentPlayer = ++currentPlayer % PLAYERCOUNT;
     }
 }
 
