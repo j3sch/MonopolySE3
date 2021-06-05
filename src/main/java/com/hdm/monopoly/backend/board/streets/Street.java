@@ -1,17 +1,22 @@
 package com.hdm.monopoly.backend.board.streets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.backend.board.game_logic.Game;
+import com.hdm.monopoly.backend.board.send_message.ActivateButton;
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.player_money.Player;
-import com.hdm.monopoly.backend.player_money.SendMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-@Controller
-@Component("Street")
+
 public class Street implements Field {
 //Eigenschaften
 //Properties
@@ -23,33 +28,48 @@ public class Street implements Field {
     private Player owner;
     SendMessage sendMessage;
     String[] sessionIds;
+
     private Player currentPlayer;
+    ActivateButton activateButton;
+    Notified notified;
 
 
 
     //Konstruktor
 //Constructor
 
-    @Autowired
-    public Street(@Qualifier("getSendMessage") SendMessage sendMessage, String[] sessionIds){
+    /*@Autowired
+    public Street(@Qualifier("getSendMessage") SendMessage sendMessage, @Qualifier("getSessionIds") String[] sessionIds, @Qualifier("getActivateButton") ActivateButton activateButton, @Qualifier("getNotified") Notified notified){
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
-    }
+        this.activateButton = activateButton;
+        this.notified = notified;
 
-    public Street(String streetName, int price, int rent, Color color) {
+    }*/
+
+    public Street(String streetName, int price, int rent, Color color, SendMessage sendmessage, String[] SessionIds) {
         this.streetName = streetName;
         this.price = price;
         this.rent = rent;
         this.color = color;
+        this.sendMessage = sendmessage;
+        this.sessionIds = SessionIds;
     }
 
     //Methods
     @Override
     public void moveOnField(Player player) {
+
         currentPlayer = player;
         if (owner == null) {
             if(player.getPlayerBankBalance()-price >=0){
-                sendMessage.sendToUser(sessionIds[currentPlayer.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
+                //notified.currentPlayer("Buy " + streetName + " for $" + price);
+                sendMessage.sendToAll("/client/notification", "Buy " + streetName + " for $" + price);//hier eigentlich nur an einen Spieler, funktioniert aber noch nicht
+                sendMessage.sendToUser(sessionIds[currentPlayer.getID()], "/client/toggleBuyEstateBtn", "false" );
+
+                System.out.println("test");
+
+
             }
 
         } else {
@@ -89,13 +109,18 @@ public class Street implements Field {
         this.owner = owner;
     }
 
-    @MessageMapping("/buyEstate")
-    public void buyEstate()
+    @MessageMapping("/buyEstateBtnClicked")
+    @SendToUser("/client/toggleBuyEstateBtn")
+    public String buyEstateBtnClicked()
             throws JsonProcessingException {
+        System.out.println("Test2");
         currentPlayer.PlayerPaysMoney(getPrice());
         setOwner(currentPlayer);
+        System.out.println(owner.getName());
 
         sendMessage.sendToAll("/client/notification", currentPlayer.getName() + " bought " + streetName);
+        return new ObjectMapper().writeValueAsString(true);
+
 
     }
 

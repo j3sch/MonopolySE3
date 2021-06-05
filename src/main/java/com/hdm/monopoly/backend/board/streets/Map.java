@@ -1,5 +1,6 @@
 package com.hdm.monopoly.backend.board.streets;
 
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import org.springframework.stereotype.Component;
 
 @Component("map")
@@ -13,9 +14,13 @@ public class Map {
     final private Color[] color = {null, Color.LightBlue, Color.LightBlue,null, Color.Brown, Color.Brown,null, Color.Pink, Color.Pink,null, Color.Orange, Color.Orange,null, Color.Red, Color.Red,null, Color.Yellow, Color.Yellow,null, Color.Green, Color.Green,null, Color.DarkBlue, Color.DarkBlue};
 
     private Field[] map;
+    SendMessage sendMessage;
+    String[] sessionIds;
 
-    public Map() {
+    public Map(SendMessage sendMessage, String[] sessionIds) {
         this.map = new Field[fieldTypes.length];
+        this.sendMessage = sendMessage;
+        this.sessionIds = sessionIds;
         setMap();
     }
 
@@ -23,7 +28,7 @@ public class Map {
     public void setMap(){
         //here the board gets created and all the fields are implemented into the map in the right order
         for(int i = 0; i < streetName.length; ++i) {
-            map[i] = FieldFactory.createField(fieldTypes[i], streetName[i], price[i], rent[i], color[i],goValues[i]);
+            map[i] = FieldFactory.createField(fieldTypes[i], streetName[i], price[i], rent[i], color[i],goValues[i], sendMessage, sessionIds);
         }
     }
 
@@ -36,6 +41,9 @@ public class Map {
             //here comes the code for error correction
         }
         return map[position];
+    }
+    public int getPrice(int position){
+        return price[position];
     }
 
 }

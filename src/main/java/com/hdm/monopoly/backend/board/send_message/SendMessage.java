@@ -1,4 +1,4 @@
-package com.hdm.monopoly.backend.player_money;
+package com.hdm.monopoly.backend.board.send_message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Component("sendMessage")
+@Component
 public class SendMessage {
 
     private SimpMessagingTemplate messagingTemplate;

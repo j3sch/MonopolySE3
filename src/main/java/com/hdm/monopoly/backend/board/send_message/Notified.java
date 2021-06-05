@@ -19,7 +19,7 @@ public class Notified {
     }
 
     public void currentPlayer(String message) {
-        sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayerIndex()], "/client/notification", message );
+        sendMessage.sendToUser(sessionIds[game.getCurrentPlayerIndex()], "/client/notification", message );
     }
 
     public void allPlayers(String message) {

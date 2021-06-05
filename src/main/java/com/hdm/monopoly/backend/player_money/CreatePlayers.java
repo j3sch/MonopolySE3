@@ -62,7 +62,7 @@ public class CreatePlayers {
         }
         for (String id: sessionIds) {
             if (id != null) {
-                sendMessage.sendToPlayer(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));
+                sendMessage.sendToUser(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));
             }
         }
     }
@@ -92,3 +92,4 @@ public class CreatePlayers {
         return new ObjectMapper().writeValueAsString(isPartyFull);
     }
 }
+

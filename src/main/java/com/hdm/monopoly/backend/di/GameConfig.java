@@ -4,6 +4,7 @@ import com.hdm.monopoly.backend.board.game_logic.Game;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
 import com.hdm.monopoly.backend.board.send_message.Notified;
 import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
+import com.hdm.monopoly.backend.board.streets.Color;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
@@ -16,9 +17,10 @@ import org.springframework.context.annotation.Configuration;
 public class GameConfig {
 
     private final Player[] players = new Player[4];
-    private final Map map = new Map();
+
     private final String[] sessionIds = new String[4];
     private final SendMessage sendMessage = new SendMessage();
+    private final Map map = new Map(sendMessage, sessionIds);
     private final Game game = new Game(players, map);
 
     //to send data to client
@@ -67,5 +69,7 @@ public class GameConfig {
     public ActivateButton getActivateButton() {
         return activateButton;
     }
+
+
 }
 

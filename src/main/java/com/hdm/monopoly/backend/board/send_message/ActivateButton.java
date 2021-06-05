@@ -19,14 +19,14 @@ public class ActivateButton {
     }
 
     public void diceNumber() {
-        sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
+        sendMessage.sendToUser(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
     }
 
     public void buyEstate() {
-        sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "false" );
+        sendMessage.sendToUser(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "false" );
     }
 
     public void nextPlayer() {
-        sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
+        sendMessage.sendToUser(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
     }
 }

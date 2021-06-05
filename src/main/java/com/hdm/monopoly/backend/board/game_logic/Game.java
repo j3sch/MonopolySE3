@@ -1,5 +1,8 @@
 package com.hdm.monopoly.backend.board.game_logic;
 
+import com.hdm.monopoly.backend.board.send_message.ActivateButton;
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,11 @@ public class Game {
     private Map board;
 
     private int currentPlayer = 0;
+
+    SendMessage sendMessage;
+    String[] sessionIds;
+    ActivateButton activateButton;
+    Notified notified;
 
     /**
      * Constructor for Game
@@ -84,6 +92,13 @@ public class Game {
     public void endOfTurn(){
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
+    }
+
+    public void setSetting(SendMessage sendMessage, String[] sessionIds, ActivateButton activateButton, Notified notified){
+        this.sendMessage = sendMessage;
+        this.sessionIds = sessionIds;
+        this.activateButton = activateButton;
+        this.notified = notified;
     }
 }
 
