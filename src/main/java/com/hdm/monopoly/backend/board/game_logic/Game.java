@@ -1,7 +1,5 @@
 package com.hdm.monopoly.backend.board.game_logic;
 
-import com.hdm.monopoly.backend.board.send_message.ActivateButton;
-import com.hdm.monopoly.backend.board.send_message.Notify;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;

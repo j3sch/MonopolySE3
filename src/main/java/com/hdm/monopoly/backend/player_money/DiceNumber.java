@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.game_logic.Game;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
-import com.hdm.monopoly.backend.board.send_message.Notify;
+import com.hdm.monopoly.backend.board.send_message.Notified;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
 import com.hdm.monopoly.backend.board.streets.Street;
@@ -23,11 +23,11 @@ public class DiceNumber {
     private final SendPlayerData sendPlayerData;
     private final ActivateButton activateButton;
     private final SendMessage sendMessage;
-    private final Notify notified;
+    private final Notified notified;
 
 
     @Autowired
-    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, @Qualifier("getNotify") Notify notified) {
+    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, @Qualifier("getNotified") Notified notified) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.activateButton = activateButton;

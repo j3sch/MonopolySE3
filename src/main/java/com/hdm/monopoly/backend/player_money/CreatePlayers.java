@@ -3,7 +3,7 @@ package com.hdm.monopoly.backend.player_money;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
-import com.hdm.monopoly.backend.board.send_message.Notify;
+import com.hdm.monopoly.backend.board.send_message.Notified;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,16 +23,16 @@ public class CreatePlayers {
     private final Player[] players;
     private final SendMessage sendMessage;
     private final ActivateButton activateButton;
-    private final Notify notify;
+    private final Notified notified;
 
     @Autowired
     public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
-                         ActivateButton activateButton, @Qualifier("getNotify") Notify notify) {
+                         ActivateButton activateButton, @Qualifier("getNotified") Notified notified) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.activateButton = activateButton;
-        this.notify = notify;
+        this.notified = notified;
     }
 
     /*
@@ -59,7 +59,7 @@ public class CreatePlayers {
                 isPartyFull = true;
                 //activateButton.buyEstate();
                 activateButton.diceNumber();
-                notify.playerXOnTurn();
+                notified.playerXOnTurn();
             }
         }
         for (String id: sessionIds) {
