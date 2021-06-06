@@ -2,7 +2,7 @@ package com.hdm.monopoly.backend.di;
 
 import com.hdm.monopoly.backend.board.game_logic.Game;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
-import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.send_message.Notify;
 import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
@@ -20,12 +20,13 @@ public class GameConfig {
     private final SendMessage sendMessage = new SendMessage();
 
     private final Map map = new Map();
-    private final Game game = new Game(players, map, sendMessage, sessionIds);
-
-    //to send data to client
     SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
-    Notified notified = new Notified(sendMessage, sessionIds, game);
+
+    private final Game game = new Game(players, map, sendMessage, sessionIds);
+    Notify notify = new Notify(sendMessage, sessionIds, game);
     ActivateButton activateButton = new ActivateButton(sendMessage, sessionIds, game);
+    //to send data to client
+
 
 
 
@@ -61,8 +62,8 @@ public class GameConfig {
     }
 
     @Bean
-    public Notified getNotified() {
-        return notified;
+    public Notify getNotify() {
+        return notify;
     }
 
     @Bean

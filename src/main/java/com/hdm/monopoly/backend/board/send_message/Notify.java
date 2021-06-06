@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Notified {
+public class Notify {
 
     private final SendMessage sendMessage;
     private final String[] sessionIds;
     private final Game game;
 
     @Autowired
-    public Notified(SendMessage sendMessage, String[] sessionIds, Game game) {
+    public Notify(SendMessage sendMessage, String[] sessionIds, Game game) {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.game = game;
