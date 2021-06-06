@@ -4,7 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.game_logic.Game;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
+import com.hdm.monopoly.backend.board.streets.Street;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
@@ -18,12 +21,17 @@ public class DiceNumber {
     private final Game game;
     private final SendPlayerData sendPlayerData;
     private final ActivateButton activateButton;
+    private final SendMessage sendMessage;
+    private final Notified notified;
+
 
     @Autowired
-    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton) {
+    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notified notified) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.activateButton = activateButton;
+        this.sendMessage = sendMessage;
+        this.notified = notified;
     }
 
     /*
@@ -33,8 +41,7 @@ public class DiceNumber {
     @MessageMapping("/diceNumberBtnClicked")
     @SendToUser("/client/toggleDiceNumberBtn")
     public String diceNumberBtnClicked() throws JsonProcessingException {
-        int diceNumber = 2;
-        //int diceNumber = diceRandomNumber();    //maybe to display the result of the dice
+        int diceNumber = diceRandomNumber();    //maybe to display the result of the dice
 
         if(game.getCurrentPlayer().getJailTime()>0){
             if(diceNumber == 6){
@@ -60,6 +67,24 @@ public class DiceNumber {
     @SendToUser("/client/toggleNextPlayerBtn")
     public String nextPlayerBtnClicked() throws JsonProcessingException {
         game.endOfTurn();
+        return new ObjectMapper().writeValueAsString(true);
+    }
+
+    @MessageMapping("/buyEstateBtnClicked")
+    @SendToUser("/client/toggleBuyEstateBtn")
+    public String buyEstate() throws JsonProcessingException {
+        Player player = game.getCurrentPlayer();
+        Street street = game.getBoard().getStreet(player.getPosition());
+
+        player.PlayerPaysMoney(street.getPrice());
+        street.setOwner(player);
+
+        sendMessage.sendToAll("/client/buyEstate", player.getPosition() + " " + player.getColour());
+        notified.allPlayers(player.getName() + " bought " + street.getFieldName());
+        sendPlayerData.sendPlayerToClient();
+
+
+
         return new ObjectMapper().writeValueAsString(true);
     }
 }
