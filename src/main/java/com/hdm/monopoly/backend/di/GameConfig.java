@@ -16,15 +16,17 @@ import org.springframework.context.annotation.Configuration;
 public class GameConfig {
 
     private final Player[] players = new Player[4];
-    private final Map map = new Map();
     private final String[] sessionIds = new String[4];
     private final SendMessage sendMessage = new SendMessage();
-    private final Game game = new Game(players, map);
+
+    private final Map map = new Map();
+    private final Game game = new Game(players, map, sendMessage, sessionIds);
 
     //to send data to client
     SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
     Notified notified = new Notified(sendMessage, sessionIds, game);
     ActivateButton activateButton = new ActivateButton(sendMessage, sessionIds, game);
+
 
 
     @Bean

@@ -1,5 +1,6 @@
 package com.hdm.monopoly.backend.board.game_logic;
 
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class Game {
     private Player[] players; /*we assume the game knows on its creation how many players there are.
     That could be achieved by a controller class that manages the network communication*/
     private Map board;
+    SendMessage sendMessage;
+    String[] SessionIds;
 
     private int currentPlayer = 0;
 
@@ -25,9 +28,11 @@ public class Game {
      * @param players Array with players
      */
     @Autowired
-    public  Game(Player[] players, Map map){
+    public  Game(Player[] players, Map map, SendMessage sendMessage, String[] SessionIds){
         this.players = players;
         this.board = map;
+        this.sendMessage = sendMessage;
+        this.SessionIds = SessionIds;
 
         //based on the playerCount the Players are created and gets put into the players ArrayList
 
@@ -58,7 +63,7 @@ public class Game {
         //activates the moveOnField function which is the field action
 
         //TODO empty methods are called
-//        board.getField(newPosition).moveOnField(getCurrentPlayer());
+        board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, SessionIds);
     }
 
     public void teleport(Player playerToBeTeleported, int position) {

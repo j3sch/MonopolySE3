@@ -1,5 +1,6 @@
 package com.hdm.monopoly.backend.board.streets;
 
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.player_money.Player;
 
 public class Jail implements Field{
@@ -11,7 +12,7 @@ public class Jail implements Field{
     }
 
     @Override
-    public void moveOnField(Player player) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
         //TODO
     }
 
