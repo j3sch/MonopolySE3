@@ -22,9 +22,6 @@ public class Game {
     private Map board;
     SendMessage sendMessage;
     String[] sessionIds;
-
-    private Notify notify;
-    private ActivateButton activateButton;
     private int currentPlayer = 0;
 
     /**
