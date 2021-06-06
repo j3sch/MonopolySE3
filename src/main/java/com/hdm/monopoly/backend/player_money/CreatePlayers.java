@@ -27,7 +27,7 @@ public class CreatePlayers {
 
     @Autowired
     public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
-                         ActivateButton activateButton, @Qualifier("getNotified") Notified notified) {
+                         ActivateButton activateButton, Notified notified) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;

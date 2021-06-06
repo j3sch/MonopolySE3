@@ -27,7 +27,7 @@ public class DiceNumber {
 
 
     @Autowired
-    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, @Qualifier("getNotified") Notified notified) {
+    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notified notified) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.activateButton = activateButton;
