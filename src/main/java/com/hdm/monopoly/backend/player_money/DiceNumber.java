@@ -33,7 +33,8 @@ public class DiceNumber {
     @MessageMapping("/diceNumberBtnClicked")
     @SendToUser("/client/toggleDiceNumberBtn")
     public String diceNumberBtnClicked() throws JsonProcessingException {
-        int diceNumber = diceRandomNumber();    //maybe to display the result of the dice
+        int diceNumber = 2;
+        //int diceNumber = diceRandomNumber();    //maybe to display the result of the dice
 
         if(game.getCurrentPlayer().getJailTime()>0){
             if(diceNumber == 6){

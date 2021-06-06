@@ -58,7 +58,7 @@ public class Game {
         //activates the moveOnField function which is the field action
 
         //TODO empty methods are called
-//        board.getField(newPosition).moveOnField(getCurrentPlayer());
+        board.getField(newPosition).moveOnField(getCurrentPlayer());
     }
 
     public void teleport(Player playerToBeTeleported, int position) {

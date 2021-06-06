@@ -56,7 +56,7 @@ public class CreatePlayers {
 
             if (playerNumber == 4) {
                 isPartyFull = true;
-                activateButton.buyEstate();
+                //activateButton.buyEstate();
                 activateButton.diceNumber();
                 notified.playerXOnTurn();
             }

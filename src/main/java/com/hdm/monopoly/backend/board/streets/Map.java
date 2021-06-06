@@ -38,4 +38,8 @@ public class Map {
         return map[position];
     }
 
+    public Street getStreet(int positon){
+        return (Street) map[positon];
+    }
+
 }

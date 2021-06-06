@@ -22,5 +22,4 @@ public class FieldFactory {
                 throw new WrongFieldError("Wrong Field Type");
         }
     }
-
 }
