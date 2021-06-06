@@ -14,7 +14,6 @@ const Home = () => {
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 
 	let array = [];
-
 	const [boughtEstate, setBoughtEstate] = useState([{}]);
 	//for receiving messages
 	const [isNotificationActiv, setNotification] = useState(false);

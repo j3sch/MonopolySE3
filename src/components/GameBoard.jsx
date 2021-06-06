@@ -4,8 +4,8 @@ import { borderColor } from '~/utils/borderColor';
 
 export function GameBoard() {
 	return (
-		<div className="grid grid-cols-9 h-screen">
-			<div className="row-start-2 row-end-7 col-start-3 col-end-8 bg-white" />
+		<div className="grid grid-cols-9 h-screen text-black">
+			<div className="row-start-2 row-end-7 col-start-3 col-end-8 bg-gray-100 dark:bg-gray-900" />
 			{gameFieldData.map((gameField) => (
 				<GameField
 					key={gameField.id.toString()}
