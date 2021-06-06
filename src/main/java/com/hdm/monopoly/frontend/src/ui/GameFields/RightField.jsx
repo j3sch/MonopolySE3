@@ -5,15 +5,18 @@ import { useContext } from 'react';
 
 export const Right = (props) => {
 	const { id, borderColor, title, price, color } = props;
-	const { fieldPosition, estateColor } = useContext(PlayerContext);
+	const { boughtEstate } = useContext(PlayerContext);
 
 	return (
 		<div className={`${borderColor} h-full flex col-span-2`}>
 			<div className={`${color} w-1/4 flex justify-center items-center`}>
-				{id === fieldPosition && (
-					<div
-						className={`bg-[${estateColor}] h-1/2 w-1/2 border border-black`}
-					/>
+				{boughtEstate.map(
+					(field) =>
+						field.fieldPosition === id && (
+							<div
+								className={`bg-[${field.estateColor}] h-1/2 w-1/2 border border-black`}
+							/>
+						),
 				)}
 			</div>
 			<div className="w-3/4 bg-green-200 grid justify-items-center">
