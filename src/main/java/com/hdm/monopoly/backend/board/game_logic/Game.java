@@ -3,6 +3,8 @@ package com.hdm.monopoly.backend.board.game_logic;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("game")
 public class Game {
+    private static Logger log = LogManager.getLogger(Game.class);
 
     private final int PLAYERCOUNT = 4; // helper for constructor
 
@@ -33,7 +36,7 @@ public class Game {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         //based on the playerCount the Players are created and gets put into the players ArrayList
-
+        log.debug("New Object 'Game' created");
     }
 
     /**
@@ -58,6 +61,7 @@ public class Game {
             //TODO get money for crossing map start = yet to be implemented
         }
         getCurrentPlayer().setPosition(newPosition);
+        log.info(getCurrentPlayer().getName() + "moves to field number: " + newPosition);
         //activates the moveOnField function which is the field action
 
         //TODO empty methods are called
@@ -87,6 +91,7 @@ public class Game {
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
     public void endOfTurn(){
+        log.info(currentPlayer + " ends his turn");
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
         sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );

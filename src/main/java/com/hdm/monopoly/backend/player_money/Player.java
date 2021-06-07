@@ -1,7 +1,12 @@
 package com.hdm.monopoly.backend.player_money;
 
 
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Player {
+    private static Logger log = LogManager.getLogger(Player.class);
 
     private int position;
     private Account account;
@@ -18,6 +23,7 @@ public class Player {
         this.colour = colour;
         this.ID = ID;
         this.position = 0;
+        log.debug("New Object 'Player' created. Name: " + name);
     }
 
     public int getID() {
@@ -61,11 +67,13 @@ public class Player {
 
     public int PlayerGetsMoney(int amount){
         account.getMoney(amount);
+        log.info(name + " new bank balance: " + account.getBankBalance());
         return account.getBankBalance();
     }
 
     public int PlayerPaysMoney(int amount){
         account.payMoney(amount);
+        log.info(name + " new bank balance: " + account.getBankBalance());
         return account.getBankBalance();
     }
 
@@ -82,6 +90,7 @@ public class Player {
      */
     public void getArrested(){
         jailTime = 3;
+        log.info(name + " get arrested");
     }
 
     public void jailed(){
@@ -90,5 +99,6 @@ public class Player {
 
     public void getReleased(){
         jailTime = 0;
+        log.info(name + " get released from jail");
     }
 }

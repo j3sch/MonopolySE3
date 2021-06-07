@@ -7,6 +7,8 @@ import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.hdm.monopoly.backend")
 public class GameConfig {
+    private static Logger log = LogManager.getLogger(GameConfig.class);
 
     private final Player[] players = new Player[4];
     private final String[] sessionIds = new String[4];

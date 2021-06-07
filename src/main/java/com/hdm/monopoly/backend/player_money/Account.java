@@ -1,12 +1,18 @@
 package com.hdm.monopoly.backend.player_money;
 
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Account {
+    private static Logger log = LogManager.getLogger(Account.class);
 
     private int BankBalance;
 
 
     public Account(int BankBalance) {
         this.BankBalance = BankBalance;
+        log.debug("New Object 'Account' created");
     }
 
     public int getBankBalance() {

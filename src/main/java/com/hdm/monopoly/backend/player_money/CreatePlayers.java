@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
 import com.hdm.monopoly.backend.board.send_message.Notified;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Component("createPlayer")
 public class CreatePlayers {
+    private static Logger log = LogManager.getLogger(CreatePlayers.class);
     private int playerNumber;
     private final Colours colours = new Colours();
     private Boolean isPartyFull = false;
@@ -32,6 +35,7 @@ public class CreatePlayers {
         this.sessionIds = sessionIds;
         this.activateButton = activateButton;
         this.notified = notified;
+        log.debug("New Object 'CreatePlayers' created");
     }
 
     /*
