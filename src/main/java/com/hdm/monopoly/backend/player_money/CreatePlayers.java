@@ -92,7 +92,7 @@ public class CreatePlayers {
     @MessageMapping("/message")
     @SendToUser("/client/reply")
     public String processMessageFromClient() throws Exception {
-        Thread.sleep(1000);
+        Thread.sleep(500);
 
         return new ObjectMapper().writeValueAsString(isPartyFull);
     }
