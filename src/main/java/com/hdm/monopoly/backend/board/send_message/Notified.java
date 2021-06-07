@@ -19,7 +19,7 @@ public class Notified {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.game = game;
-        log.debug("Newm Object 'Notified' created");
+        log.debug("New Object 'Notified' created");
     }
 
     public void currentPlayer(String message) {
