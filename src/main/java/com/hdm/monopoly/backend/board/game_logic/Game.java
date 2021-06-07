@@ -3,6 +3,8 @@ package com.hdm.monopoly.backend.board.game_logic;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.board.streets.Map;
 import com.hdm.monopoly.backend.player_money.Player;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("game")
 public class Game {
+    private static Logger log = LogManager.getLogger(Game.class);
 
     private final int PLAYERCOUNT = 4; // helper for constructor
 
@@ -33,7 +36,7 @@ public class Game {
         this.board = map;
         this.sendMessage = sendMessage;
         this.SessionIds = SessionIds;
-
+        log.debug("New Object 'Game' created");
         //based on the playerCount the Players are created and gets put into the players ArrayList
 
     }

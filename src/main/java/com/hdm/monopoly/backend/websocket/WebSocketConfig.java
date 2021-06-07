@@ -1,5 +1,8 @@
 package com.hdm.monopoly.backend.websocket;
 
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -18,6 +21,7 @@ import java.util.Map;
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+	private static Logger log = LogManager.getLogger(WebSocketConfig.class);
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {

@@ -1,11 +1,14 @@
 package com.hdm.monopoly.backend.board.send_message;
 
 import com.hdm.monopoly.backend.board.game_logic.Game;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Notified {
+    private static Logger log = LogManager.getLogger(Notified.class);
 
     private final SendMessage sendMessage;
     private final String[] sessionIds;
@@ -16,6 +19,7 @@ public class Notified {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.game = game;
+        log.debug("Newm Object 'Notified' created");
     }
 
     public void currentPlayer(String message) {
