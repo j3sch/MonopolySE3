@@ -20,6 +20,7 @@ public class GoToJail implements Field{
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
         player.setPosition(6);
         player.getArrested();
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to go to jail.");
         log.info(player.getName() + " moves into jail");
     }
 
