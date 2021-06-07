@@ -6,8 +6,6 @@ import com.hdm.monopoly.backend.board.game_logic.Game;
 import com.hdm.monopoly.backend.board.send_message.ActivateButton;
 import com.hdm.monopoly.backend.board.send_message.Notified;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
-import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
-import com.hdm.monopoly.backend.di.GameConfig;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,8 +28,6 @@ public class Street implements Field {
     private final Color color;
     private Player owner;
 
-
-
     public Street(String streetName, int price, int rent, Color color) {
         this.streetName = streetName;
         this.price = price;
@@ -41,7 +37,6 @@ public class Street implements Field {
 
     }
 
-    //Methods
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
         if (owner == null) {
@@ -62,7 +57,7 @@ public class Street implements Field {
             }
         }
     }
-    //Getter
+
     @Override
     public String getFieldName() {
         return streetName;

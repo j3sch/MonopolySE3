@@ -22,8 +22,7 @@ public class Game {
     That could be achieved by a controller class that manages the network communication*/
     private Map board;
     SendMessage sendMessage;
-    String[] SessionIds;
-
+    String[] sessionIds;
     private int currentPlayer = 0;
 
     /**
@@ -31,12 +30,11 @@ public class Game {
      * @param players Array with players
      */
     @Autowired
-    public  Game(Player[] players, Map map, SendMessage sendMessage, String[] SessionIds){
+    public  Game(Player[] players, Map map, SendMessage sendMessage, String[] sessionIds){
         this.players = players;
         this.board = map;
         this.sendMessage = sendMessage;
-        this.SessionIds = SessionIds;
-        log.debug("New Object 'Game' created");
+        this.sessionIds = sessionIds;
         //based on the playerCount the Players are created and gets put into the players ArrayList
 
     }
@@ -67,7 +65,7 @@ public class Game {
         //activates the moveOnField function which is the field action
 
         //TODO empty methods are called
-        board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, SessionIds);
+        board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds);
     }
 
     public void teleport(Player playerToBeTeleported, int position) {
@@ -96,7 +94,9 @@ public class Game {
         log.info(currentPlayer + " ends his turn");
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
-
+        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
+        sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
+        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
     }
 }
 
