@@ -44,7 +44,7 @@ class WebsocketTest {
 
         StompSession session = webSocketStompClient
                 .connect(getWsPath(), new StompSessionHandlerAdapter() {})
-                .get(1, SECONDS);
+                .get(2, SECONDS);
 
         session.subscribe("/user/client/reply", new StompFrameHandler() {
 
@@ -62,7 +62,7 @@ class WebsocketTest {
 
         session.send("/server/message", "is Party full?");
 
-        assertEquals("false", blockingQueue.poll(1, SECONDS));
+        assertEquals("false", blockingQueue.poll(2, SECONDS));
     }
 
     private String getWsPath() {
