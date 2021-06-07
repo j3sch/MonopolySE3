@@ -44,6 +44,7 @@ public class Map {
 
     public Field getField(int position){
         if(position<0 || position>size()){
+            log.error("position " + position + " is outside of the gameboard length ");
             //here comes the code for error correction
         }
         return map[position];

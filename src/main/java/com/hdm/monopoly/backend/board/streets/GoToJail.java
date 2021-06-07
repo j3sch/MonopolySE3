@@ -20,7 +20,7 @@ public class GoToJail implements Field{
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
         player.setPosition(6);
         player.getArrested();
-        log.info(player.getName() + " gets arrested and moves into jail");
+        log.info(player.getName() + " moves into jail");
     }
 
     @Override

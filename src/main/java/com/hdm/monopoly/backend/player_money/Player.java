@@ -90,6 +90,7 @@ public class Player {
      */
     public void getArrested(){
         jailTime = 3;
+        log.info(name + " get arrested");
     }
 
     public void jailed(){
@@ -98,5 +99,6 @@ public class Player {
 
     public void getReleased(){
         jailTime = 0;
+        log.info(name + " get released from jail");
     }
 }

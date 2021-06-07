@@ -63,6 +63,7 @@ public class Game {
             //TODO get money for crossing map start = yet to be implemented
         }
         getCurrentPlayer().setPosition(newPosition);
+        log.info(getCurrentPlayer().getName() + "moves to field number: " + newPosition);
         //activates the moveOnField function which is the field action
 
         //TODO empty methods are called
@@ -92,8 +93,10 @@ public class Game {
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
     public void endOfTurn(){
+        log.info(currentPlayer + " ends his turn");
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
+
     }
 }
 
