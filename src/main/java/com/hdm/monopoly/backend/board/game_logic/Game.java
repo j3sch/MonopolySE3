@@ -36,7 +36,7 @@ public class Game {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         //based on the playerCount the Players are created and gets put into the players ArrayList
-
+        log.debug("New Object 'Game' created");
     }
 
     /**
