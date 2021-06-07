@@ -62,7 +62,6 @@ public class DiceNumber {
         return (int)(Math.random() * 6 + 1);
     }
 
-
     @MessageMapping("/nextPlayerBtnClicked")
     @SendToUser("/client/toggleNextPlayerBtn")
     public String nextPlayerBtnClicked() throws JsonProcessingException {
@@ -82,8 +81,6 @@ public class DiceNumber {
         sendMessage.sendToAll("/client/buyEstate", player.getPosition() + " " + player.getColour());
         notified.allPlayers(player.getName() + " bought " + street.getFieldName());
         sendPlayerData.sendPlayerToClient();
-
-
 
         return new ObjectMapper().writeValueAsString(true);
     }

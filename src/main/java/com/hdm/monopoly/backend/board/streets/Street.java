@@ -1,32 +1,15 @@
 package com.hdm.monopoly.backend.board.streets;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hdm.monopoly.backend.board.game_logic.Game;
-import com.hdm.monopoly.backend.board.send_message.ActivateButton;
 import com.hdm.monopoly.backend.board.send_message.SendMessage;
-import com.hdm.monopoly.backend.board.send_message.SendPlayerData;
-import com.hdm.monopoly.backend.di.GameConfig;
 import com.hdm.monopoly.backend.player_money.Player;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.annotation.SendToUser;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
-/*@Controller
-@Component("Street")*/
 public class Street implements Field {
-//Eigenschaften
-//Properties
 
     private final String streetName;
     private final int price;
     private final int rent;
     private final Color color;
     private Player owner;
-
-
 
     public Street(String streetName, int price, int rent, Color color) {
         this.streetName = streetName;
@@ -36,7 +19,6 @@ public class Street implements Field {
 
     }
 
-    //Methods
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
         if (owner == null) {
@@ -57,7 +39,7 @@ public class Street implements Field {
             }
         }
     }
-    //Getter
+
     @Override
     public String getFieldName() {
         return streetName;
