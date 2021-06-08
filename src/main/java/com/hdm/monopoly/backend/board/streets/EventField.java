@@ -37,6 +37,7 @@ private static Logger log = LogManager.getLogger(EventField.class);
                 player.setPosition(22);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
 
+
             break;
 
                 //Money to Free Parking 2$
