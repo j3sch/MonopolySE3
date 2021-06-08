@@ -1,17 +1,24 @@
-/* eslint-disable no-unused-expressions */
-// fehler nicht gefunden
+import { PlayerContext } from '~/utils/PlayerContext';
+import { useContext } from 'react';
+
 export const borderColor = (id) => {
-	const player1 = 18;
-	const player2 = 21;
-	const player3 = 6;
-	const player4 = 13;
+	const { players } = useContext(PlayerContext);
+
 	let color;
 
-	(id === player1 && (color = 'border-red-500 border-4')) ||
-		(id === player2 && (color = 'border-blue-500 border-4')) ||
-		(id === player3 && (color = 'border-green-500 border-4')) ||
-		(id === player4 && (color = 'border-yellow-500 border-4')) ||
-		(color = 'border-black border-2');
+	(players[0] === null
+		? 0
+		: id === players[0].position && (color = 'border-red-500 border-4')) ||
+	(players[1] === null
+		? 0
+		: id === players[1].position && (color = 'border-blue-500 border-4')) ||
+	(players[2] === null
+		? 0
+		: id === players[2].position && (color = 'border-green-500 border-4')) ||
+	(players[3] === null
+		? 0
+		: id === players[3].position && (color = 'border-yellow-500 border-4')) ||
+	(color = 'border-black border-2');
 
 	return color;
 };

@@ -1,5 +1,7 @@
-package com.hdm.monopoly.backend.player_money;
+package com.hdm.monopoly.backend.board.send_message;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageType;
@@ -8,8 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Component("sendMessage")
+@Component
 public class SendMessage {
+    private static Logger log = LogManager.getLogger(SendMessage.class);
 
     private SimpMessagingTemplate messagingTemplate;
 
@@ -18,7 +21,7 @@ public class SendMessage {
         this.messagingTemplate = messagingTemplate;
     }
 
-    protected void sendToUser(String sessionId, String destination, String message) {
+    public void sendToPlayer(String sessionId, String destination, String message) {
         SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor
                 .create(SimpMessageType.MESSAGE);
         headerAccessor.setSessionId(sessionId);
@@ -27,9 +30,11 @@ public class SendMessage {
         messagingTemplate.convertAndSendToUser(sessionId, destination,
                 message,
                 headerAccessor.getMessageHeaders());
+        log.debug("send message to player. Destination: " + destination + "contend: " + message);
     }
 
-    protected void sendToAll(String destination, String message) {
+    public void sendToAll(String destination, String message) {
         messagingTemplate.convertAndSend(destination, message);
+        log.debug("send message to all. Destination: " + destination + "contend: " + message);
     }
 }

@@ -13,9 +13,8 @@ const Home = () => {
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 
-	const [fieldPosition, setFieldPosition] = useState(-1);
-	const [estateColor, setEstateColor] = useState();
-
+	let array = [];
+	const [boughtEstate, setBoughtEstate] = useState([{}]);
 	//for receiving messages
 	const [isNotificationActiv, setNotification] = useState(false);
 	const [message, setMessage] = useState('');
@@ -34,6 +33,9 @@ const Home = () => {
 				setUserJoint(true);
 			}
 		});
+		stompClient.subscribe('/client/playerList', function (greeting) {
+			setPlayers(JSON.parse(greeting.body));
+		});
 		stompClient.subscribe('/user/client/reply', function (greeting) {
 			isPartyFull = greeting.body === 'true';
 			setPartyFull(isPartyFull);
@@ -50,8 +52,10 @@ const Home = () => {
 			},
 		);
 		stompClient.subscribe('/client/buyEstate', function (greeting) {
-			setFieldPosition(parseInt(greeting.body.split(' ')[0], 10));
-			setEstateColor(greeting.body.split(' ')[1]);
+			let fieldPosition = parseInt(greeting.body.split(' ')[0], 10);
+			let estateColor = greeting.body.split(' ')[1];
+			array.push({ fieldPosition, estateColor });
+			setBoughtEstate(array);
 		});
 		stompClient.subscribe(
 			'/user/client/toggleNextPlayerBtn',
@@ -66,6 +70,10 @@ const Home = () => {
 			},
 		);
 		stompClient.subscribe('/client/notification', function (greeting) {
+			setNotification(true);
+			setMessage(greeting.body);
+		});
+		stompClient.subscribe('/user/client/notification', function (greeting) {
 			setNotification(true);
 			setMessage(greeting.body);
 		});
@@ -107,8 +115,7 @@ const Home = () => {
 					stompClient,
 					isNextPlayerBtnDisabled,
 					isBuyEstateBtnDisabled,
-					fieldPosition,
-					estateColor,
+					boughtEstate,
 				}}
 			>
 				<GamePage />

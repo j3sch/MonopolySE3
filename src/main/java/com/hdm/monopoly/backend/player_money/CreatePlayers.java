@@ -2,8 +2,12 @@ package com.hdm.monopoly.backend.player_money;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.backend.board.send_message.ActivateButton;
+import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.send_message.SendMessage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
@@ -13,17 +17,25 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Component("createPlayer")
 public class CreatePlayers {
+    private static Logger log = LogManager.getLogger(CreatePlayers.class);
     private int playerNumber;
     private final Colours colours = new Colours();
     private Boolean isPartyFull = false;
-    private final String[] SESSIONIDS = new String[4];
+    private final String[] sessionIds;
     private final Player[] players;
     private final SendMessage sendMessage;
+    private final ActivateButton activateButton;
+    private final Notified notified;
 
     @Autowired
-    public CreatePlayers(Player[] players, @Qualifier("getSendMessage") SendMessage sendMessage) {
+    public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
+                         ActivateButton activateButton, Notified notified) {
         this.players = players;
         this.sendMessage = sendMessage;
+        this.sessionIds = sessionIds;
+        this.activateButton = activateButton;
+        this.notified = notified;
+        log.debug("New Object 'CreatePlayers' created");
     }
 
     /*
@@ -36,7 +48,7 @@ public class CreatePlayers {
 
         if (playerNumber < 4) {
 
-            SESSIONIDS[playerNumber] = (sessionId);
+            sessionIds[playerNumber] = (sessionId);
 
             players[playerNumber] = new Player(
                     playerNumber,
@@ -48,34 +60,21 @@ public class CreatePlayers {
 
             if (playerNumber == 4) {
                 isPartyFull = true;
-                playerXTurn();
-                notificationEvent();
+                //activateButton.buyEstate();
+                activateButton.diceNumber();
+                notified.playerXOnTurn();
             }
         }
-        for (String id: SESSIONIDS) {
+        for (String id: sessionIds) {
             if (id != null) {
-                sendMessage.sendToUser(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));
+                sendMessage.sendToPlayer(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));
             }
         }
-    }
-
-    public Player[] getPlayers() {
-        return players;
-    }
-    /*
-    when party is full, message is sent that first player is on turn
-    */
-    private void notificationEvent() {
-        sendMessage.sendToAll("/client/notification", "Player " + getPlayers()[0].getName() + " is on turn");
     }
 
     /*
     sends this message only to the player whose turn it is now, so that the buttons can be activated
      */
-    public void playerXTurn() {
-        sendMessage.sendToUser(SESSIONIDS[0], "/client/toggleDiceNumberBtn", "false");
-    }
-
     //Define previous Player for everyone
     public void setPreviousPlayers() {
         for(int i = 0; i < playerNumber; i++){
