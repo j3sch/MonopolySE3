@@ -34,22 +34,22 @@ private static Logger log = LogManager.getLogger(EventField.class);
             break;
                 //Player move to Park Place
             case 1:
-                //todo Straße kaufen
                 player.setPosition(22);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
+
             break;
 
                 //Money to Free Parking 2$
             case 2:
                 player.PlayerPaysMoney(2);
-                //toDO Geld muss an Free Parking
+                FreeParking.setCredit(2);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 2 $ to Free Parking");
             break;
 
                 //Money to Free Parking 1$
             case 3:
                 player.PlayerPaysMoney(1);
-                //toDO Geld muss an Free Parking
+                FreeParking.setCredit(2);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 1 $ to Free Parking");
                 break;
 

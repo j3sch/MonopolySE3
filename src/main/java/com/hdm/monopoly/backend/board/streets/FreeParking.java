@@ -10,6 +10,12 @@ public class FreeParking implements Field{
     private static Logger log = LogManager.getLogger(FreeParking.class);
 
     private String name;
+    static int credit;
+
+
+    public static void setCredit(int amount) {
+       credit = amount;
+    }
 
     public FreeParking(String name){
         this.name = name;
@@ -18,7 +24,17 @@ public class FreeParking implements Field{
 
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
-        //TODO
+
+        if(credit >=1 ){
+            sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking" + credit);
+
+            player.PlayerGetsMoney(credit);}
+
+        else{
+            sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking credit:" + credit);
+
+        }
+
     }
 
     @Override
