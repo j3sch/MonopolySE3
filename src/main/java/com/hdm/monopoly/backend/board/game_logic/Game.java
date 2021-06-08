@@ -57,14 +57,14 @@ public class Game {
     public void movePlayer(int steps) {
         //Calculating players new position and checking if he made a whole round around the map and is at the start again
         int newPosition = (getCurrentPlayer().getPosition() + steps) % board.size();
-        if (getCurrentPlayer().getPosition() > newPosition) {
-            //TODO get money for crossing map start = yet to be implemented
+        if (getCurrentPlayer().getPosition() > newPosition && newPosition != 0) {
+            getCurrentPlayer().PlayerGetsMoney(2);
         }
         getCurrentPlayer().setPosition(newPosition);
         log.info(getCurrentPlayer().getName() + "moves to field number: " + newPosition);
         //activates the moveOnField function which is the field action
 
-        //TODO empty methods are called
+
         board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds);
     }
 
