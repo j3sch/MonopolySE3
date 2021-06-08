@@ -92,8 +92,10 @@ public class Game {
      */
     public void endOfTurn(){
         log.info(currentPlayer + " ends his turn");
+        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true" );
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
+
         sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
         sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
         sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
