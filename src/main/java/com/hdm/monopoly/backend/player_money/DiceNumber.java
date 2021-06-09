@@ -76,7 +76,7 @@ public class DiceNumber {
     @SendToUser("/client/toggleBuyEstateBtn")
     public String buyEstate() throws JsonProcessingException {
         Player player = game.getCurrentPlayer();
-        Street street = game.getBoard().getStreet(player.getPosition());
+        Street street = (Street)game.getBoard().getField(player.getPosition());
 
         player.PlayerPaysMoney(street.getPrice());
         street.setOwner(player);
