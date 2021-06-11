@@ -1,12 +1,12 @@
 {
-	"name": "monopoly-frontend-1",
+	"name": "monopoly-frontend",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev -p 3001",
 		"build": "next build",
 		"start": "next start",
-		"prepare": "husky install",
+		"prepare": "cd.. && husky install frontend/",
 		"format": "prettier --write ./src/**/* --config .prettierrc.js",
 		"lint": "eslint ./src/**/* --ext .js,.jsx --quiet --fix"
 	},
