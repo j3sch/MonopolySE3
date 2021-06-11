@@ -1,7 +1,7 @@
 package com.hdm.monopoly;
 
-import com.hdm.monopoly.backend.player_money.Colours;
-import com.hdm.monopoly.backend.player_money.Player;
+import com.hdm.monopoly.player_money.Colours;
+import com.hdm.monopoly.player_money.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
