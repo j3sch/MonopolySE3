@@ -34,8 +34,12 @@ const LoginPage = () => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
 	};
 
-	const sendMessage = (name) => {
-		stompClient.send('/server/playerName', {}, JSON.stringify({ name }));
+	const sendMessage = (playerName) => {
+		stompClient.send(
+			'/server/playerName',
+			{},
+			JSON.stringify({ name: playerName }),
+		);
 	};
 
 	return (
