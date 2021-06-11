@@ -131,7 +131,7 @@ const Home = () => {
 	}
 	return (
 		<PlayerContext.Provider value={{ stompClient, isPartyFullHooks }}>
-			<LoginPage />;
+			<LoginPage />
 		</PlayerContext.Provider>
 	);
 };

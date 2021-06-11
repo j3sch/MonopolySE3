@@ -24,5 +24,6 @@ module.exports = {
 		'import/no-unresolved': 'off',
 		'import/extensions': 'off',
 		'react/require-default-props': 'off', // gamefield data is static
+		'react/no-array-index-key': 'off' // for the leaderboard helpful
 	},
 };
