@@ -15,6 +15,14 @@ const LoginPage = () => {
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
 
+	const sendMessage = (playerName) => {
+		stompClient.send(
+			'/server/playerName',
+			{},
+			JSON.stringify({ name: playerName }),
+		);
+	};
+
 	const handleSubmit = (e) => {
 		sendMessage(name);
 		e.preventDefault();
@@ -32,14 +40,6 @@ const LoginPage = () => {
 
 	const closeNotification = () => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
-	};
-
-	const sendMessage = (playerName) => {
-		stompClient.send(
-			'/server/playerName',
-			{},
-			JSON.stringify({ name: playerName }),
-		);
 	};
 
 	return (

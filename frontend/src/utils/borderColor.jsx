@@ -12,7 +12,7 @@ export const borderColor = (id) => {
 		'border-yellow-500 border-4',
 	];
 
-	for (let i = 0; i < borderColors.length; i++) {
+	for (let i = 0; i < borderColors.length; i += 1) {
 		if (players[i] !== null && id === players[i].position) {
 			color = borderColors[i];
 			break;
