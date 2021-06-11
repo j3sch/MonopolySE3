@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 
 const NotificationMessage = ({ message, closeNotification }) => {
 	useEffect(() => {
-		{
-			setTimeout(() => {
-				closeNotification();
-			}, 6000);
-		}
+		setTimeout(() => {
+			closeNotification();
+		}, 6000);
 	});
 
 	return (
