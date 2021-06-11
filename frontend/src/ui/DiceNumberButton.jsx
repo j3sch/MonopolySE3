@@ -1,5 +1,5 @@
-import { PlayerContext } from '~/utils/PlayerContext';
 import { useContext } from 'react';
+import { PlayerContext } from '~/utils/PlayerContext';
 
 export function DiceNumberButton() {
 	const { isDiceNumberBtnDisabled } = useContext(PlayerContext);

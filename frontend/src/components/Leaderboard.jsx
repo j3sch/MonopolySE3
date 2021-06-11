@@ -1,7 +1,7 @@
-import { PlayerContext } from '~/utils/PlayerContext';
 import React, { useContext } from 'react';
+import { PlayerContext } from '~/utils/PlayerContext';
 
-//colors are missing by players
+// colors are missing by players
 export function Leaderboard() {
 	const { players } = useContext(PlayerContext);
 
