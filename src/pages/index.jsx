@@ -89,7 +89,7 @@ const Home = () => {
 
 	const connect = () => {
 		const sessionId = randomstring.generate(12);
-		SockJS = new SockJS('http://localhost:8080//ws-monopoly', [], {
+		SockJS = new SockJS('https://localhost:8080//ws-monopoly', [], {
 			sessionId: () => {
 				return sessionId;
 			},
