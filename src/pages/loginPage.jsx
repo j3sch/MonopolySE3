@@ -15,6 +15,14 @@ const LoginPage = () => {
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
 
+	const sendMessage = (playerName) => {
+		stompClient.send(
+			'/server/playerName',
+			{},
+			JSON.stringify({ name: playerName }),
+		);
+	};
+
 	const handleSubmit = (e) => {
 		sendMessage(name);
 		e.preventDefault();
@@ -34,13 +42,9 @@ const LoginPage = () => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
 	};
 
-	const sendMessage = (name) => {
-		stompClient.send('/server/playerName', {}, JSON.stringify({ name }));
-	};
-
 	return (
 		<div className="flex h-full">
-			<div className="mx-auto ">
+			<div className="mx-auto">
 				<h1 className="font-semibold text-4xl mt-28 mb-6">
 					Welcome to Monopoly Game
 				</h1>

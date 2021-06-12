@@ -5,6 +5,9 @@ import GamePage from '~/pages/gamePage';
 import NotificationMessage from '~/components/NotificationMessage';
 
 let stompClient;
+const Stomp = require('stompjs');
+let SockJS = require('sockjs-client');
+const randomstring = require('randomstring');
 
 const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
@@ -85,10 +88,7 @@ const Home = () => {
 	};
 
 	const connect = () => {
-		const randomstring = require('randomstring');
 		const sessionId = randomstring.generate(12);
-		const Stomp = require('stompjs');
-		let SockJS = require('sockjs-client');
 		SockJS = new SockJS('http://localhost:8080//ws-monopoly', [], {
 			sessionId: () => {
 				return sessionId;
@@ -131,7 +131,7 @@ const Home = () => {
 	}
 	return (
 		<PlayerContext.Provider value={{ stompClient, isPartyFullHooks }}>
-			<LoginPage />;
+			<LoginPage />
 		</PlayerContext.Provider>
 	);
 };
