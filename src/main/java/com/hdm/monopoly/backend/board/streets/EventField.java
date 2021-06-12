@@ -6,8 +6,10 @@ import com.hdm.monopoly.backend.player_money.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Random;
+
 public class EventField implements Field{
-    private static Logger log = LogManager.getLogger(EventField.class);
+private static Logger log = LogManager.getLogger(EventField.class);
 
     private String name;
 
@@ -18,7 +20,60 @@ public class EventField implements Field{
 
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
-        //TODO
+        //Random number 0 to 6
+        Random random = new Random();
+        int randomNumber = random.nextInt(7);
+
+        // switch aktivate the different event field actions with a random number
+        switch (randomNumber){
+
+            //Player move to Go
+            case 0:
+                player.setPosition(0);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to go");
+            break;
+                //Player move to Park Place
+            case 1:
+                player.setPosition(22);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
+
+
+            break;
+
+                //Money to Free Parking 2$
+            case 2:
+                player.PlayerPaysMoney(2);
+                FreeParking.setCredit(2);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 2 $ to Free Parking");
+            break;
+
+                //Money to Free Parking 1$
+            case 3:
+                player.PlayerPaysMoney(1);
+                FreeParking.setCredit(2);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 1 $ to Free Parking");
+                break;
+
+                //current player gets money
+            case 4:
+                player.PlayerGetsMoney(2);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: You get 2$ from the bank");
+                break;
+
+                //player pays 1$ to the bank
+            case 5:
+                player.PlayerPaysMoney(1);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: You pay 1$ to the bank");
+                break;
+
+                //player to jail
+            case 6:
+                player.setPosition(6);
+                player.getArrested();
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Go to jail");
+                break;
+        }
+
     }
 
     @Override
