@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';
 
 export function BuyEstateButton() {
-	const { isBuyEstateBtnDisabled } = useContext(PlayerContext);
-	const { stompClient } = useContext(PlayerContext);
+	const { isBuyEstateBtnDisabled } = useContext(PlayerContext) || true;
+	const { stompClient } = useContext(PlayerContext) || {};
 
 	const sendButtonClickEvent = () => {
 		stompClient.send(
