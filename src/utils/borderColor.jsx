@@ -1,5 +1,5 @@
-import { PlayerContext } from '~/utils/PlayerContext';
 import { useContext } from 'react';
+import { PlayerContext } from '~/utils/PlayerContext';
 
 export const borderColor = (id) => {
 	const { players } = useContext(PlayerContext);

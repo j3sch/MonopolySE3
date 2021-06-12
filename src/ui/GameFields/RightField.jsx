@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { PlayerContext } from '~/utils/PlayerContext';
-import { useContext } from 'react';
 
 export const Right = (props) => {
 	const { id, borderColor, title, price, color } = props;

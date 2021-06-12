@@ -1,9 +1,10 @@
+import React, { useState } from 'react';
 import LoginPage from '~/pages/loginPage';
 import { PlayerContext } from '~/utils/PlayerContext';
 import GamePage from '~/pages/gamePage';
-let stompClient;
-import React, { useState } from 'react';
 import NotificationMessage from '~/components/NotificationMessage';
+
+let stompClient;
 
 const Home = () => {
 	const [userJoint, setUserJoint] = useState(false);
@@ -13,9 +14,9 @@ const Home = () => {
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 
-	let array = [];
+	const array = [];
 	const [boughtEstate, setBoughtEstate] = useState([{}]);
-	//for receiving messages
+	// for receiving messages
 	const [isNotificationActiv, setNotification] = useState(false);
 	const [message, setMessage] = useState('');
 
@@ -52,8 +53,8 @@ const Home = () => {
 			},
 		);
 		stompClient.subscribe('/client/buyEstate', function (greeting) {
-			let fieldPosition = parseInt(greeting.body.split(' ')[0], 10);
-			let estateColor = greeting.body.split(' ')[1];
+			const fieldPosition = parseInt(greeting.body.split(' ')[0], 10);
+			const estateColor = greeting.body.split(' ')[1];
 			array.push({ fieldPosition, estateColor });
 			setBoughtEstate(array);
 		});
@@ -85,7 +86,7 @@ const Home = () => {
 
 	const connect = () => {
 		const randomstring = require('randomstring');
-		let sessionId = randomstring.generate(12);
+		const sessionId = randomstring.generate(12);
 		const Stomp = require('stompjs');
 		let SockJS = require('sockjs-client');
 		SockJS = new SockJS('http://localhost:8080//ws-monopoly', [], {
