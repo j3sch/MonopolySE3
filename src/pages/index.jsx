@@ -88,9 +88,10 @@ const Home = () => {
 	};
 
 	const connect = () => {
+		//https://localhost:8080
 		const sessionId = randomstring.generate(12);
 		SockJS = new SockJS(
-			'https://shielded-ridge-73205.herokuapp.com//ws-monopoly',
+			'https://radiant-falls-52552.herokuapp.com//ws-monopoly',
 			[],
 			{
 				sessionId: () => {
