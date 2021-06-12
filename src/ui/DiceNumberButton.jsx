@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';
 
 export function DiceNumberButton() {
-	const { isDiceNumberBtnDisabled } = useContext(PlayerContext);
-	const { stompClient } = useContext(PlayerContext);
+	const { isDiceNumberBtnDisabled } = useContext(PlayerContext) || true;
+	const { stompClient } = useContext(PlayerContext) || {};
 
 	const sendButtonClickEvent = () => {
 		stompClient.send(

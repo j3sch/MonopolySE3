@@ -9,8 +9,8 @@ const defaultState = {
 	message: '',
 };
 const LoginPage = () => {
-	const { isPartyFullHooks } = useContext(PlayerContext);
-	const { stompClient } = useContext(PlayerContext);
+	const { isPartyFullHooks } = useContext(PlayerContext) || false;
+	const { stompClient } = useContext(PlayerContext) || {};
 
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
