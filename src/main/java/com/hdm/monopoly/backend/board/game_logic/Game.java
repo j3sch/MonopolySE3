@@ -68,14 +68,6 @@ public class Game {
         board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds);
     }
 
-    public void teleport(Player playerToBeTeleported, int position) {
-        if (position < board.size() && position >= 0) {
-            playerToBeTeleported.setPosition(position);
-        } else {
-            //TODO Error correction
-        }
-    }
-
 
     /**
      * A getter for the player that is now on the turn. So he is the current player.
