@@ -89,11 +89,15 @@ const Home = () => {
 
 	const connect = () => {
 		const sessionId = randomstring.generate(12);
-		SockJS = new SockJS('https://localhost:8080//ws-monopoly', [], {
-			sessionId: () => {
-				return sessionId;
+		SockJS = new SockJS(
+			'https://shielded-ridge-73205.herokuapp.com//ws-monopoly',
+			[],
+			{
+				sessionId: () => {
+					return sessionId;
+				},
 			},
-		});
+		);
 		stompClient = Stomp.over(SockJS);
 
 		stompClient.connect({}, onConnected, onError);
