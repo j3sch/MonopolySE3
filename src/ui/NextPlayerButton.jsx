@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';
 
-export function DiceNumberButton() {
-	const { isDiceNumberBtnDisabled } = useContext(PlayerContext);
+export function NextPlayerButton() {
+	const { isNextPlayerBtnDisabled } = useContext(PlayerContext);
 	const { stompClient } = useContext(PlayerContext);
 
 	const sendButtonClickEvent = () => {
 		stompClient.send(
-			'/server/diceNumberBtnClicked',
+			'/server/nextPlayerBtnClicked',
 			{},
-			JSON.stringify({ message: 'Player has rolled a number' }),
+			JSON.stringify({ message: 'Next players turn' }),
 		);
 	};
 
@@ -20,9 +20,9 @@ export function DiceNumberButton() {
 			className="px-4 py-2 text-lg bg-blue-600 hover:bg-blue-700
 			active:bg-blue-300 shadow-lg block font-semibold tracking-wider text-white
 			rounded disabled:opacity-70 disabled:bg-blue-600"
-			disabled={isDiceNumberBtnDisabled}
+			disabled={isNextPlayerBtnDisabled}
 		>
-			Dice number
+			Next player
 		</button>
 	);
 }

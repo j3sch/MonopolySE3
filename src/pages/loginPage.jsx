@@ -1,6 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import LoginNotification from '~/components/LoginNotification';
 import { reducer } from '~/utils/reducer';
+import { PlayerContext } from '~/utils/PlayerContext';
 
 const defaultState = {
 	people: [],
@@ -8,14 +9,21 @@ const defaultState = {
 	message: '',
 };
 const LoginPage = () => {
+	const { isPartyFullHooks } = useContext(PlayerContext);
+	const { stompClient } = useContext(PlayerContext);
+
 	const [name, setName] = useState('');
 	const [state, dispatch] = useReducer(reducer, defaultState);
 
 	const handleSubmit = (e) => {
+		sendMessage(name);
 		e.preventDefault();
-		if (name) {
-			const newItem = { id: new Date().getTime().toString(), name };
+		if (isPartyFullHooks) {
+			dispatch({ type: 'PARTY_FULL' });
+		} else if (name) {
+			const newItem = { name };
 			dispatch({ type: 'USER_ADDED', payload: newItem });
+
 			setName('');
 		} else {
 			dispatch({ type: 'NO_INPUT' });
@@ -26,15 +34,19 @@ const LoginPage = () => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
 	};
 
+	const sendMessage = (name) => {
+		stompClient.send('/server/playerName', {}, JSON.stringify({ name }));
+	};
+
 	return (
 		<div className="flex h-full">
-			<div className="mx-auto text-white">
-				<h1 className="text-white font-semibold text-4xl mt-28 mb-6">
+			<div className="mx-auto ">
+				<h1 className="font-semibold text-4xl mt-28 mb-6">
 					Welcome to Monopoly Game
 				</h1>
 				<form
 					onSubmit={handleSubmit}
-					className="form bg-blue-200 py-14 px-20 flex bg-opacity-20 rounded text-lg mb-6"
+					className="form bg-blue-300 py-14 px-20 flex bg-opacity-25 rounded text-lg mb-6"
 				>
 					<div>
 						<label htmlFor="submit">
@@ -51,7 +63,7 @@ const LoginPage = () => {
 						type="submit"
 						className="bg-green-600 py-1 px-3 rounded font-semibold"
 					>
-						Add
+						Submit
 					</button>
 				</form>
 				{state.isNotificationActiv && (

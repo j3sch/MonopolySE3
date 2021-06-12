@@ -5,7 +5,7 @@ const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
 	useEffect(() => {
 		setTimeout(() => {
 			closeNotification();
-		}, 3000);
+		}, 4000);
 	});
 
 	return (

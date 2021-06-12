@@ -3,11 +3,9 @@
 @tailwind utilities;
 
 body {
-  @apply dark:bg-gray-900 bg-gray-100 text-gray-900 antialiased font-sans;
+	@apply dark:bg-gray-900 bg-gray-100 text-gray-800  dark:text-gray-300 antialiased font-sans;
 }
 
 button:focus {
-  outline: 0px dotted;
+	outline: 0px dotted;
 }
-
-
