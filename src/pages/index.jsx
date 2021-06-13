@@ -88,17 +88,12 @@ const Home = () => {
 	};
 
 	const connect = () => {
-		//https://localhost:8080
 		const sessionId = randomstring.generate(12);
-		SockJS = new SockJS(
-			'https://radiant-falls-52552.herokuapp.com//ws-monopoly',
-			[],
-			{
-				sessionId: () => {
-					return sessionId;
-				},
+		SockJS = new SockJS('http://localhost:8080//ws-monopoly', [], {
+			sessionId: () => {
+				return sessionId;
 			},
-		);
+		});
 		stompClient = Stomp.over(SockJS);
 
 		stompClient.connect({}, onConnected, onError);
