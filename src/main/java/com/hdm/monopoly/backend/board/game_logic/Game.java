@@ -88,6 +88,7 @@ public class Game {
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
 
+        sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
         sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
         sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
     }
