@@ -1,6 +1,6 @@
 package com.hdm.monopoly;
 
-import com.hdm.monopoly.backend.board.streets.Map;
+import com.hdm.monopoly.board.Map;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

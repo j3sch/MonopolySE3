@@ -1,7 +1,7 @@
 package com.hdm.monopoly;
 
-import com.hdm.monopoly.backend.player_money.Colours;
-import com.hdm.monopoly.backend.player_money.Player;
+import com.hdm.monopoly.player.Colours;
+import com.hdm.monopoly.player.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
@@ -17,15 +17,15 @@ public class PlayerTest {
     public void MoneyTest(){
         assertEquals(Player1.getPlayerBankBalance(), 31);
 
-        Player2.PlayerGetsMoney(2);
+        Player2.playerGetsMoney(2);
         assertEquals(Player2.getPlayerBankBalance(), 33);
         assertNotEquals(Player3.getPlayerBankBalance(), 33);
 
-        Player3.PlayerPaysMoney(2);
+        Player3.playerPaysMoney(2);
         assertEquals(Player3.getPlayerBankBalance(), 29);
         assertNotEquals(Player4.getPlayerBankBalance(), 29);
 
-        Player3.PlayerGetsMoney(4);
+        Player3.playerGetsMoney(4);
         assertEquals(Player3.getPlayerBankBalance(), 33);
     }
 
