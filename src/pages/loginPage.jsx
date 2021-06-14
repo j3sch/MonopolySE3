@@ -46,26 +46,27 @@ const LoginPage = () => {
 		<div className="flex h-full">
 			<div className="mx-auto">
 				<h1 className="font-semibold text-4xl mt-28 mb-6">
-					Welcome to Monopoly Game
+					Welcome to the Monopoly Game
 				</h1>
 				<form
 					onSubmit={handleSubmit}
-					className="form bg-blue-300 py-14 px-20 flex bg-opacity-25 rounded text-lg mb-6"
+					className="form shadow-md bg-white py-14 px-20 flex bg-opacity-10 rounded text-lg mb-6 "
 				>
-					<div>
-						<label htmlFor="submit">
+					<div className="pr-4">
+						<label className="block sm:inline-block pr-8" htmlFor="submit">
 							Pls, enter your name
-							<input
-								className="py-1 text-black mx-8 rounded"
-								type="text"
-								value={name}
-								onChange={(e) => setName(e.target.value)}
-							/>
 						</label>
+						<input
+							className="py-1 text-black rounded appearance-none leading-tight border focus:border-blue-400 outline-none"
+							placeholder="Name"
+							type="text"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
 					</div>
 					<button
 						type="submit"
-						className="bg-green-600 py-1 px-3 rounded font-semibold"
+						className=" py-1 px-3 bg-green-400 rounded font-semibold text-gray-900"
 					>
 						Submit
 					</button>

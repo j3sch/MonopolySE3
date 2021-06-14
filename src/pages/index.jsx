@@ -16,11 +16,12 @@ const Home = () => {
 	const [isDiceNumberBtnDisabled, setDiceNumberBtn] = useState(true);
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
+	const [currentPlayer, setCurrentPlayer] = useState(0)
 
 	const array = [];
 	const [boughtEstate, setBoughtEstate] = useState([{}]);
 	// for receiving messages
-	const [isNotificationActiv, setNotification] = useState(false);
+	const [isNotificationActiv, setNotification] = useState();
 	const [message, setMessage] = useState('');
 
 	let isPartyFull;
@@ -36,6 +37,9 @@ const Home = () => {
 			if (JSON.parse(greeting.body).length <= 4 && !isPartyFull) {
 				setUserJoint(true);
 			}
+		});
+		stompClient.subscribe('/client/highlightPlayer', function (greeting) {
+			setCurrentPlayer(JSON.parse(greeting.body));
 		});
 		stompClient.subscribe('/client/playerList', function (greeting) {
 			setPlayers(JSON.parse(greeting.body));
@@ -121,6 +125,7 @@ const Home = () => {
 					isNextPlayerBtnDisabled,
 					isBuyEstateBtnDisabled,
 					boughtEstate,
+					currentPlayer
 				}}
 			>
 				<GamePage />
