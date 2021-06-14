@@ -19,7 +19,8 @@ export function Leaderboard() {
 									className={`bg-[${
 										player.colour
 									}] mr-2 group-hover:mr-1 col-span-2 xl:col-span-1 items-center grid justify-items-center ${
-										i === currentPlayer && 'border-2 border-gray-900 black:border-white' 
+										i === currentPlayer &&
+										'border-2 border-gray-900 black:border-white'
 									}`}
 								>
 									{i + 1}
@@ -28,7 +29,8 @@ export function Leaderboard() {
 									className={`bg-[${
 										player.colour
 									}] col-span-4 xl:col-span-5 grid grid-cols-2 items-center px-3 ${
-										i === currentPlayer && 'border-2'
+										i === currentPlayer &&
+										'border-2 border-gray-900 black:border-white'
 									}`}
 								>
 									<div className="col-span-1 ">{player.name}</div>
