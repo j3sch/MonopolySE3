@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class Jail implements Field{
     private static Logger log = LogManager.getLogger(Jail.class);
 
-    private String name;
+    private final String name;
 
     public Jail(String name){
         this.name = name;
@@ -17,7 +17,7 @@ public class Jail implements Field{
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Map map) {
         //TODO
     }
 

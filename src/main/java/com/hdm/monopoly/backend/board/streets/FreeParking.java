@@ -9,12 +9,12 @@ import org.apache.logging.log4j.Logger;
 public class FreeParking implements Field{
     private static Logger log = LogManager.getLogger(FreeParking.class);
 
-    private String name;
-    static int credit;
+    private final String name;
+    int credit;
 
 
-    public static void setCredit(int amount) {
-       credit = amount;
+    public void setCredit(int amount) {
+       credit += amount;
     }
 
     public FreeParking(String name){
@@ -23,12 +23,12 @@ public class FreeParking implements Field{
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Map map) {
 
         if(credit >=1 ){
             sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking: " + credit);
             player.PlayerGetsMoney(credit);
-            setCredit(0);
+            credit = 0;
         }
 
 

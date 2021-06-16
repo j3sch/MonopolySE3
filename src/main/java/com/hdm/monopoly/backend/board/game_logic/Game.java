@@ -65,7 +65,7 @@ public class Game {
         //activates the moveOnField function which is the field action
 
 
-        board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds);
+        board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds, board);
     }
 
 

@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 public class Go implements Field {
     private static Logger log = LogManager.getLogger(Go.class);
 
-    private String name;
-    private int goValue;
+    private final String name;
+    private final int goValue;
 
     public Go(String name,int goValue){
         this.name = name;
@@ -19,7 +19,7 @@ public class Go implements Field {
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Map map) {
         player.PlayerGetsMoney(goValue);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", " You get $" + goValue);
 

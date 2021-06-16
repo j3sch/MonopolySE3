@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class GoToJail implements Field{
     private static Logger log = LogManager.getLogger(GoToJail.class);
 
-    private String name;
+    private final String name;
 
     public GoToJail(String name){
         this.name = name;
@@ -17,7 +17,7 @@ public class GoToJail implements Field{
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Map map) {
         player.setPosition(6);
         player.getArrested();
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to go to jail.");
