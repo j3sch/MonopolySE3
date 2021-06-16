@@ -37,9 +37,9 @@ public class DiceNumber {
         log.info("New Object 'DiceNumber' created");
     }
 
-    /*
-    get message, if player clicked on button
-    and deactivate the button.
+    /**
+     * player rolls a number
+     * @return true, to deactivate the diceNumberBtn
      */
     @MessageMapping("/diceNumberBtnClicked")
     @SendToUser("/client/toggleDiceNumberBtn")
@@ -60,10 +60,18 @@ public class DiceNumber {
         return new ObjectMapper().writeValueAsString(true);
     }
 
+    /**
+     *
+     * @return random number between 1 and 6
+     */
     public int diceRandomNumber() {
         return (int)(Math.random() * 6 + 1);
     }
 
+    /**
+     * initiates the change to the next player
+     * @return true, to deactivate the nextPlayerBtn
+     */
     @MessageMapping("/nextPlayerBtnClicked")
     @SendToUser("/client/toggleNextPlayerBtn")
     public String nextPlayerBtnClicked() throws JsonProcessingException {
@@ -71,6 +79,10 @@ public class DiceNumber {
         return new ObjectMapper().writeValueAsString(true);
     }
 
+    /**
+     * buys the street on players position
+     * @return true, to deactivate the buyEstateBtn
+     */
     @MessageMapping("/buyEstateBtnClicked")
     @SendToUser("/client/toggleBuyEstateBtn")
     public String buyEstate() throws JsonProcessingException {

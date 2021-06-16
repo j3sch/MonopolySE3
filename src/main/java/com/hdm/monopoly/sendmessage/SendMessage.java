@@ -21,6 +21,12 @@ public class SendMessage {
         this.messagingTemplate = messagingTemplate;
     }
 
+    /**
+     * message to an individual player
+     * @param sessionId the sessionID of the player who should receive the message
+     * @param destination to which address the message should be sent
+     * @param message the payload that is sent away
+     */
     public void sendToPlayer(String sessionId, String destination, String message) {
         SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor
                 .create(SimpMessageType.MESSAGE);
@@ -33,6 +39,11 @@ public class SendMessage {
         log.info("send message to player. Destination: " + destination + "content: " + message);
     }
 
+    /**
+     * message is sent to all connected players
+     * @param destination to which address the message should be sent
+     * @param message the payload that is sent away
+     */
     public void sendToAll(String destination, String message) {
         messagingTemplate.convertAndSend(destination, message);
         log.info("send message to all. Destination: " + destination + "content: " + message);

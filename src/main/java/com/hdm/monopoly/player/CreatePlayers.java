@@ -35,13 +35,14 @@ public class CreatePlayers {
         this.sessionIds = sessionIds;
         this.activateButton = activateButton;
         this.notified = notified;
-        log.debug("New Object 'CreatePlayers' created");
+        log.info("New Object 'CreatePlayers' created");
     }
 
-    /*
-    gets the entered player name.
-    Creates the player and sends the array of all players to the client.
-    */
+    /**
+     * A new player gets created, if the party isn't full
+     * @param message name of the player
+     * @param sessionId will be stored in an array to send messages to the player individually
+     */
     @MessageMapping("/playerName")
     public void addPlayer(Player message, @Header("simpSessionId") String sessionId)
             throws JsonProcessingException {
@@ -71,10 +72,11 @@ public class CreatePlayers {
         }
     }
 
-    /*
-    gets a message on successful connection and then tells the client if more players can join
-    */
-    @MessageMapping("/message")
+    /**
+     * gets a message on successful connection and then tells the client if more players can join
+     * @return isPartyFull
+     */
+    @MessageMapping("/isPartyFull")
     @SendToUser("/client/reply")
     public String processMessageFromClient() throws Exception {
         Thread.sleep(1000);

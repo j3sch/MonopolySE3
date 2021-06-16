@@ -21,6 +21,9 @@ public class SendPlayerData {
         this.players = players;
     }
 
+    /**
+     * when a player is changed, this method can be called to send the new changes to the client
+     */
     public void sendPlayerToClient() throws JsonProcessingException {
         sendMessage.sendToAll("/client/playerList", new ObjectMapper().writeValueAsString(players));
         log.info(players);

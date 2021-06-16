@@ -6,20 +6,20 @@ import org.apache.logging.log4j.Logger;
 public class Account {
     private static final Logger log = LogManager.getLogger(Account.class);
 
-    private int BankBalance;
+    private int bankBalance;
 
 
-    public Account(int BankBalance) {
-        this.BankBalance = BankBalance;
+    public Account(int bankBalance) {
+        this.bankBalance = bankBalance;
         log.info("New Object 'Account' created");
     }
 
     public int getBankBalance() {
-        return BankBalance;
+        return bankBalance;
     }
 
     public void setBankBalance(int bankBalance) {
-        this.BankBalance = bankBalance;
+        this.bankBalance = bankBalance;
     }
 
     public void getMoney(int amount){

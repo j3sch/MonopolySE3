@@ -60,7 +60,7 @@ class WebSocketTest {
             }
         });
 
-        session.send("/server/message", "is Party full?");
+        session.send("/server/isPartyFull", "is Party full?");
 
         assertEquals("false", blockingQueue.poll(2, SECONDS));
     }
