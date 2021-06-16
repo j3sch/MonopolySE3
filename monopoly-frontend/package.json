@@ -6,7 +6,7 @@
 		"dev": "next dev -p 3001",
 		"build": "next build",
 		"start": "next start",
-		"prepare": "husky install",
+		"prepare": "cd .. && husky install monopoly-frontend/.husky",
 		"format": "prettier --write ./src/**/* --config ./.prettierrc.js",
 		"lint": "eslint ./src/**/* --ext .js,.jsx --quiet --fix"
 	},
