@@ -1,6 +1,6 @@
 package com.hdm.monopoly;
 
-import com.hdm.monopoly.board.Map;
+import com.hdm.monopoly.board.Board;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,13 +10,13 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class MapTest {
+public class BoardTest {
 
     @Autowired
-    private Map map;
+    private Board board;
 
     @org.junit.Test
     public void streetIceCreamPalor() {
-        assertEquals(map.getField(5).getFieldName(), "Ice Cream Palor");
+        assertEquals(board.getField(5).getFieldName(), "Ice Cream Palor");
     }
 }

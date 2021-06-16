@@ -16,7 +16,7 @@ public class GoToJail implements Field{
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
         player.setPosition(6);
         player.getArrested();
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to go to jail.");

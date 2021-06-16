@@ -16,7 +16,7 @@ public class Jail implements Field{
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
         //TODO
     }
 

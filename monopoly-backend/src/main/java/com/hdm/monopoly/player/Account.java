@@ -24,10 +24,10 @@ public class Account {
 
     public void getMoney(int amount){
         setBankBalance(getBankBalance() + amount);
-    };
+    }
 
     public void payMoney(int amount){
         setBankBalance(getBankBalance() - amount);
-    };
+    }
 
 }

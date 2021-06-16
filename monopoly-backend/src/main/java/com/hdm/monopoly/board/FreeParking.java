@@ -1,35 +1,35 @@
 package com.hdm.monopoly.board;
 
-import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.sendmessage.SendMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class FreeParking implements Field{
-    private static final Logger log = LogManager.getLogger(FreeParking.class);
+public class freeParking implements Field{
+    private static final Logger log = LogManager.getLogger(freeParking.class);
 
     private final String name;
-    static int credit;
+    private int credit;
 
-    public static void setCredit(int amount) {
-       credit = amount;
+
+    public void setCredit(int amount) {
+       credit += amount;
     }
 
-    public FreeParking(String name){
+    public freeParking(String name){
         this.name = name;
         log.info("New Object 'FreeParking' created");
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
 
         if(credit >=1 ){
             sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking: " + credit);
-            player.playerGetsMoney(credit);
-            setCredit(0);
-        }
 
-        else{
+            player.playerGetsMoney(credit);
+            credit = 0;
+        } else {
             sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking credit:" + credit);
         }
     }

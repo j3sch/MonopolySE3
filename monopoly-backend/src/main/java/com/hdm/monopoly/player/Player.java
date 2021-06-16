@@ -1,7 +1,10 @@
 package com.hdm.monopoly.player;
 
+import com.hdm.monopoly.board.Street;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 public class Player {
     private static final Logger log = LogManager.getLogger(Player.class);
@@ -11,6 +14,7 @@ public class Player {
     private String name;
     private String colour;
     private final int ID;
+    private final ArrayList<Street> ownedStreets;
     private int jailTime = 0;
 
     public Player(int ID, String name, String colour) {
@@ -19,7 +23,8 @@ public class Player {
         this.colour = colour;
         this.ID = ID;
         this.position = 0;
-        log.info("New Object 'Player' created. Name: " + name);
+        this.ownedStreets = new ArrayList<>();
+        log.debug("New Object 'Player' created. Name: " + name);
     }
 
     public int getID() {
@@ -40,6 +45,10 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<Street> getOwnedStreets() {
+        return ownedStreets;
     }
 
     public String getColour() {
@@ -86,5 +95,9 @@ public class Player {
     public void getReleased(){
         jailTime = 0;
         log.info(name + " get released from jail");
+    }
+
+    public void addStreet(Street toBeAdded){
+        ownedStreets.add(toBeAdded);
     }
 }

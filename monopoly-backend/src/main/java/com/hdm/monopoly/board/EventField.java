@@ -18,49 +18,56 @@ private static final Logger log = LogManager.getLogger(EventField.class);
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
+
         //Random number 0 to 6
         Random random = new Random();
         int randomNumber = random.nextInt(7);
+        freeParking freeParking = (com.hdm.monopoly.board.freeParking) board.getField(12);
 
         // switch activate the different event field actions with a random number
         switch (randomNumber){
             //Player move to Go
             case 0:
-                player.setPosition(0);
+                board.getField(0).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to go");
                 break;
-                //Player move to Park Place
+            //Player move to Park Place
+
             case 1:
-                player.setPosition(22);
+                board.getField(22).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
                 break;
             //Money to Free Parking 2$
+
             case 2:
                 player.playerPaysMoney(2);
-                FreeParking.setCredit(2);
+                freeParking.setCredit(2);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 2 $ to Free Parking");
                 break;
             //Money to Free Parking 1$
+
             case 3:
                 player.playerPaysMoney(1);
-                FreeParking.setCredit(2);
+                freeParking.setCredit(1);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 1 $ to Free Parking");
                 break;
+
             //current player gets money
             case 4:
                 player.playerGetsMoney(2);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: You get 2$ from the bank");
                 break;
+
             //player pays 1$ to the bank
             case 5:
                 player.playerPaysMoney(1);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: You pay 1$ to the bank");
                 break;
+
             //player to jail
             case 6:
-                player.setPosition(6);
-                player.getArrested();
+                board.getField(18).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Go to jail");
                 break;
         }

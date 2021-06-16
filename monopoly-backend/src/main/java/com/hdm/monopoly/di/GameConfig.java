@@ -4,7 +4,7 @@ import com.hdm.monopoly.logic.Game;
 import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notified;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
-import com.hdm.monopoly.board.Map;
+import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +18,8 @@ public class GameConfig {
     private final Player[] players = new Player[4];
     private final String[] sessionIds = new String[4];
     private final SendMessage sendMessage = new SendMessage();
-    private final Map map = new Map();
-    private final Game game = new Game(players, map, sendMessage, sessionIds);
+    private final Board board = new Board();
+    private final Game game = new Game(players, board, sendMessage, sessionIds);
 
     //to send data to client
     SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
@@ -37,8 +37,8 @@ public class GameConfig {
     }
 
     @Bean
-    public Map getMap() {
-        return map;
+    public Board getBoard() {
+        return board;
     }
 
     @Bean

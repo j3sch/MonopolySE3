@@ -18,7 +18,7 @@ public class Go implements Field {
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
         player.playerGetsMoney(goValue);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", " You get $" + goValue);
     }

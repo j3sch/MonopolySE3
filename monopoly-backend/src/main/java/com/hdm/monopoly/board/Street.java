@@ -4,6 +4,7 @@ import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.util.Iterator;
 
 public class Street implements Field {
     private static final Logger log = LogManager.getLogger(Street.class);
@@ -23,9 +24,10 @@ public class Street implements Field {
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
+
         if (owner == null) {
-            if(player.getPlayerBankBalance() - price >= 0){
+            if(player.getPlayerBankBalance()-price >=0){
 
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/toggleBuyEstateBtn", "false" );
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
@@ -34,13 +36,38 @@ public class Street implements Field {
         } else {
             //player on field has to pay rent to the owner
             if(player != owner){
-                player.playerPaysMoney(rent);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
-                owner.playerGetsMoney(rent);
-                sendMessage.sendToPlayer(SessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + player.getName());
-                log.info(player.getName() + " pays " + rent + " rent to " + owner.getName());
+                int rentPrice = rent;
+
+                //if the owner owns all Streets of the same color double the rent price
+                if(colorCheck()){
+                    rentPrice *= 2;
+                }
+                player.playerPaysMoney(rentPrice);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay $" + rentPrice + "rent to " + owner.getName());
+                owner.playerGetsMoney(rentPrice);
+                sendMessage.sendToPlayer(SessionIds[owner.getID()], "/client/notification", "You received $" + rentPrice + "rent from " + player.getName());
+                log.info(player.getName() + " pays " + rentPrice + " rent to " + owner.getName());
             }
         }
+    }
+
+
+
+    /**
+     *
+     * @return true if owner owns all streets with the same color
+     */
+    public boolean colorCheck(){
+        Iterator<Street> streetIterator = this.owner.getOwnedStreets().iterator();
+        int colorCount = 0;
+        while (streetIterator.hasNext()){
+            if(streetIterator.next().getColor() == this.color){
+                if(++colorCount == 2){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -66,6 +93,7 @@ public class Street implements Field {
 
     public void setOwner(Player owner) {
         this.owner = owner;
+        this.owner.addStreet(this);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.hdm.monopoly.logic;
 
 import com.hdm.monopoly.sendmessage.SendMessage;
-import com.hdm.monopoly.board.Map;
+import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,15 +18,15 @@ public class Game {
     // These two attributes enable a connection between a map and players
     private final Player[] players; /*we assume the game knows on its creation how many players there are.
     That could be achieved by a controller class that manages the network communication*/
-    private final Map map;
+    private final Board board;
     SendMessage sendMessage;
     String[] sessionIds;
     private int currentPlayer = 0;
 
     @Autowired
-    public  Game(Player[] players, Map map, SendMessage sendMessage, String[] sessionIds){
+    public  Game(Player[] players, Board board, SendMessage sendMessage, String[] sessionIds){
         this.players = players;
-        this.map = map;
+        this.board = board;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         //based on the playerCount the Players are created and gets put into the players ArrayList
@@ -37,8 +37,8 @@ public class Game {
      * Standard getter for the board.
      * @return Board of the running game.
      */
-    public Map getMap(){
-        return map;
+    public Board getMap(){
+        return board;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Game {
 
     public void movePlayer(int steps) {
         //Calculating players new position and checking if he made a whole round around the map and is at the start again
-        int newPosition = (getCurrentPlayer().getPosition() + steps) % map.size();
+        int newPosition = (getCurrentPlayer().getPosition() + steps) % board.size();
         if (getCurrentPlayer().getPosition() > newPosition && newPosition != 0) {
             getCurrentPlayer().playerGetsMoney(2);
         }
@@ -57,7 +57,7 @@ public class Game {
         log.info(getCurrentPlayer().getName() + "moves to field number: " + newPosition);
 
         //activates the moveOnField function which is the field action
-        map.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds);
+        board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds, board);
     }
 
 
@@ -77,17 +77,29 @@ public class Game {
     public void endOfTurn(){
         int playerCount = 4;
 
-        log.info(getCurrentPlayer().getName() + " ends his turn");
-        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true" );
-        //TODO check if game has to end
-        // helper for constructor
-        currentPlayer = ++currentPlayer % playerCount;
+        if (getCurrentPlayer().getPlayerBankBalance() < 0){
+            sendMessage.sendToAll("/client/notification", "Player: " + getCurrentPlayer().getName() + " ran out of money");
+            int amountMoney = getCurrentPlayer().getPlayerBankBalance() ;
+            int winner = 0;
+            for(int i = 0; i <= 3; i++){
+                if(players[i].getPlayerBankBalance() >= amountMoney ){
+                    amountMoney = players[i].getPlayerBankBalance();
+                    winner = i;
+                }
+            }
+            sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+            log.info(currentPlayer + " ran out of money and lost the game");
+            log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+        }else {
+            log.info(currentPlayer + " ends his turn");
+            sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
 
-        log.info("Player " + getCurrentPlayer().getName() + " is on turn");
+            currentPlayer = ++currentPlayer % playerCount;
 
-        sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
-        sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
-        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
+            sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
+            sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
+            sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false");
+        }
     }
 }
 
