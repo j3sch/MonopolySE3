@@ -37,6 +37,12 @@ private static final Logger log = LogManager.getLogger(EventField.class);
             case 1:
                 board.getField(22).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
+                try {
+                    Thread.sleep(2000);
+                    player.setPosition(22);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             //Money to Free Parking 2$
 

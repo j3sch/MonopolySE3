@@ -1,8 +1,10 @@
 package com.hdm.monopoly.logic;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.sendmessage.SendPlayerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

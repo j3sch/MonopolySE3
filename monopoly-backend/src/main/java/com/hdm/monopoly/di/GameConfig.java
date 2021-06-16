@@ -2,7 +2,7 @@ package com.hdm.monopoly.di;
 
 import com.hdm.monopoly.logic.Game;
 import com.hdm.monopoly.sendmessage.ActivateButton;
-import com.hdm.monopoly.sendmessage.Notified;
+import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
 import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
@@ -23,7 +23,7 @@ public class GameConfig {
 
     //to send data to client
     SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
-    Notified notified = new Notified(sendMessage, sessionIds, game);
+    Notify notify = new Notify(sendMessage, sessionIds, game);
     ActivateButton activateButton = new ActivateButton(sendMessage, sessionIds, game);
 
     @Bean
@@ -58,8 +58,8 @@ public class GameConfig {
     }
 
     @Bean
-    public Notified getNotified() {
-        return notified;
+    public Notify getNotify() {
+        return notify;
     }
 
     @Bean

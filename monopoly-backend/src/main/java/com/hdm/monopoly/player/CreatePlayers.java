@@ -3,7 +3,7 @@ package com.hdm.monopoly.player;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.sendmessage.ActivateButton;
-import com.hdm.monopoly.sendmessage.Notified;
+import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,16 +25,16 @@ public class CreatePlayers {
     private final Player[] players;
     private final SendMessage sendMessage;
     private final ActivateButton activateButton;
-    private final Notified notified;
+    private final Notify notify;
 
     @Autowired
     public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
-                         ActivateButton activateButton, Notified notified) {
+                         ActivateButton activateButton, Notify notify) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.activateButton = activateButton;
-        this.notified = notified;
+        this.notify = notify;
         log.info("New Object 'CreatePlayers' created");
     }
 
@@ -62,7 +62,7 @@ public class CreatePlayers {
             if (playerNumber == 4) {
                 isPartyFull = true;
                 activateButton.diceNumber();
-                notified.playerXOnTurn();
+                notify.playerXOnTurn();
             }
         }
         for (String id: sessionIds) {

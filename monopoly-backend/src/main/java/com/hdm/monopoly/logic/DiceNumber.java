@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.ActivateButton;
-import com.hdm.monopoly.sendmessage.Notified;
+import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
 import com.hdm.monopoly.board.Street;
@@ -25,15 +25,15 @@ public class DiceNumber {
     private final SendPlayerData sendPlayerData;
     private final ActivateButton activateButton;
     private final SendMessage sendMessage;
-    private final Notified notified;
+    private final Notify notify;
 
     @Autowired
-    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notified notified) {
+    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notify notify) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.activateButton = activateButton;
         this.sendMessage = sendMessage;
-        this.notified = notified;
+        this.notify = notify;
         log.info("New Object 'DiceNumber' created");
     }
 
@@ -46,17 +46,19 @@ public class DiceNumber {
     public String diceNumberBtnClicked() throws JsonProcessingException {
         int diceNumber = diceRandomNumber();    //maybe to display the result of the dice
         log.info(game.getCurrentPlayer().getName() + " has rolled number " + diceNumber);
-        if(game.getCurrentPlayer().getJailTime()>0){
+        if(game.getCurrentPlayer().getJailTime() > 0) {
             if(diceNumber == 6){
                 game.getCurrentPlayer().getReleased();
+                notify.currentPlayer("You're free from prison!");
             }else{
                 game.getCurrentPlayer().jailed();
+                notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
             }
         }else {
             game.movePlayer(diceNumber);
             sendPlayerData.sendPlayerToClient();
-            activateButton.nextPlayer();
         }
+        activateButton.nextPlayer();
         return new ObjectMapper().writeValueAsString(true);
     }
 
@@ -93,7 +95,7 @@ public class DiceNumber {
         street.setOwner(player);
 
         sendMessage.sendToAll("/client/buyEstate", player.getPosition() + " " + player.getColour());
-        notified.allPlayers(player.getName() + " bought " + street.getFieldName());
+        notify.allPlayers(player.getName() + " bought " + street.getFieldName());
         sendPlayerData.sendPlayerToClient();
 
         return new ObjectMapper().writeValueAsString(true);

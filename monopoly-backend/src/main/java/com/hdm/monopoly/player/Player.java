@@ -91,6 +91,7 @@ public class Player {
 
     public void jailed(){
         --jailTime;
+
     }
 
     public void getReleased(){
