@@ -1,6 +1,6 @@
 package com.hdm.monopoly.player;
 
-import com.hdm.monopoly.board.Street;
+import com.hdm.monopoly.board.Colour;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,8 +13,9 @@ public class Player {
     private final Account account;
     private String name;
     private String colour;
+
     private final int ID;
-    private final ArrayList<Street> ownedStreets;
+    private final ArrayList<Colour> ownedColours;
     private int jailTime = 0;
 
     public Player(int ID, String name, String colour) {
@@ -23,7 +24,7 @@ public class Player {
         this.colour = colour;
         this.ID = ID;
         this.position = 0;
-        this.ownedStreets = new ArrayList<>();
+        this.ownedColours = new ArrayList<>();
         log.debug("New Object 'Player' created. Name: " + name);
     }
 
@@ -47,8 +48,8 @@ public class Player {
         this.name = name;
     }
 
-    public ArrayList<Street> getOwnedStreets() {
-        return ownedStreets;
+    public ArrayList<Colour> getOwnedColors() {
+        return ownedColours;
     }
 
     public String getColour() {
@@ -97,7 +98,7 @@ public class Player {
         log.info(name + " get released from jail");
     }
 
-    public void addStreet(Street toBeAdded){
-        ownedStreets.add(toBeAdded);
+    public void addStreet(Colour toBeAdded){
+        ownedColours.add(toBeAdded);
     }
 }

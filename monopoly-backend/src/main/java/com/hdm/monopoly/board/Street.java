@@ -12,14 +12,14 @@ public class Street implements Field {
     private final String streetName;
     private final int price;
     private final int rent;
-    private final Color color;
+    private final Colour colour;
     private Player owner;
 
-    public Street(String streetName, int price, int rent, Color color) {
+    public Street(String streetName, int price, int rent, Colour colour) {
         this.streetName = streetName;
         this.price = price;
         this.rent = rent;
-        this.color = color;
+        this.colour = colour;
         log.info("New Object 'Street' created");
     }
 
@@ -51,17 +51,15 @@ public class Street implements Field {
         }
     }
 
-
-
     /**
      *
      * @return true if owner owns all streets with the same color
      */
     public boolean colorCheck(){
-        Iterator<Street> streetIterator = this.owner.getOwnedStreets().iterator();
+        Iterator<Colour> streetIterator = this.owner.getOwnedColors().iterator();
         int colorCount = 0;
         while (streetIterator.hasNext()){
-            if(streetIterator.next().getColor() == this.color){
+            if(streetIterator.next() == this.colour){
                 if(++colorCount == 2){
                     return true;
                 }
@@ -83,17 +81,18 @@ public class Street implements Field {
         return rent;
     }
 
-    public Color getColor() {
-        return color;
+    public Colour getColour() {
+        return colour;
     }
 
     public Player getOwner() {
         return owner;
     }
 
-    public void setOwner(Player owner) {
-        this.owner = owner;
-        this.owner.addStreet(this);
+    public void setOwner(Player newOwner) {
+        if(newOwner!=owner){
+            this.owner = newOwner;
+            this.owner.addStreet(this.colour);
+        }
     }
-
 }

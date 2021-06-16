@@ -1,6 +1,6 @@
 package com.hdm.monopoly.board;
 
-    public enum Color {
+    public enum Colour {
         Brown,
         LightBlue,
         Pink,

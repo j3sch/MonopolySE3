@@ -7,10 +7,10 @@ import org.apache.logging.log4j.Logger;
 public class FieldFactory {
     private static final Logger log = LogManager.getLogger(FieldFactory.class);
 
-    protected static Field createField(String type, String name, int price, int rent,Color color,int goValue) throws WrongFieldError {
+    protected static Field createField(String type, String name, int price, int rent, Colour colour, int goValue) throws WrongFieldError {
         switch (type){
             case "Street":
-                return new Street(name,price,rent,color);
+                return new Street(name,price,rent, colour);
             case "Go":
                 return new Go(name, goValue);
             case "Jail":

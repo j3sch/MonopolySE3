@@ -13,7 +13,7 @@ public class Board {
     final private int[] price = {0,1,1,0,1,1,0,2,2,0,2,2,0,3,3,0,3,3,0,4,4,0,5,5};
     final private int[] rent =  {0,1,1,0,1,1,0,2,2,0,2,2,0,3,3,0,3,3,0,4,4,0,5,5};
     final private int[] goValues = {2,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    final private Color[] color = {null, Color.LightBlue, Color.LightBlue,null, Color.Brown, Color.Brown,null, Color.Pink, Color.Pink,null, Color.Orange, Color.Orange,null, Color.Red, Color.Red,null, Color.Yellow, Color.Yellow,null, Color.Green, Color.Green,null, Color.DarkBlue, Color.DarkBlue};
+    final private Colour[] colour = {null, Colour.LightBlue, Colour.LightBlue,null, Colour.Brown, Colour.Brown,null, Colour.Pink, Colour.Pink,null, Colour.Orange, Colour.Orange,null, Colour.Red, Colour.Red,null, Colour.Yellow, Colour.Yellow,null, Colour.Green, Colour.Green,null, Colour.DarkBlue, Colour.DarkBlue};
 
     private final Field[] board;
 
@@ -25,7 +25,7 @@ public class Board {
     //here the board gets created and all the fields are implemented into the map in the right order
     public void setBoard(){
         for(int i = 0; i < streetName.length; ++i) {
-            board[i] = FieldFactory.createField(fieldTypes[i], streetName[i], price[i], rent[i], color[i],goValues[i]);
+            board[i] = FieldFactory.createField(fieldTypes[i], streetName[i], price[i], rent[i], colour[i],goValues[i]);
         }
         if (streetName.length == board.length){
             log.info("Map successfully created");
@@ -46,6 +46,4 @@ public class Board {
         }
         return board[position];
     }
-
-
 }
