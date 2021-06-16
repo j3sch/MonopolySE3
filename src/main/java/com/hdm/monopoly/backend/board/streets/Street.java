@@ -5,7 +5,6 @@ import com.hdm.monopoly.backend.board.send_message.SendMessage;
 import com.hdm.monopoly.backend.player_money.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.util.Iterator;
@@ -65,10 +64,10 @@ public class Street implements Field {
      * @return true if owner owns all streets with the same color
      */
     public boolean colorCheck(){
-        Iterator<Street> streetIterator = this.owner.getOwnedStreets().iterator();
+        Iterator<Color> streetIterator = this.owner.getOwnedColors().iterator();
         int colorCount = 0;
         while (streetIterator.hasNext()){
-            if(streetIterator.next().getColor() == this.color){
+            if(streetIterator.next() == this.color){
                 if(++colorCount == 2){
                     return true;
                 }
@@ -98,9 +97,12 @@ public class Street implements Field {
         return owner;
     }
 
-    public void setOwner(Player owner) {
-        this.owner = owner;
-        this.owner.addStreet(this);
+    public void setOwner(Player newOwner) {
+        if(newOwner!=owner){
+            this.owner = newOwner;
+            this.owner.addStreet(this.color);
+        }
+
     }
 
 }

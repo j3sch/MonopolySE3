@@ -1,7 +1,7 @@
 package com.hdm.monopoly.backend.player_money;
 
 
-import com.hdm.monopoly.backend.board.send_message.Notified;
+import com.hdm.monopoly.backend.board.streets.Color;
 import com.hdm.monopoly.backend.board.streets.Street;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ public class Player {
     private String colour;
     private int ID;
     private Player previousPlayer;
-    private ArrayList<Street> ownedStreets;
+    private ArrayList<Color> ownedColors;
     private int jailTime = 0;
 
     public Player(int ID, String name, String colour) {
@@ -27,7 +27,7 @@ public class Player {
         this.colour = colour;
         this.ID = ID;
         this.position = 0;
-        this.ownedStreets = new ArrayList<>();
+        this.ownedColors = new ArrayList<>();
         log.debug("New Object 'Player' created. Name: " + name);
     }
 
@@ -51,8 +51,8 @@ public class Player {
         this.name = name;
     }
 
-    public ArrayList<Street> getOwnedStreets() {
-        return ownedStreets;
+    public ArrayList<Color> getOwnedColors() {
+        return ownedColors;
     }
 
     public String getColour() {
@@ -111,7 +111,7 @@ public class Player {
         log.info(name + " get released from jail");
     }
 
-    public void addStreet(Street toBeAdded){
-        ownedStreets.add(toBeAdded);
+    public void addStreet(Color toBeAdded){
+        ownedColors.add(toBeAdded);
     }
 }
