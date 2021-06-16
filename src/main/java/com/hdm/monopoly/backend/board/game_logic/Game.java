@@ -68,14 +68,6 @@ public class Game {
         board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds, board);
     }
 
-    public void teleport(Player playerToBeTeleported, int position) {
-        if (position < board.size() && position >= 0) {
-            playerToBeTeleported.setPosition(position);
-        } else {
-            //TODO Error correction
-        }
-    }
-
 
     /**
      * A getter for the player that is now on the turn. So he is the current player.
@@ -96,7 +88,7 @@ public class Game {
         //TODO check if game has to end
         currentPlayer = ++currentPlayer % PLAYERCOUNT;
 
-        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
+        sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
         sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
         sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
     }
