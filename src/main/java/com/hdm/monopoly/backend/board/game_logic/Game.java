@@ -83,14 +83,30 @@ public class Game {
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
     public void endOfTurn(){
-        log.info(currentPlayer + " ends his turn");
-        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true" );
-        //TODO check if game has to end
-        currentPlayer = ++currentPlayer % PLAYERCOUNT;
 
-        sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
-        sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
-        sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false" );
+        if (getCurrentPlayer().getPlayerBankBalance() < 0){
+            sendMessage.sendToAll("/client/notification", "Player: " + getCurrentPlayer().getName() + " ran out of money");
+            int amountMoney = getCurrentPlayer().getPlayerBankBalance() ;
+            int winner = 0;
+            for(int i = 0; i <= 3; i++){
+                if(players[i].getPlayerBankBalance() >= amountMoney ){
+                    amountMoney = players[i].getPlayerBankBalance();
+                    winner = i;
+                }
+            }
+            sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+            log.info(currentPlayer + " ran out of money and lost the game");
+            log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+        }else {
+            log.info(currentPlayer + " ends his turn");
+            sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
+
+            currentPlayer = ++currentPlayer % PLAYERCOUNT;
+
+            sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
+            sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
+            sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false");
+        }
     }
 }
 
