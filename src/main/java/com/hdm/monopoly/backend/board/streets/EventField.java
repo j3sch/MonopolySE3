@@ -24,7 +24,7 @@ private static Logger log = LogManager.getLogger(EventField.class);
         //Random number 0 to 6
         Random random = new Random();
         int randomNumber = random.nextInt(7);
-        FreeParking freeParking = (FreeParking) map.getField(22);
+        FreeParking freeParking = (FreeParking) map.getField(12);
 
         // switch aktivate the different event field actions with a random number
         switch (randomNumber){
@@ -52,8 +52,8 @@ private static Logger log = LogManager.getLogger(EventField.class);
 
             //Money to Free Parking 1$
             case 3:
-                player.PlayerPaysMoney(2);
-                freeParking.setCredit(2);
+                player.PlayerPaysMoney(1);
+                freeParking.setCredit(1);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 1 $ to Free Parking");
                 break;
 
