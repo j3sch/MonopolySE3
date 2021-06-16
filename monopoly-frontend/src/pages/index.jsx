@@ -16,7 +16,7 @@ const Home = () => {
 	const [isDiceNumberBtnDisabled, setDiceNumberBtn] = useState(true);
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
-	const [currentPlayer, setCurrentPlayer] = useState(0)
+	const [currentPlayer, setCurrentPlayer] = useState(0);
 
 	const array = [];
 	const [boughtEstate, setBoughtEstate] = useState([{}]);
@@ -93,15 +93,11 @@ const Home = () => {
 
 	const connect = () => {
 		const sessionId = randomstring.generate(12);
-		SockJS = new SockJS(
-			'http://localhost:8080//ws-monopoly',
-			[],
-			{
-				sessionId: () => {
-					return sessionId;
-				},
+		SockJS = new SockJS('http://localhost:8080//ws-monopoly', [], {
+			sessionId: () => {
+				return sessionId;
 			},
-		);
+		});
 		stompClient = Stomp.over(SockJS);
 
 		stompClient.connect({}, onConnected, onError);
@@ -125,7 +121,7 @@ const Home = () => {
 					isNextPlayerBtnDisabled,
 					isBuyEstateBtnDisabled,
 					boughtEstate,
-					currentPlayer
+					currentPlayer,
 				}}
 			>
 				<GamePage />
