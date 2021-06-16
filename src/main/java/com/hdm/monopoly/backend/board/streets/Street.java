@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import java.util.Iterator;
+
 /*@Controller
 @Component("Street")*/
 public class Street implements Field {
@@ -43,13 +45,36 @@ public class Street implements Field {
         } else {
             //player on field has to pay rent to the owner
             if(player != owner){
-                player.PlayerPaysMoney(rent);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay $" + rent + "rent to " + owner.getName());
-                owner.PlayerGetsMoney(rent);
-                sendMessage.sendToPlayer(SessionIds[owner.getID()], "/client/notification", "You received $" + rent + "rent from " + player.getName());
-                log.info(player.getName() + " pays " + rent + " rent to " + owner.getName());
+                int rentPrice = rent;
+
+                //if the owner owns all Streets of the same color double the rent price
+                if(colorCheck()){
+                    rentPrice *= 2;
+                }
+                player.PlayerPaysMoney(rentPrice);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay $" + rentPrice + "rent to " + owner.getName());
+                owner.PlayerGetsMoney(rentPrice);
+                sendMessage.sendToPlayer(SessionIds[owner.getID()], "/client/notification", "You received $" + rentPrice + "rent from " + player.getName());
+                log.info(player.getName() + " pays " + rentPrice + " rent to " + owner.getName());
             }
         }
+    }
+
+    /**
+     *
+     * @return true if owner owns all streets with the same color
+     */
+    public boolean colorCheck(){
+        Iterator<Street> streetIterator = this.owner.getOwnedStreets().iterator();
+        int colorCount = 0;
+        while (streetIterator.hasNext()){
+            if(streetIterator.next().getColor() == this.color){
+                if(++colorCount == 2){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -75,6 +100,7 @@ public class Street implements Field {
 
     public void setOwner(Player owner) {
         this.owner = owner;
+        this.owner.addStreet(this);
     }
 
 }
