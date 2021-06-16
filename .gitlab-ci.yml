@@ -1,15 +1,24 @@
 stages:
     - build
     - test
-build:
+
+build-backend:
   stage: build
   image: maven:latest
-  script: echo "mvn run build -B"
+  script: mvn package
+  artifacts:
+        paths:
+            - "./target/*.jar"
+
+build-frontend:
+  stage: build
+  image: node:latest
+  script: npm run build
 
 tests:
     stage: test
     image: maven:latest
-    script: echo "mvn test"
+    script: mvn test
 
 
 
