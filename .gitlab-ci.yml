@@ -6,9 +6,6 @@ build-backend:
   stage: build
   image: maven:latest
   script: mvn package
-  artifacts:
-        paths:
-            - "./target/*.jar"
 
 build-frontend:
   stage: build
