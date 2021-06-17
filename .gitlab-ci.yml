@@ -7,13 +7,8 @@ build-backend:
   image: maven:latest
   script: mvn package
   artifacts:
-        paths:
-            - "./target/*.jar"
-
-build-frontend:
-  stage: build
-  image: node:latest
-  script: npm run build
+      paths:
+          - "./target/*.jar"
 
 tests:
     stage: test
