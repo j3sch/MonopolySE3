@@ -17,7 +17,7 @@ public class Jail implements Field{
 
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
-        //TODO
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You visit the prison");
     }
 
     @Override
