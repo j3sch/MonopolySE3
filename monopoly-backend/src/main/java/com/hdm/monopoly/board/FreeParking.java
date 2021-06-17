@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FreeParking implements Field{
-    private static final Logger log = LogManager.getLogger(FreeParking.class);
+    private static final Logger log = LogManager.getLogger();
 
     private final String name;
     private int credit;
