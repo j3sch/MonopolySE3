@@ -5,8 +5,8 @@ import com.hdm.monopoly.sendmessage.SendMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class freeParking implements Field{
-    private static final Logger log = LogManager.getLogger(freeParking.class);
+public class FreeParking implements Field{
+    private static final Logger log = LogManager.getLogger(FreeParking.class);
 
     private final String name;
     private int credit;
@@ -16,7 +16,7 @@ public class freeParking implements Field{
        credit += amount;
     }
 
-    public freeParking(String name){
+    public FreeParking(String name){
         this.name = name;
         log.info("New Object 'FreeParking' created");
     }

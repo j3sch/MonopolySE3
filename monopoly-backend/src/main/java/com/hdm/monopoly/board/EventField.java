@@ -23,7 +23,7 @@ private static final Logger log = LogManager.getLogger(EventField.class);
         //Random number 0 to 6
         Random random = new Random();
         int randomNumber = random.nextInt(7);
-        freeParking freeParking = (com.hdm.monopoly.board.freeParking) board.getField(12);
+        FreeParking freeParking = (FreeParking) board.getField(12);
 
         // switch activate the different event field actions with a random number
         switch (randomNumber){
