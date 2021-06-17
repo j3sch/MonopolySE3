@@ -2,6 +2,7 @@ package com.hdm.monopoly;
 
 import com.hdm.monopoly.player.Colours;
 import com.hdm.monopoly.player.Player;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 

@@ -1,6 +1,7 @@
 package com.hdm.monopoly.logic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
@@ -49,7 +50,7 @@ public class Game {
      * @param steps Number of fields the player should be moved
      */
 
-    public void movePlayer(int steps) {
+    public void movePlayer(int steps) throws JsonProcessingException {
         //Calculating players new position and checking if he made a whole round around the map and is at the start again
         int newPosition = (getCurrentPlayer().getPosition() + steps) % board.size();
         if (getCurrentPlayer().getPosition() > newPosition && newPosition != 0) {
@@ -57,6 +58,7 @@ public class Game {
         }
         getCurrentPlayer().setPosition(newPosition);
         log.info(getCurrentPlayer().getName() + "moves to field number: " + newPosition);
+        sendMessage.sendToAll("/client/playerList", new ObjectMapper().writeValueAsString(players));
 
         //activates the moveOnField function which is the field action
         board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds, board);
