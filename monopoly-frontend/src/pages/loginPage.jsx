@@ -24,14 +24,13 @@ const LoginPage = () => {
 	};
 
 	const handleSubmit = (e) => {
-		sendMessage(name);
 		e.preventDefault();
 		if (isPartyFullHooks) {
 			dispatch({ type: 'PARTY_FULL' });
 		} else if (name) {
 			const newItem = { name };
 			dispatch({ type: 'USER_ADDED', payload: newItem });
-
+			sendMessage(name);
 			setName('');
 		} else {
 			dispatch({ type: 'NO_INPUT' });
