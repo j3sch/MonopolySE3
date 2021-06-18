@@ -10,6 +10,11 @@ build-backend:
       paths:
           - "./target/*.jar"
 
+build-frontend:
+  stage: build
+  image: node:latest
+  script: npm run build
+
 tests:
     stage: test
     image: maven:latest
