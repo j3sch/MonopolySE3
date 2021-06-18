@@ -27,7 +27,7 @@ const Home = () => {
 	let isPartyFull;
 
 	const sendMessage = (msg) => {
-		stompClient.send('/server/message', {}, JSON.stringify({ name: msg }));
+		stompClient.send('/server/isPartyFull', {}, JSON.stringify({ name: msg }));
 	};
 
 	const onConnected = () => {
