@@ -12,12 +12,17 @@ public class Player {
     private int position;
     private final Account account;
     private String name;
-    private String colour;
+    private final String colour;
 
     private final int ID;
     private final ArrayList<Colour> ownedColours;
     private int jailTime = 0;
 
+    /**
+     * @param ID of the player
+     * @param name player has given himself
+     * @param colour default colour for every player
+     */
     public Player(int ID, String name, String colour) {
         this.account = new Account(31);
         this.name = name;
@@ -28,55 +33,84 @@ public class Player {
         log.debug("New Object 'Player' created. Name: " + name);
     }
 
+    /**
+     * @return the players ID
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * @param position set new position after dicing a number
+     */
     public void setPosition(int position) {
         this.position = position;
     }
 
+    /**
+     * @return get current position
+     */
     public int getPosition() {
         return position;
     }
 
+    /**
+     * @return the players name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name set the players name
+     *             is only used aat the beginning of the game
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return save colours of the streets to maybe double the rent price
+     */
     public ArrayList<Colour> getOwnedColors() {
         return ownedColours;
     }
 
+    /**
+     * @return this players colour to visualize on the board
+     */
     public String getColour() {
         return colour;
     }
 
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
-    //Nach jeder Änderung des Kontostandes wird der neue Kontostand über das return statement zurückgegeben.
-    //Falls wir später eine Anzeige des Kontostandes haben, kann man die Anzeige mit den Returnstatments aktualisieren
-
+    /**
+     * @param amount money the players gets
+     *               if he gets rent or money from EventFields, FreeParking or Go
+     */
     public void playerGetsMoney(int amount){
         account.getMoney(amount);
         log.info(name + " new bank balance: " + account.getBankBalance());
     }
 
+    /**
+     * @param amount money the player had to pay
+     *               if he has to pay rent, bought a street or from EventField
+     */
     public void playerPaysMoney(int amount){
         account.payMoney(amount);
         log.info(name + " new bank balance: " + account.getBankBalance());
     }
 
+    /**
+     * @return money, the player has right now
+     */
     public int getPlayerBankBalance() {
         return account.getBankBalance();
     }
 
+    /**
+     * @return jailTime, how many rounds the player has to stay in Jail
+     */
     public int getJailTime(){
         return jailTime;
     }
@@ -89,11 +123,16 @@ public class Player {
         log.info(name + " get arrested");
     }
 
+    /**
+     * used if player is in Jail
+     */
     public void jailed(){
         --jailTime;
-
     }
 
+    /**
+     * if JailTime is over, player gets released
+     */
     public void getReleased(){
         jailTime = 0;
         log.info(name + " get released from jail");
