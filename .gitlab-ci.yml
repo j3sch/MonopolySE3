@@ -10,15 +10,10 @@ build-backend:
       paths:
           - "./target/*.jar"
 
-build-frontend:
-  stage: build
-  image: node:latest
-  script: npm - /builds/mw225/monopoly/package.json run build
-
 tests:
     stage: test
     image: maven:latest
-    script: mvn test
+    script: mvn -f monopoly-backend/ test
 
 
 
