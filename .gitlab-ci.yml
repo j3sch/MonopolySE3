@@ -10,6 +10,11 @@ build-backend:
       paths:
           - "./target/*.jar"
 
+build-frontend:
+  stage: build
+  image: node:latest
+  script: npm -f src/main/java/com/hdm/monopoly/frontend/node_modules/ run build
+
 tests:
     stage: test
     image: maven:latest
