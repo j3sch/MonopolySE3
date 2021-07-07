@@ -13,7 +13,9 @@ build-backend:
 build-frontend:
   stage: build
   image: node:latest
-  script: npm run build
+  script: 
+    - cd monoloy-frontend
+    - npm run build
 
 tests:
     stage: test
