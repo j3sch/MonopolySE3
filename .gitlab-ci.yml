@@ -13,7 +13,7 @@ build-backend:
 build-frontend:
   stage: build
   image: node:latest
-  script: npm -f /builds/mw225/monopoly/package.json run build
+  script: npm run build
 
 tests:
     stage: test
