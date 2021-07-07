@@ -14,7 +14,7 @@ build-frontend:
   stage: build
   image: node:latest
   script: 
-    - cd monoloy-frontend
+    - cd monopoly-frontend
     - npm run build
 
 tests:
