@@ -38,6 +38,7 @@ public class DiceNumber {
     }
 
     /**
+     * button is only activated for the player who is on turn
      * player rolls a number
      * @return true, to deactivate the diceNumberBtn
      */
@@ -71,6 +72,7 @@ public class DiceNumber {
     }
 
     /**
+     * button is only activated if current Player already diced an number
      * initiates the change to the next player
      * @return true, to deactivate the nextPlayerBtn
      */
@@ -82,6 +84,7 @@ public class DiceNumber {
     }
 
     /**
+     * button is only activated if a Player is on a Street and if this street has no owner
      * buys the street on players position
      * @return true, to deactivate the buyEstateBtn
      */

@@ -23,6 +23,13 @@ public class Street implements Field {
         log.info("New Object 'Street' created");
     }
 
+    /**
+     * @param player player who moved on this street
+     * @param sendMessage to send messages to players and updates to this street
+     * @param SessionIds of all players
+     * @param board to get every other field
+     * if there is no owner, the player could buy this field or he has to pay rent
+     */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
 
