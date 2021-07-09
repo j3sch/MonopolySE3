@@ -44,7 +44,7 @@ public class PlayerTest {
         assertEquals(Player1.getColour(), "#f44336");
         assertEquals(Player2.getColour(), "#2196f3");
         assertEquals(Player3.getColour(), "#4caf50");
-        assertEquals(Player4.getColour(), "#FFEB3B");
+        assertEquals(Player4.getColour(), "#FF6F00");
 
     }
 
