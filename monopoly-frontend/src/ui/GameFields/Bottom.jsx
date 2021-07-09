@@ -4,7 +4,7 @@ import { PlayerContext } from '~/utils/PlayerContext';
 
 export const Bottom = (props) => {
 	const { id, borderColor, title, price, color } = props;
-	const { boughtEstate } = useContext(PlayerContext) || {};
+	const { boughtEstates } = useContext(PlayerContext) || {};
 
 	return (
 		<div className={borderColor}>
@@ -13,12 +13,12 @@ export const Bottom = (props) => {
 				<p className="text-xl font-semibold">{price}</p>
 			</div>
 			<div className={`h-1/4 ${color} flex justify-center items-center`}>
-				{boughtEstate !== undefined &&
-					boughtEstate.map(
+				{boughtEstates !== undefined &&
+					boughtEstates.map(
 						(field) =>
 							field.fieldPosition === id && (
 								<div
-									className={`bg-[${field.estateColor}] h-1/2 w-1/2 border border-black`}
+									className={`bg-[${field.playerColour}] h-1/2 w-1/2 border border-black`}
 								/>
 							),
 					)}

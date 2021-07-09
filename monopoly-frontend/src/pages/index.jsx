@@ -19,7 +19,7 @@ const Home = () => {
 	const [currentPlayer, setCurrentPlayer] = useState(0);
 
 	const array = [];
-	const [boughtEstate, setBoughtEstate] = useState([{}]);
+	const [boughtEstates, setBoughtEstates] = useState([{}]);
 	// for receiving messages
 	const [isNotificationActiv, setNotification] = useState();
 	const [message, setMessage] = useState('');
@@ -60,10 +60,15 @@ const Home = () => {
 			},
 		);
 		stompClient.subscribe('/client/buyEstate', function (greeting) {
-			const fieldPosition = parseInt(greeting.body.split(' ')[0], 10);
-			const estateColor = greeting.body.split(' ')[1];
-			array.push({ fieldPosition, estateColor });
-			setBoughtEstate(array);
+			const body = JSON.parse(greeting.body);
+			const fieldPosition = parseInt(body[0], 10);
+			const estateName = body[1];
+			const playerColour = body[2];
+			const estateColour = body[3];
+
+
+			array.push({ fieldPosition, estateName, playerColour, estateColour });
+			setBoughtEstates(array);
 		});
 		stompClient.subscribe(
 			'/user/client/toggleNextPlayerBtn',
@@ -120,7 +125,7 @@ const Home = () => {
 					stompClient,
 					isNextPlayerBtnDisabled,
 					isBuyEstateBtnDisabled,
-					boughtEstate,
+					boughtEstates,
 					currentPlayer,
 				}}
 			>

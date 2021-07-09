@@ -40,7 +40,7 @@ public class Game {
      * Standard getter for the board.
      * @return Board of the running game.
      */
-    public Board getMap(){
+    public Board getBoard(){
         return board;
     }
 

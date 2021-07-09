@@ -2,6 +2,7 @@ package com.hdm.monopoly.logic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.helper.EstateColourToHex;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notify;
@@ -17,9 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Component("diceNumber")
-public class DiceNumber {
-    private static final Logger log = LogManager.getLogger(DiceNumber.class);
+@Component
+public class ButtonEvents {
+    private static final Logger log = LogManager.getLogger(ButtonEvents.class);
 
     private final Game game;
     private final SendPlayerData sendPlayerData;
@@ -28,7 +29,7 @@ public class DiceNumber {
     private final Notify notify;
 
     @Autowired
-    public DiceNumber(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notify notify) {
+    public ButtonEvents(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notify notify) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.activateButton = activateButton;
@@ -89,12 +90,19 @@ public class DiceNumber {
     @SendToUser("/client/toggleBuyEstateBtn")
     public String buyEstate() throws JsonProcessingException {
         Player player = game.getCurrentPlayer();
-        Street street = (Street)game.getMap().getField(player.getPosition());
+        Street street = (Street)game.getBoard().getField(player.getPosition());
+        EstateColourToHex estateColourToHex = new EstateColourToHex();
+        String[] packet = new String[4];
+        packet[0] = String.valueOf(player.getPosition());
+        packet[1] = street.getFieldName();
+        packet [2] = player.getColour();
+        packet[3] = estateColourToHex.getHexOfColour(street.getColour().toString());
+
 
         player.playerPaysMoney(street.getPrice());
         street.setOwner(player);
 
-        sendMessage.sendToAll("/client/buyEstate", player.getPosition() + " " + player.getColour());
+        sendMessage.sendToAll("/client/buyEstate", new ObjectMapper().writeValueAsString(packet));
         notify.allPlayers(player.getName() + " bought " + street.getFieldName());
         sendPlayerData.sendPlayerToClient();
 
