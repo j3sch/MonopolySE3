@@ -13,7 +13,7 @@ public class Board {
     final private int[] price = {0,1,1,0,1,1,0,2,2,0,2,2,0,3,3,0,3,3,0,4,4,0,5,5};
     final private int[] rent =  {0,1,1,0,1,1,0,2,2,0,2,2,0,3,3,0,3,3,0,4,4,0,5,5};
     final private int[] goValues = {2,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    final private Colour[] colour = {null, Colour.LightBlue, Colour.LightBlue,null, Colour.Brown, Colour.Brown,null, Colour.Pink, Colour.Pink,null, Colour.Orange, Colour.Orange,null, Colour.Red, Colour.Red,null, Colour.Yellow, Colour.Yellow,null, Colour.Green, Colour.Green,null, Colour.DarkBlue, Colour.DarkBlue};
+    final private Colour[] colour = {null, Colour.Brown, Colour.Brown,null, Colour.LightBlue, Colour.LightBlue,null, Colour.Pink, Colour.Pink,null, Colour.Orange, Colour.Orange,null, Colour.Red, Colour.Red,null, Colour.Yellow, Colour.Yellow,null, Colour.Green, Colour.Green,null, Colour.DarkBlue, Colour.DarkBlue};
 
     private final Field[] board;
 
