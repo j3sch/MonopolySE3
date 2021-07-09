@@ -50,19 +50,19 @@ export function Leaderboard() {
 								</div>
 								{isShowBoughtStreetsActiv === player.colour && (
 									<div
-										className={`grid col-span-6 p-1 pb-2 mt-2 bg-[${player.colour}]`}
+										className={`grid relative col-span-6 pb-2 font-medium mt-2 bg-[${player.colour}]`}
 									>
 										{boughtEstates.map((boughtEstate, i) => {
 											return boughtEstate.playerColour == player.colour ? (
 												<div>
-													<p key={i} className="inline-block p-1">
+													<p key={i} className="inline-block ml-3 p-1">
 														{boughtEstate.fieldPosition}
 													</p>
-													<p key={i} className="inline-block p-1">
+													<p key={i} className="inline-block absolute left-[4.5rem] mt-1">
 														{boughtEstate.estateName}
 													</p>
 													<div
-														className={`inline-block h-5 w-5 border bg-[${boughtEstate.estateColour}]`}
+														className={`inline-block h-5 w-5 absolute right-5 mt-3 border bg-[${boughtEstate.estateColour}]`}
 													></div>
 												</div>
 											) : (
