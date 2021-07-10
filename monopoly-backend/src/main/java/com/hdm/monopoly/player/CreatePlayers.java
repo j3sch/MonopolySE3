@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendMessage;
+import com.hdm.monopoly.utility.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Controller;
 public class CreatePlayers {
     private static final Logger log = LogManager.getLogger(CreatePlayers.class);
     private int playerNumber;
-    private final Colours colours = new Colours();
+    private final PlayerColours PlayerColours = new PlayerColours();
     private Boolean isPartyFull = false;
     private final String[] sessionIds;
     private final Player[] players;
@@ -47,19 +48,19 @@ public class CreatePlayers {
     public void addPlayer(Player message, @Header("simpSessionId") String sessionId)
             throws JsonProcessingException {
 
-        if (playerNumber < 4) {
+        if (playerNumber < Constants.PLAYER_COUNT) {
 
             sessionIds[playerNumber] = (sessionId);
 
             players[playerNumber] = new Player(
                     playerNumber,
                     message.getName(),
-                    colours.getColours(playerNumber)
+                    PlayerColours.getPlayerColour(playerNumber)
             );
 
             playerNumber++;
 
-            if (playerNumber == 4) {
+            if (playerNumber == Constants.PLAYER_COUNT) {
                 isPartyFull = true;
                 activateButton.diceNumber();
                 notify.playerXOnTurn();

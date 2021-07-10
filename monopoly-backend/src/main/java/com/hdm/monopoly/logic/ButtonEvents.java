@@ -46,16 +46,10 @@ public class ButtonEvents {
     @MessageMapping("/diceNumberBtnClicked")
     @SendToUser("/client/toggleDiceNumberBtn")
     public String diceNumberBtnClicked() throws JsonProcessingException {
-        int diceNumber = diceRandomNumber();    //maybe to display the result of the dice
+        int diceNumber = diceRandomNumber();
         log.info(game.getCurrentPlayer().getName() + " has rolled number " + diceNumber);
         if(game.getCurrentPlayer().getJailTime() > 0) {
-            if(diceNumber == 6){
-                game.getCurrentPlayer().getReleased();
-                notify.currentPlayer("You're free from prison!");
-            }else{
-                game.getCurrentPlayer().jailed();
-                notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
-            }
+            playerInPrison(diceNumber);
         }else {
             game.movePlayer(diceNumber);
             sendPlayerData.sendPlayerToClient();
@@ -64,12 +58,22 @@ public class ButtonEvents {
         return new ObjectMapper().writeValueAsString(true);
     }
 
+    private void playerInPrison(int diceNumber) {
+        if(diceNumber == 6){
+            game.getCurrentPlayer().getReleased();
+            notify.currentPlayer("You're free from prison!");
+        }else{
+            game.getCurrentPlayer().jailed();
+            notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
+        }
+    }
+
     /**
      *
      * @return random number between 1 and 6
      */
     public int diceRandomNumber() {
-        return (int)(Math.random() * 6 + 1);
+        return (int) (Math.random() * 6 + 1);
     }
 
     /**
@@ -91,7 +95,7 @@ public class ButtonEvents {
      */
     @MessageMapping("/buyEstateBtnClicked")
     @SendToUser("/client/toggleBuyEstateBtn")
-    public String buyEstate() throws JsonProcessingException {
+    public String buyEstateBtnClicked() throws JsonProcessingException {
         Player player = game.getCurrentPlayer();
         Street street = (Street)game.getBoard().getField(player.getPosition());
         EstateColourToHex estateColourToHex = new EstateColourToHex();

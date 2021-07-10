@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { forEach } from 'sockjs-client/lib/transport-list';
 import { PlayerContext } from '~/utils/PlayerContext';
 
-// colors are missing by players
 export function Leaderboard() {
 	const { players, currentPlayer, boughtEstates } =
 		useContext(PlayerContext) || {};
@@ -53,7 +51,7 @@ export function Leaderboard() {
 										className={`grid relative col-span-6 pb-2 font-medium mt-2 bg-[${player.colour}]`}
 									>
 										{boughtEstates.map((boughtEstate, i) => {
-											return boughtEstate.playerColour == player.colour ? (
+											return boughtEstate.playerColour == player.colour && (
 												<div>
 													<p key={i} className="inline-block 2xl:ml-3 xl:ml-2 ml-1 p-1">
 														{boughtEstate.fieldPosition}
@@ -68,9 +66,7 @@ export function Leaderboard() {
 														className={`inline-block h-5 w-5 absolute 2xl:right-5 xl:right-4 right-3 mt-3 border bg-[${boughtEstate.estateColour}]`}
 													></div>
 												</div>
-											) : (
-												<p></p>
-											);
+											)
 										})}
 									</div>
 								)}

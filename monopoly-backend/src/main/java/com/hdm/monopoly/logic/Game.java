@@ -2,10 +2,10 @@ package com.hdm.monopoly.logic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.utility.Constants;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
-import com.hdm.monopoly.sendmessage.SendPlayerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,9 +79,7 @@ public class Game {
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
     public void endOfTurn(){
-        int playerCount = 4;
-
-        if (getCurrentPlayer().getPlayerBankBalance() < 0){
+        if (getCurrentPlayer().getPlayerBankBalance() < 0) {
             sendMessage.sendToAll("/client/notification", "Player: " + getCurrentPlayer().getName() + " ran out of money");
             int amountMoney = getCurrentPlayer().getPlayerBankBalance() ;
             int winner = 0;
@@ -94,11 +92,11 @@ public class Game {
             sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
             log.info(currentPlayer + " ran out of money and lost the game");
             log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
-        }else {
+        } else {
             log.info(currentPlayer + " ends his turn");
             sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
 
-            currentPlayer = ++currentPlayer % playerCount;
+            currentPlayer = ++currentPlayer % Constants.PLAYER_COUNT;
 
             sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
             sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");

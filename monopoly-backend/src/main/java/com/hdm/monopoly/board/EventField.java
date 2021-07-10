@@ -22,7 +22,7 @@ private static final Logger log = LogManager.getLogger(EventField.class);
 
         //Random number 0 to 6
         Random random = new Random();
-        int randomNumber = random.nextInt(7);
+        int randomNumber = 1;
         FreeParking freeParking = (FreeParking) board.getField(12);
 
         // switch activate the different event field actions with a random number
