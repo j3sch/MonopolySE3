@@ -2,7 +2,7 @@ package com.hdm.monopoly.logic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hdm.monopoly.utility.Constants;
+import com.hdm.monopoly.utility.ConstantIntegers;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
@@ -96,7 +96,7 @@ public class Game {
             log.info(currentPlayer + " ends his turn");
             sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
 
-            currentPlayer = ++currentPlayer % Constants.PLAYER_COUNT;
+            currentPlayer = ++currentPlayer % ConstantIntegers.PLAYER_COUNT;
 
             sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
             sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");

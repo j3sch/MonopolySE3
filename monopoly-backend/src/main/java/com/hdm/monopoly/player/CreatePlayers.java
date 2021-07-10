@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendMessage;
-import com.hdm.monopoly.utility.Constants;
+import com.hdm.monopoly.utility.ConstantIntegers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class CreatePlayers {
     public void addPlayer(Player message, @Header("simpSessionId") String sessionId)
             throws JsonProcessingException {
 
-        if (playerNumber < Constants.PLAYER_COUNT) {
+        if (playerNumber < ConstantIntegers.PLAYER_COUNT) {
 
             sessionIds[playerNumber] = (sessionId);
 
@@ -60,7 +60,7 @@ public class CreatePlayers {
 
             playerNumber++;
 
-            if (playerNumber == Constants.PLAYER_COUNT) {
+            if (playerNumber == ConstantIntegers.PLAYER_COUNT) {
                 isPartyFull = true;
                 activateButton.diceNumber();
                 notify.playerXOnTurn();
