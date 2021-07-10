@@ -5,8 +5,6 @@ import com.hdm.monopoly.player.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Random;
-
 public class EventField implements Field{
 private static final Logger log = LogManager.getLogger(EventField.class);
 
@@ -20,20 +18,19 @@ private static final Logger log = LogManager.getLogger(EventField.class);
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
 
-        //Random number 0 to 6
-        Random random = new Random();
-        int randomNumber = 1;
+        int randomNumber = (int) (Math.random() * 7);
         FreeParking freeParking = (FreeParking) board.getField(12);
 
         // switch activate the different event field actions with a random number
         switch (randomNumber){
+
             //Player move to Go
             case 0:
                 board.getField(0).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to go");
                 break;
-            //Player move to Park Place
 
+            //Player move to Park Place
             case 1:
                 board.getField(22).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
@@ -44,15 +41,15 @@ private static final Logger log = LogManager.getLogger(EventField.class);
                     e.printStackTrace();
                 }
                 break;
-            //Money to Free Parking 2$
 
+            //Money to Free Parking 2$
             case 2:
                 player.playerPaysMoney(2);
                 freeParking.setCredit(2);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 2 $ to Free Parking");
                 break;
-            //Money to Free Parking 1$
 
+            //Money to Free Parking 1$
             case 3:
                 player.playerPaysMoney(1);
                 freeParking.setCredit(1);

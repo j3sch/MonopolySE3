@@ -11,7 +11,6 @@ public class FreeParking implements Field{
     private final String name;
     private int credit;
 
-
     public void setCredit(int amount) {
        credit += amount;
     }
@@ -26,7 +25,6 @@ public class FreeParking implements Field{
 
         if(credit >=1 ){
             sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking: " + credit);
-
             player.playerGetsMoney(credit);
             credit = 0;
         } else {
