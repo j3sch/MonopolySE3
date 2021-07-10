@@ -26,17 +26,23 @@ private static final Logger log = LogManager.getLogger(EventField.class);
 
             //Player move to Go
             case 0:
-                board.getField(0).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to go");
+                try {
+                    Thread.sleep(2000);
+                    player.setPosition(0);
+                    board.getField(0).moveOnField(player, sendMessage, SessionIds, board);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
 
             //Player move to Park Place
             case 1:
-                board.getField(22).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
                 try {
                     Thread.sleep(2000);
                     player.setPosition(22);
+                    board.getField(22).moveOnField(player, sendMessage, SessionIds, board);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -70,8 +76,14 @@ private static final Logger log = LogManager.getLogger(EventField.class);
 
             //player to jail
             case 6:
-                board.getField(18).moveOnField(player, sendMessage, SessionIds, board);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Go to jail");
+                try {
+                    Thread.sleep(2000);
+                    player.setPosition(18);
+                    board.getField(18).moveOnField(player, sendMessage, SessionIds, board);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
