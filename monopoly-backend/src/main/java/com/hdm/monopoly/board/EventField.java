@@ -2,11 +2,12 @@ package com.hdm.monopoly.board;
 
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.utility.FieldPositions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class EventField implements Field{
-private static final Logger log = LogManager.getLogger(EventField.class);
+    private static final Logger log = LogManager.getLogger(EventField.class);
 
     private final String name;
 
@@ -29,8 +30,8 @@ private static final Logger log = LogManager.getLogger(EventField.class);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to go");
                 try {
                     Thread.sleep(2000);
-                    player.setPosition(0);
-                    board.getField(0).moveOnField(player, sendMessage, SessionIds, board);
+                    player.setPosition(FieldPositions.GO_FIELD);
+                    board.getField(FieldPositions.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -41,8 +42,8 @@ private static final Logger log = LogManager.getLogger(EventField.class);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
                 try {
                     Thread.sleep(2000);
-                    player.setPosition(22);
-                    board.getField(22).moveOnField(player, sendMessage, SessionIds, board);
+                    player.setPosition(FieldPositions.PARK_PALACE_FIELD);
+                    board.getField(FieldPositions.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -79,8 +80,8 @@ private static final Logger log = LogManager.getLogger(EventField.class);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Go to jail");
                 try {
                     Thread.sleep(2000);
-                    player.setPosition(18);
-                    board.getField(18).moveOnField(player, sendMessage, SessionIds, board);
+                    player.setPosition(FieldPositions.JAIL_FIELD);
+                    board.getField(FieldPositions.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
