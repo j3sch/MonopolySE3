@@ -6,10 +6,7 @@ const GamePage = () => {
 	return (
 		<div className="flex mx-auto">
 			<div className="grid grid-cols-5">
-				<div className="text-white">
-					<Leaderboard />
 					<GameMenu />
-				</div>
 				<div className="col-span-4">
 					<GameBoard />
 				</div>

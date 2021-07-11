@@ -49,16 +49,17 @@ public class ButtonEvents {
         int diceNumber = diceRandomNumber();
         log.info(game.getCurrentPlayer().getName() + " has rolled number " + diceNumber);
         if(game.getCurrentPlayer().getJailTime() > 0) {
-            playerInPrison(diceNumber);
+            playerInJail(diceNumber);
         }else {
             game.movePlayer(diceNumber);
+            sendPlayerData.sendDicedNumber(diceNumber);
             sendPlayerData.sendPlayerToClient();
         }
         activateButton.nextPlayer();
         return new ObjectMapper().writeValueAsString(true);
     }
 
-    private void playerInPrison(int diceNumber) {
+    private void playerInJail(int diceNumber) {
         if(diceNumber == 6){
             game.getCurrentPlayer().getReleased();
             notify.currentPlayer("You're free from prison!");

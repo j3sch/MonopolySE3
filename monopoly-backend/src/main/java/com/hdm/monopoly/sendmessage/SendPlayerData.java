@@ -28,4 +28,8 @@ public class SendPlayerData {
         sendMessage.sendToAll("/client/playerList", new ObjectMapper().writeValueAsString(players));
         log.info(players);
     }
+
+    public void sendDicedNumber(int dicedNumber) throws JsonProcessingException {
+        sendMessage.sendToAll("/client/diceNumber", new ObjectMapper().writeValueAsString(dicedNumber));
+    }
 }
