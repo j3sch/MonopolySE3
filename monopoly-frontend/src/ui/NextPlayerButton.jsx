@@ -2,10 +2,12 @@ import { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';
 
 export function NextPlayerButton() {
-	const { isNextPlayerBtnDisabled } = useContext(PlayerContext) || true;
+	const { isNextPlayerBtnDisabled, setEventFieldMessage } =
+		useContext(PlayerContext) || true;
 	const { stompClient } = useContext(PlayerContext) || {};
 
 	const sendButtonClickEvent = () => {
+		setEventFieldMessage()
 		stompClient.send(
 			'/server/nextPlayerBtnClicked',
 			{},
