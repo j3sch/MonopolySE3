@@ -1,5 +1,4 @@
 import { GameBoard } from '~/components/GameBoard';
-import { Leaderboard } from '~/components/Leaderboard';
 import { GameMenu } from '~/components/GameMenu';
 
 const GamePage = () => {

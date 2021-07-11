@@ -25,7 +25,7 @@ export const gameFieldData = [
 		condition: 'top',
 		color: colorGroup1,
 	},
-	{ id: 3, title: 'CHANCE', price: '1$', condition: 'chanceX' },
+	{ id: 3, title: 'CHANCE', condition: 'chanceX' },
 	{
 		id: 4,
 		title: 'CANDY STORE',
@@ -69,8 +69,8 @@ export const gameFieldData = [
 		condition: 'right',
 		color: colorGroup3,
 	},
-	{ id: 21, title: 'CHANCE', price: '1$', condition: 'chanceY' },
-	{ id: 9, title: 'CHANCE', price: '1$', condition: 'chanceY' },
+	{ id: 21, title: 'CHANCE' , condition: 'chanceY' },
+	{ id: 9, title: 'CHANCE', condition: 'chanceY' },
 	{
 		id: 20,
 		title: 'THE ZOO',
@@ -114,7 +114,7 @@ export const gameFieldData = [
 		condition: 'bottom',
 		color: colorGroup6,
 	},
-	{ id: 15, title: 'CHANCE', price: '1$', condition: 'chanceX' },
+	{ id: 15, title: 'CHANCE', condition: 'chanceX' },
 	{
 		id: 14,
 		title: 'MOVIE THEATER',

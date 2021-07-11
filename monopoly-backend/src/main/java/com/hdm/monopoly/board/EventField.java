@@ -27,7 +27,7 @@ public class EventField implements Field{
 
             //Player move to Go
             case 0:
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to go");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to go");
                 try {
                     Thread.sleep(2000);
                     player.setPosition(FieldPositions.GO_FIELD);
@@ -39,7 +39,7 @@ public class EventField implements Field{
 
             //Player move to Park Place
             case 1:
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Move to  Park Place");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to Park Place");
                 try {
                     Thread.sleep(2000);
                     player.setPosition(FieldPositions.PARK_PALACE_FIELD);
@@ -53,31 +53,31 @@ public class EventField implements Field{
             case 2:
                 player.playerPaysMoney(2);
                 freeParking.setCredit(2);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 2 $ to Free Parking");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
                 break;
 
             //Money to Free Parking 1$
             case 3:
                 player.playerPaysMoney(1);
                 freeParking.setCredit(1);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Pay 1 $ to Free Parking");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
                 break;
 
             //current player gets money
             case 4:
                 player.playerGetsMoney(2);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: You get 2$ from the bank");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
                 break;
 
             //player pays 1$ to the bank
             case 5:
                 player.playerPaysMoney(1);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: You pay 1$ to the bank");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the bank");
                 break;
 
             //player to jail
             case 6:
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Event Field: Go to jail");
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
                 try {
                     Thread.sleep(2000);
                     player.setPosition(FieldPositions.JAIL_FIELD);
