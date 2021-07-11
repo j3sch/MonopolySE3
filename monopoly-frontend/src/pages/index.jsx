@@ -17,7 +17,7 @@ const Home = () => {
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 	const [currentPlayer, setCurrentPlayer] = useState(0);
-
+	const [diceNumber, setDiceNumber] = useState('0')
 	const array = [];
 	const [boughtEstates, setBoughtEstates] = useState([{}]);
 	// for receiving messages
@@ -59,6 +59,9 @@ const Home = () => {
 				setDiceNumberBtn(greeting.body === 'true');
 			},
 		);
+		stompClient.subscribe('/client/diceNumber', function (greeting) {
+			setDiceNumber(JSON.parse(greeting.body));
+		});
 		stompClient.subscribe('/client/buyEstate', function (greeting) {
 			const body = JSON.parse(greeting.body);
 			const fieldPosition = parseInt(body[0], 10);
@@ -127,6 +130,7 @@ const Home = () => {
 					isBuyEstateBtnDisabled,
 					boughtEstates,
 					currentPlayer,
+					diceNumber
 				}}
 			>
 				<GamePage />
