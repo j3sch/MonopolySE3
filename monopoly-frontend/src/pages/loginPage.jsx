@@ -25,7 +25,6 @@ const LoginPage = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(name);
 		if (name.match(/[^a-zA-Z]/)) {
 			dispatch({ type: 'INPUT_INVALID' });
 		} else if (isPartyFullHooks) {
