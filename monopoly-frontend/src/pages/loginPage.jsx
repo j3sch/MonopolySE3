@@ -24,6 +24,7 @@ const LoginPage = () => {
 	};
 
 	const handleSubmit = (e) => {
+		
 		e.preventDefault();
 		if (isPartyFullHooks) {
 			dispatch({ type: 'PARTY_FULL' });
