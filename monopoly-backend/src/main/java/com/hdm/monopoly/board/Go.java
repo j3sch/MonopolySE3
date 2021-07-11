@@ -2,6 +2,7 @@ package com.hdm.monopoly.board;
 
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.sendmessage.SendPlayerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +19,7 @@ public class Go implements Field {
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
         player.playerGetsMoney(goValue);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", " You get $" + goValue);
     }

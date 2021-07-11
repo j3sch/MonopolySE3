@@ -1,7 +1,9 @@
 package com.hdm.monopoly.board;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.sendmessage.SendPlayerData;
 import com.hdm.monopoly.utility.FieldPositions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +19,7 @@ public class EventField implements Field{
     }
 
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
         int randomNumber = (int) (Math.random() * 7);
         FreeParking freeParking = (FreeParking) board.getField(12);
@@ -28,25 +30,31 @@ public class EventField implements Field{
             //Player move to Go
             case 0:
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to go");
-                try {
-                    Thread.sleep(2000);
-                    player.setPosition(FieldPositions.GO_FIELD);
-                    board.getField(FieldPositions.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(2000);
+                        player.setPosition(FieldPositions.GO_FIELD);
+                        sendPlayerData.sendPlayerToClient();
+                        board.getField(FieldPositions.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+                    } catch (InterruptedException | JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
                 break;
 
             //Player move to Park Place
             case 1:
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to Park Place");
-                try {
-                    Thread.sleep(2000);
-                    player.setPosition(FieldPositions.PARK_PALACE_FIELD);
-                    board.getField(FieldPositions.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(2000);
+                        player.setPosition(FieldPositions.PARK_PALACE_FIELD);
+                        sendPlayerData.sendPlayerToClient();
+                        board.getField(FieldPositions.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+                    } catch (InterruptedException | JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
                 break;
 
             //Money to Free Parking 2$
@@ -78,13 +86,16 @@ public class EventField implements Field{
             //player to jail
             case 6:
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
-                try {
-                    Thread.sleep(2000);
-                    player.setPosition(FieldPositions.JAIL_FIELD);
-                    board.getField(FieldPositions.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(2000);
+                        player.setPosition(FieldPositions.JAIL_FIELD);
+                        sendPlayerData.sendPlayerToClient();
+                        board.getField(FieldPositions.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+                    } catch (InterruptedException | JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
                 break;
         }
     }
