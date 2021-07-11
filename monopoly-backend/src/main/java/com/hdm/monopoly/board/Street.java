@@ -2,6 +2,7 @@ package com.hdm.monopoly.board;
 
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.sendmessage.SendPlayerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Iterator;
@@ -31,7 +32,7 @@ public class Street implements Field {
      * if there is no owner, the player could buy this field or he has to pay rent
      */
     @Override
-    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board) {
+    public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
         if (owner == null) {
             if(player.getPlayerBankBalance()-price >=0){

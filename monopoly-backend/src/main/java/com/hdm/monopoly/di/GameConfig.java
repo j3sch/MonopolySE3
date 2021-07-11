@@ -19,10 +19,10 @@ public class GameConfig {
     private final String[] sessionIds = new String[4];
     private final SendMessage sendMessage = new SendMessage();
     private final Board board = new Board();
-    private final Game game = new Game(players, board, sendMessage, sessionIds);
+    SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
+    private final Game game = new Game(players, board, sendMessage, sessionIds, sendPlayerData);
 
     //to send data to client
-    SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
     Notify notify = new Notify(sendMessage, sessionIds, game);
     ActivateButton activateButton = new ActivateButton(sendMessage, sessionIds, game);
 
