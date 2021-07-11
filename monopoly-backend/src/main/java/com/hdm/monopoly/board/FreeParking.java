@@ -28,7 +28,7 @@ public class FreeParking implements Field{
             player.playerGetsMoney(credit);
             credit = 0;
         } else {
-            sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Free Parking credit:" + credit);
+            sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "There is no money in Free Parking");
         }
     }
 
