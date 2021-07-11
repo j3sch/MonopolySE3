@@ -24,9 +24,10 @@ const LoginPage = () => {
 	};
 
 	const handleSubmit = (e) => {
-		
 		e.preventDefault();
-		if (isPartyFullHooks) {
+		if (name.match(/[^a-zA-Z]/)) {
+			dispatch({ type: 'INPUT_INVALID' });
+		} else if (isPartyFullHooks) {
 			dispatch({ type: 'PARTY_FULL' });
 		} else if (name) {
 			const newItem = { name };

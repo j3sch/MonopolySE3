@@ -5,7 +5,7 @@ export const reducer = (state, action) => {
 			...state,
 			people: newPeople,
 			isNotificationActiv: true,
-			message: 'player added',
+			message: 'Player added',
 			backgroundColor: 'bg-green-500',
 		};
 	}
@@ -13,10 +13,18 @@ export const reducer = (state, action) => {
 		return {
 			...state,
 			isNotificationActiv: true,
-			message: 'please enter your name',
+			message: 'Please enter your name',
 			backgroundColor: 'bg-red-500',
 		};
 	}
+		if (action.type === 'INPUT_INVALID') {
+			return {
+				...state,
+				isNotificationActiv: true,
+				message: 'Invalid characters: use only letters in your name',
+				backgroundColor: 'bg-red-500',
+			};
+		}
 	if (action.type === 'PARTY_FULL') {
 		return {
 			...state,
