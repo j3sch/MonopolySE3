@@ -71,14 +71,12 @@ public class EventField implements Field{
                 freeParking.setCredit(1);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
                 sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
-                sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
                 break;
 
             //current player gets money
             case 4:
                 player.playerGetsMoney(2);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
-                sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
                 break;
 
             //player pays 1$ to the bank
