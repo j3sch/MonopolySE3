@@ -16,6 +16,10 @@ public class FreeParking implements Field{
        credit += amount;
     }
 
+    public int getCredit() {
+        return credit;
+    }
+
     public FreeParking(String name){
         this.name = name;
         log.info("New Object 'FreeParking' created");
