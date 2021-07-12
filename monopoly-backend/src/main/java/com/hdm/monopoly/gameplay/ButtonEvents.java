@@ -78,7 +78,7 @@ public class ButtonEvents {
      *
      * @return random number between 1 and 6
      */
-    public int diceRandomNumber() {
+    private int diceRandomNumber() {
         return (int) (Math.random() * 6 + 1);
     }
 
