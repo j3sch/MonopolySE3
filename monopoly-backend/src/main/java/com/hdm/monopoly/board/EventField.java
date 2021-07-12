@@ -22,7 +22,7 @@ public class EventField implements Field{
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
         int randomNumber = (int) (Math.random() * 7);
-        FreeParking freeParking = (FreeParking) board.getField(12);
+        FreeParking freeParking = (FreeParking) board.getField(FieldPosition.FREE_PARKING);
 
         // switch activate the different event field actions with a random number
         switch (randomNumber){
