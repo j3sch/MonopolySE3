@@ -92,12 +92,12 @@ public class Game {
                 }
             }
             sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
-            log.info(currentPlayer + " ran out of money and lost the game");
+            log.info(getCurrentPlayer().getName() + " ran out of money and lost the game");
             log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
             log.info("restarting server");
             MonopolyApplication.restart();
         } else {
-            log.info(currentPlayer + " ends his turn");
+            log.info(getCurrentPlayer().getName() + " ends his turn");
             sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
 
             currentPlayer = ++currentPlayer % ConstantInteger.PLAYER_COUNT;
