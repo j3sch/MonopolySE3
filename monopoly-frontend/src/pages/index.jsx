@@ -3,7 +3,6 @@ import LoginPage from '~/pages/loginPage';
 import { PlayerContext } from '~/utils/PlayerContext';
 import GamePage from '~/pages/gamePage';
 import NotificationMessage from '~/components/NotificationMessage';
-import { setInterval } from 'timers';
 
 let stompClient;
 const Stomp = require('stompjs');
