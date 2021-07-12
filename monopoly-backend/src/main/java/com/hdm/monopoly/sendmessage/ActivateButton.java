@@ -1,6 +1,6 @@
 package com.hdm.monopoly.sendmessage;
 
-import com.hdm.monopoly.logic.Game;
+import com.hdm.monopoly.gameplay.Game;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

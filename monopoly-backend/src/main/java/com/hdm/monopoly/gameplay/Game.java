@@ -1,9 +1,8 @@
-package com.hdm.monopoly.logic;
+package com.hdm.monopoly.gameplay;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.MonopolyApplication;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
-import com.hdm.monopoly.utility.ConstantIntegers;
+import com.hdm.monopoly.utility.ConstantInteger;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.player.Player;
@@ -95,11 +94,13 @@ public class Game {
             sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
             log.info(currentPlayer + " ran out of money and lost the game");
             log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+            log.info("restarting server");
+            MonopolyApplication.restart();
         } else {
             log.info(currentPlayer + " ends his turn");
             sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
 
-            currentPlayer = ++currentPlayer % ConstantIntegers.PLAYER_COUNT;
+            currentPlayer = ++currentPlayer % ConstantInteger.PLAYER_COUNT;
 
             sendMessage.sendToAll("/client/highlightPlayer", String.valueOf(getCurrentPlayerIndex()));
             sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");

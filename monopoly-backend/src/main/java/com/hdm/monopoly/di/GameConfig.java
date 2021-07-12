@@ -1,6 +1,7 @@
 package com.hdm.monopoly.di;
 
-import com.hdm.monopoly.logic.Game;
+import com.hdm.monopoly.gameplay.Game;
+import com.hdm.monopoly.gameplay.Countdown;
 import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
@@ -19,7 +20,7 @@ public class GameConfig {
     private final String[] sessionIds = new String[4];
     private final SendMessage sendMessage = new SendMessage();
     private final Board board = new Board();
-    SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
+    private final SendPlayerData sendPlayerData = new SendPlayerData(sendMessage, players);
     private final Game game = new Game(players, board, sendMessage, sessionIds, sendPlayerData);
 
     //to send data to client
@@ -66,5 +67,8 @@ public class GameConfig {
     public ActivateButton getActivateButton() {
         return activateButton;
     }
+
+    @Bean
+    public Countdown getCountdown() { return new Countdown(); }
 }
 

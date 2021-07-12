@@ -1,6 +1,6 @@
 package com.hdm.monopoly.utility;
 
-public class FieldPositions {
+public class FieldPosition {
     public static final Integer GO_FIELD = 0;
 
     public static final Integer JAIL_FIELD = 6;

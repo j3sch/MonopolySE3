@@ -3,6 +3,7 @@ import LoginPage from '~/pages/loginPage';
 import { PlayerContext } from '~/utils/PlayerContext';
 import GamePage from '~/pages/gamePage';
 import NotificationMessage from '~/components/NotificationMessage';
+import { setInterval } from 'timers';
 
 let stompClient;
 const Stomp = require('stompjs');
@@ -17,7 +18,7 @@ const Home = () => {
 	const [isNextPlayerBtnDisabled, setNextPlayerBtn] = useState(true);
 	const [isBuyEstateBtnDisabled, setBuyEstateBtn] = useState(true);
 	const [currentPlayer, setCurrentPlayer] = useState(0);
-	const [diceNumber, setDiceNumber] = useState('0')
+	const [diceNumber, setDiceNumber] = useState('0');
 	const [eventFieldMessage, setEventFieldMessage] = useState();
 	const array = [];
 	const [boughtEstates, setBoughtEstates] = useState([{}]);
@@ -54,9 +55,12 @@ const Home = () => {
 			setNextPlayerBtn(greeting.body === 'true');
 			setBuyEstateBtn(greeting.body === 'true');
 		});
-		stompClient.subscribe('/user/client/eventFieldMessage', function (greeting) {
-			setEventFieldMessage(greeting.body);
-		});
+		stompClient.subscribe(
+			'/user/client/eventFieldMessage',
+			function (greeting) {
+				setEventFieldMessage(greeting.body);
+			},
+		);
 		stompClient.subscribe(
 			'/user/client/toggleDiceNumberBtn',
 			function (greeting) {
@@ -72,7 +76,6 @@ const Home = () => {
 			const estateName = body[1];
 			const playerColour = body[2];
 			const estateColour = body[3];
-
 
 			array.push({ fieldPosition, estateName, playerColour, estateColour });
 			setBoughtEstates(array);
@@ -136,7 +139,7 @@ const Home = () => {
 					currentPlayer,
 					diceNumber,
 					eventFieldMessage,
-					setEventFieldMessage
+					setEventFieldMessage,
 				}}
 			>
 				<GamePage />
@@ -154,6 +157,6 @@ const Home = () => {
 			<LoginPage />
 		</PlayerContext.Provider>
 	);
-};
+};;
 
 export default Home;
