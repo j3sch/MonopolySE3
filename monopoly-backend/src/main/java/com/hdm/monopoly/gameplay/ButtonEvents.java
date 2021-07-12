@@ -1,4 +1,4 @@
-package com.hdm.monopoly.logic;
+package com.hdm.monopoly.gameplay;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,14 +27,17 @@ public class ButtonEvents {
     private final ActivateButton activateButton;
     private final SendMessage sendMessage;
     private final Notify notify;
+    private final Countdown countdown;
 
     @Autowired
-    public ButtonEvents(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton, SendMessage sendMessage, Notify notify) {
+    public ButtonEvents(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton,
+                        SendMessage sendMessage, Notify notify, Countdown countdown) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.activateButton = activateButton;
         this.sendMessage = sendMessage;
         this.notify = notify;
+        this.countdown = countdown;
         log.info("New Object 'DiceNumber' created");
     }
 
@@ -48,6 +51,7 @@ public class ButtonEvents {
     public String diceNumberBtnClicked() throws JsonProcessingException {
         int diceNumber = diceRandomNumber();
         log.info(game.getCurrentPlayer().getName() + " has rolled number " + diceNumber);
+
         if(game.getCurrentPlayer().getJailTime() > 0) {
             playerInJail(diceNumber);
         }else {
@@ -55,6 +59,7 @@ public class ButtonEvents {
             sendPlayerData.sendDicedNumber(diceNumber);
             sendPlayerData.sendPlayerToClient();
         }
+
         activateButton.nextPlayer();
         return new ObjectMapper().writeValueAsString(true);
     }
@@ -85,6 +90,7 @@ public class ButtonEvents {
     @MessageMapping("/nextPlayerBtnClicked")
     @SendToUser("/client/toggleNextPlayerBtn")
     public String nextPlayerBtnClicked() throws JsonProcessingException {
+        countdown.resetCountdown();
         game.endOfTurn();
         return new ObjectMapper().writeValueAsString(true);
     }

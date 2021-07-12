@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
-import com.hdm.monopoly.utility.FieldPositions;
+import com.hdm.monopoly.utility.FieldPosition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,9 +33,9 @@ public class EventField implements Field{
                 new Thread(() -> {
                     try {
                         Thread.sleep(2000);
-                        player.setPosition(FieldPositions.GO_FIELD);
+                        player.setPosition(FieldPosition.GO_FIELD);
                         sendPlayerData.sendPlayerToClient();
-                        board.getField(FieldPositions.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+                        board.getField(FieldPosition.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
                     } catch (InterruptedException | JsonProcessingException e) {
                         e.printStackTrace();
                     }
@@ -48,9 +48,9 @@ public class EventField implements Field{
                 new Thread(() -> {
                     try {
                         Thread.sleep(2000);
-                        player.setPosition(FieldPositions.PARK_PALACE_FIELD);
+                        player.setPosition(FieldPosition.PARK_PALACE_FIELD);
                         sendPlayerData.sendPlayerToClient();
-                        board.getField(FieldPositions.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+                        board.getField(FieldPosition.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
                     } catch (InterruptedException | JsonProcessingException e) {
                         e.printStackTrace();
                     }
@@ -89,9 +89,9 @@ public class EventField implements Field{
                 new Thread(() -> {
                     try {
                         Thread.sleep(2000);
-                        player.setPosition(FieldPositions.JAIL_FIELD);
+                        player.setPosition(FieldPosition.JAIL_FIELD);
                         sendPlayerData.sendPlayerToClient();
-                        board.getField(FieldPositions.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+                        board.getField(FieldPosition.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
                     } catch (InterruptedException | JsonProcessingException e) {
                         e.printStackTrace();
                     }

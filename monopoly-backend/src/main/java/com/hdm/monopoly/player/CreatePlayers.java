@@ -2,10 +2,11 @@ package com.hdm.monopoly.player;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.gameplay.Countdown;
 import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendMessage;
-import com.hdm.monopoly.utility.ConstantIntegers;
+import com.hdm.monopoly.utility.ConstantInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,17 @@ public class CreatePlayers {
     private final SendMessage sendMessage;
     private final ActivateButton activateButton;
     private final Notify notify;
+    private final Countdown countdown;
 
     @Autowired
     public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
-                         ActivateButton activateButton, Notify notify) {
+                         ActivateButton activateButton, Notify notify, Countdown countdown) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.activateButton = activateButton;
         this.notify = notify;
+        this.countdown = countdown;
         log.info("New Object 'CreatePlayers' created");
     }
 
@@ -48,7 +51,7 @@ public class CreatePlayers {
     public void addPlayer(Player message, @Header("simpSessionId") String sessionId)
             throws JsonProcessingException {
 
-        if (playerNumber < ConstantIntegers.PLAYER_COUNT) {
+        if (playerNumber < ConstantInteger.PLAYER_COUNT) {
 
             sessionIds[playerNumber] = (sessionId);
 
@@ -60,10 +63,11 @@ public class CreatePlayers {
 
             playerNumber++;
 
-            if (playerNumber == ConstantIntegers.PLAYER_COUNT) {
+            if (playerNumber == ConstantInteger.PLAYER_COUNT) {
                 isPartyFull = true;
                 activateButton.diceNumber();
                 notify.playerXOnTurn();
+                countdown.startCountdown();
             }
         }
         for (String id: sessionIds) {
