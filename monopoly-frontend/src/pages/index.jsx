@@ -19,6 +19,7 @@ const Home = () => {
 	const [currentPlayer, setCurrentPlayer] = useState(0);
 	const [diceNumber, setDiceNumber] = useState('0');
 	const [eventFieldMessage, setEventFieldMessage] = useState();
+	const [freeParkingCredit, setFreeParkingCredit] = useState(0);
 	const array = [];
 	const [boughtEstates, setBoughtEstates] = useState([{}]);
 	// for receiving messages
@@ -85,6 +86,10 @@ const Home = () => {
 				setNextPlayerBtn(greeting.body === 'true');
 			},
 		);
+
+		stompClient.subscribe('/client/freeParkingCredit', function (greeting) {
+			setFreeParkingCredit(JSON.parse(greeting.body));
+		});
 		stompClient.subscribe(
 			'/user/client/toggleBuyEstateBtn',
 			function (greeting) {
@@ -139,6 +144,7 @@ const Home = () => {
 					diceNumber,
 					eventFieldMessage,
 					setEventFieldMessage,
+					freeParkingCredit,
 				}}
 			>
 				<GamePage />
