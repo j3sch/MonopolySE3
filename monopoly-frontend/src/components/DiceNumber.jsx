@@ -6,7 +6,7 @@ export function DiceNumber() {
     
 	return (
 		<div className="flex justify-center mb-3">
-			<div className="h-20 w-20 bg-black dark:bg-white dark:text-black font-semibold shadow-lg text-5xl flex items-center justify-center dark:bg-opacity-80">
+			<div className="h-20 w-20 bg-black dark:bg-white dark:text-black font-semibold shadow-lg text-5xl flex items-center justify-center dark:bg-opacity-80 rounded-md">
 				{diceNumber}
 			</div>
 		</div>
