@@ -23,8 +23,6 @@ const Home = () => {
 	const array = [];
 	const [boughtEstates, setBoughtEstates] = useState([{}]);
 	// for receiving messages
-	const [isNotificationActiv, setNotification] = useState();
-	const [message, setMessage] = useState('');
 
 	let isPartyFull;
 
@@ -96,14 +94,6 @@ const Home = () => {
 				setBuyEstateBtn(greeting.body === 'true');
 			},
 		);
-		stompClient.subscribe('/client/notification', function (greeting) {
-			setNotification(true);
-			setMessage(greeting.body);
-		});
-		stompClient.subscribe('/user/client/notification', function (greeting) {
-			setNotification(true);
-			setMessage(greeting.body);
-		});
 	};
 
 	const onError = () => {
@@ -126,10 +116,6 @@ const Home = () => {
 		connect();
 	}
 
-	const closeNotification = () => {
-		setNotification(false);
-	};
-
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
@@ -148,12 +134,6 @@ const Home = () => {
 				}}
 			>
 				<GamePage />
-				{isNotificationActiv && (
-					<NotificationMessage
-						closeNotification={closeNotification}
-						message={message}
-					/>
-				)}
 			</PlayerContext.Provider>
 		);
 	} else {
