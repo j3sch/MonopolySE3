@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
+const LoginNotification = ({ message, closeLoginNotification, backgroundColor }) => {
 	useEffect(() => {
-		setTimeout(() => {
-			closeNotification();
+		let loginNotificationTime = setTimeout(() => {
+			closeLoginNotification();
 		}, 4000);
-	});
+		return () => {
+			clearTimeout(loginNotificationTime);
+		};
+	}, []);
 
 	return (
 		<div className={` ${backgroundColor} rounded bg-opacity-70 flex`}>
@@ -17,7 +20,7 @@ const LoginNotification = ({ message, closeNotification, backgroundColor }) => {
 
 LoginNotification.propTypes = {
 	message: PropTypes.string,
-	closeNotification: PropTypes.func,
+	closeLoginNotification: PropTypes.func,
 	backgroundColor: PropTypes.string,
 };
 

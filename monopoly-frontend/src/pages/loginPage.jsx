@@ -39,7 +39,7 @@ const LoginPage = () => {
 		}
 	};
 
-	const closeNotification = () => {
+	const closeLoginNotification = () => {
 		dispatch({ type: 'CLOSE_NOTIFICATION' });
 	};
 
@@ -74,7 +74,7 @@ const LoginPage = () => {
 				</form>
 				{state.isNotificationActiv && (
 					<LoginNotification
-						closeNotification={closeNotification}
+						closeLoginNotification={closeLoginNotification}
 						message={state.message}
 						backgroundColor={state.backgroundColor}
 					/>
