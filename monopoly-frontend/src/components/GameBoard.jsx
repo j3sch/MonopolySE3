@@ -3,22 +3,12 @@ import { gameFieldData } from '~/data/gameFieldData';
 import { borderColor } from '~/utils/borderColor';
 import { EventFieldCard } from './EventFieldCard';
 import NotificationMessage from './NotificationMessage';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';
 
 export function GameBoard() {
-	const [isNotificationActiv, setNotification] = useState();
-	const [message, setMessage] = useState('');
-	const { stompClient } = useContext(PlayerContext) || {};
-
-	stompClient.subscribe('/client/notification', function (greeting) {
-		setNotification(true);
-		setMessage(greeting.body);
-	});
-	stompClient.subscribe('/user/client/notification', function (greeting) {
-		setNotification(true);
-		setMessage(greeting.body);
-	});
+	const { message, isNotificationActiv, setNotification } =
+		useContext(PlayerContext) || {};
 
 	const closeNotification = () => {
 		setNotification(false);
