@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';

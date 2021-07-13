@@ -7,9 +7,11 @@ export function Leaderboard() {
 	const [isShowBoughtStreetsActiv, setShowBoughtStreetsActiv] = useState(false);
 
 	const showBoughtStreets = (colour) => {
-		colour === isShowBoughtStreetsActiv
-			? setShowBoughtStreetsActiv('')
-			: setShowBoughtStreetsActiv(colour);
+		if (colour === isShowBoughtStreetsActiv) {
+			setShowBoughtStreetsActiv('');
+		} else {
+			setShowBoughtStreetsActiv(colour);
+		}
 	};
 
 	return (
@@ -21,7 +23,10 @@ export function Leaderboard() {
 							<div
 								key={player.id}
 								className="grid grid-cols-6  justify-items-stretch p-1 group hover:text-2xl font-bold text-xl transition hover:p-0"
+								role="button"
+								tabIndex={i}
 								onClick={() => showBoughtStreets(player.colour)}
+								onKeyDown={() => showBoughtStreets(player.colour)}
 							>
 								<div
 									className={`bg-[${
@@ -50,23 +55,22 @@ export function Leaderboard() {
 									<div
 										className={`grid relative col-span-6 pb-2 font-medium mt-2 bg-[${player.colour}]`}
 									>
-										{boughtEstates.map((boughtEstate, i) => {
-											return boughtEstate.playerColour == player.colour && (
-												<div>
-													<p key={i} className="inline-block 2xl:ml-3 xl:ml-2 ml-1 p-1">
-														{boughtEstate.fieldPosition}
-													</p>
-													<p
-														key={i}
-														className="inline-block absolute 2xl:left-[4.5rem] xl:left-[3.5rem] left-[2.5rem] mt-1"
-													>
-														{boughtEstate.estateName}
-													</p>
-													<div
-														className={`inline-block h-5 w-5 absolute 2xl:right-5 xl:right-4 right-3 mt-3 border bg-[${boughtEstate.estateColour}]`}
-													></div>
-												</div>
-											)
+										{boughtEstates.map((boughtEstate) => {
+											return (
+												boughtEstate.playerColour === player.colour && (
+													<div>
+														<p className="inline-block 2xl:ml-3 xl:ml-2 ml-1 p-1">
+															{boughtEstate.fieldPosition}
+														</p>
+														<p className="inline-block absolute 2xl:left-[4.5rem] xl:left-[3.5rem] left-[2.5rem] mt-1">
+															{boughtEstate.estateName}
+														</p>
+														<div
+															className={`inline-block h-5 w-5 absolute 2xl:right-5 xl:right-4 right-3 mt-3 border bg-[${boughtEstate.estateColour}]`}
+														/>
+													</div>
+												)
+											);
 										})}
 									</div>
 								)}

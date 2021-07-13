@@ -69,7 +69,7 @@ export const gameFieldData = [
 		condition: 'right',
 		color: colorGroup3,
 	},
-	{ id: 21, title: 'CHANCE' , condition: 'chanceY' },
+	{ id: 21, title: 'CHANCE', condition: 'chanceY' },
 	{ id: 9, title: 'CHANCE', condition: 'chanceY' },
 	{
 		id: 20,

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 export const ChanceXField = (props) => {
@@ -12,7 +11,6 @@ export const ChanceXField = (props) => {
 			<svg
 				width="50"
 				height="50"
-				className
 				className="fill-current text-pink-600 justify-self-center"
 				viewBox="0 0 24 24"
 			>
