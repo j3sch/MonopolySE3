@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 
 const NotificationMessage = ({ message, closeNotification }) => {
 	useEffect(() => {
-		setTimeout(() => {
+		let notificationTime = setTimeout(() => {
 			closeNotification();
 		}, 6000);
-	});
+		return () => {
+			clearTimeout(notificationTime);
+		};
+	}, []);
 
 	return (
-		<div className="p-20 bg-gray-900 dark:bg-gray-500 rounded-xl absolute left-[50%] top-[50%] transform translate-y-[-50%] translate-x-[-50%]">
-			<p className="truncate font-semibold text-lg text-white pt-3 text-center">
+		<div className="px-12 h-20 bg-gray-900 dark:bg-gray-500 rounded-xl flex items-center">
+			<p className="truncate font-semibold text-xl text-white text-center">
 				{message}
 			</p>
 		</div>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import LoginPage from '~/pages/loginPage';
 import { PlayerContext } from '~/utils/PlayerContext';
 import GamePage from '~/pages/gamePage';
-import NotificationMessage from '~/components/NotificationMessage';
 
 let stompClient;
 const Stomp = require('stompjs');
@@ -25,7 +24,6 @@ const Home = () => {
 	// for receiving messages
 	const [isNotificationActiv, setNotification] = useState();
 	const [message, setMessage] = useState('');
-
 	let isPartyFull;
 
 	const sendMessage = (msg) => {
@@ -126,10 +124,6 @@ const Home = () => {
 		connect();
 	}
 
-	const closeNotification = () => {
-		setNotification(false);
-	};
-
 	if (userJoint) {
 		return (
 			<PlayerContext.Provider
@@ -145,15 +139,12 @@ const Home = () => {
 					eventFieldMessage,
 					setEventFieldMessage,
 					freeParkingCredit,
+					message,
+					isNotificationActiv,
+					setNotification,
 				}}
 			>
 				<GamePage />
-				{isNotificationActiv && (
-					<NotificationMessage
-						closeNotification={closeNotification}
-						message={message}
-					/>
-				)}
 			</PlayerContext.Provider>
 		);
 	} else {
