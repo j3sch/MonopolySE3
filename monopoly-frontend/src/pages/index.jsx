@@ -162,6 +162,6 @@ const Home = () => {
 			<LoginPage />
 		</PlayerContext.Provider>
 	);
-};;
+};
 
 export default Home;

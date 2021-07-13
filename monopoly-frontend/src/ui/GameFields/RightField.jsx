@@ -8,7 +8,7 @@ export const Right = (props) => {
 
 	return (
 		<div className={`${borderColor} h-full flex col-span-2`}>
-			<div className={`${color} w-1/4 flex justify-center items-center`}>
+			<div className={`${color} w-1/4 flex items-center text-center`}>
 				{boughtEstates !== undefined &&
 					boughtEstates.map(
 						(field) =>

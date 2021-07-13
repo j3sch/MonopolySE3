@@ -17,14 +17,14 @@ export const reducer = (state, action) => {
 			backgroundColor: 'bg-red-500',
 		};
 	}
-		if (action.type === 'INPUT_INVALID') {
-			return {
-				...state,
-				isNotificationActiv: true,
-				message: 'Invalid characters: use only letters in your name',
-				backgroundColor: 'bg-red-500',
-			};
-		}
+	if (action.type === 'INPUT_INVALID') {
+		return {
+			...state,
+			isNotificationActiv: true,
+			message: 'Invalid characters: use only letters in your name',
+			backgroundColor: 'bg-red-500',
+		};
+	}
 	if (action.type === 'PARTY_FULL') {
 		return {
 			...state,
