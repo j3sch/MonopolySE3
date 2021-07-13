@@ -17,7 +17,6 @@ export const JailField = (props) => {
 						src="/images/jail.png"
 						height={60}
 						width={65}
-						fixed
 						priority
 					/>
 				</div>

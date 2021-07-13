@@ -156,12 +156,13 @@ const Home = () => {
 				)}
 			</PlayerContext.Provider>
 		);
+	} else {
+		return (
+			<PlayerContext.Provider value={{ stompClient, isPartyFullHooks }}>
+				<LoginPage />
+			</PlayerContext.Provider>
+		);
 	}
-	return (
-		<PlayerContext.Provider value={{ stompClient, isPartyFullHooks }}>
-			<LoginPage />
-		</PlayerContext.Provider>
-	);
 };
 
 export default Home;

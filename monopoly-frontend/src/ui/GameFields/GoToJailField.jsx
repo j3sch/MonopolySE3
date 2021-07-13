@@ -15,7 +15,6 @@ export const GoToJailField = (props) => {
 					src="/images/referee.png"
 					height={60}
 					width={65}
-					fixed
 					priority
 				/>
 			</div>
