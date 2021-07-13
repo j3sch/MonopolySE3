@@ -1,8 +1,9 @@
 import { DiceNumberButton } from '~/ui/DiceNumberButton';
 import { BuyEstateButton } from '~/ui/BuyEstateButton';
 import { NextPlayerButton } from '~/ui/NextPlayerButton';
-import { Leaderboard } from '~/components/Leaderboard'
-import { DiceNumber } from '~/components/DiceNumber'
+import { Leaderboard } from '~/components/Leaderboard';
+import { DiceNumber } from '~/components/DiceNumber';
+
 export function GameMenu() {
 	return (
 		<div className="text-white">

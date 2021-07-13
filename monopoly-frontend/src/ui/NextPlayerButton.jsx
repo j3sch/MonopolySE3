@@ -7,7 +7,7 @@ export function NextPlayerButton() {
 	const { stompClient } = useContext(PlayerContext) || {};
 
 	const sendButtonClickEvent = () => {
-		setEventFieldMessage()
+		setEventFieldMessage();
 		stompClient.send(
 			'/server/nextPlayerBtnClicked',
 			{},
