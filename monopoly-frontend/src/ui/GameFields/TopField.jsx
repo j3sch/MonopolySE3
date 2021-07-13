@@ -8,7 +8,7 @@ export const Top = (props) => {
 
 	return (
 		<div className={borderColor}>
-			<div className="h-3/4 bg-green-200 grid justify-items-center">
+			<div className="h-3/4 bg-green-200 grid text-center">
 				<p className="text-xl font-bold">{title}</p>
 				<p className="text-xl font-semibold">{price}</p>
 			</div>
