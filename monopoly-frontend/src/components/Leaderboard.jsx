@@ -36,7 +36,7 @@ export function Leaderboard() {
 										'border-2 border-gray-900 dark:border-white'
 									}`}
 								>
-									{i + 1}
+									{player.position}
 								</div>
 								<div
 									className={`bg-[${
@@ -63,7 +63,6 @@ export function Leaderboard() {
 															{boughtEstate.fieldPosition}
 														</p>
 														<p className="inline-block absolute 2xl:left-[4.5rem] xl:left-[3.5rem] left-[2.5rem] mt-1">
-															4f1b9e1935484316dd56fcfd39e21381
 															{boughtEstate.estateName}
 														</p>
 														<div
