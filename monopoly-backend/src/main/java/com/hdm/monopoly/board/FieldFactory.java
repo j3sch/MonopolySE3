@@ -3,20 +3,20 @@ package com.hdm.monopoly.board;
 import com.hdm.monopoly.errors.WrongFieldError;
 
 public class FieldFactory {
-    protected static Field createField(String type, String name, int price, int rent, Colour colour, int goValue) throws WrongFieldError {
-        switch (type){
+    protected static Field createField(String fieldType, String fieldName, int price, int rent, Colour colour, int goValue) throws WrongFieldError {
+        switch (fieldType){
             case "Street":
-                return new Street(name,price,rent, colour);
+                return new Street(fieldName,price,rent, colour);
             case "Go":
-                return new Go(name, goValue);
+                return new Go(fieldName, goValue);
             case "Jail":
-                return new Jail(name);
+                return new Jail(fieldName);
             case "FreeParking":
-                return new FreeParking(name);
+                return new FreeParking(fieldName);
             case "GoToJail":
-                return new GoToJail(name);
+                return new GoToJail(fieldName);
             case "EventField":
-                return new EventField(name);
+                return new EventField(fieldName);
             default:
                 throw new WrongFieldError("Wrong Field Type");
         }

@@ -21,7 +21,6 @@ const Home = () => {
 	const [freeParkingCredit, setFreeParkingCredit] = useState(0);
 	const array = [];
 	const [boughtEstates, setBoughtEstates] = useState([{}]);
-	// for receiving messages
 	const [isNotificationActiv, setNotification] = useState();
 	const [message, setMessage] = useState('');
 	let isPartyFull;
@@ -105,7 +104,7 @@ const Home = () => {
 	};
 
 	const onError = () => {
-		console.log('error');
+		console.error('Error appeared when connecting to the server');
 	};
 
 	const connect = () => {

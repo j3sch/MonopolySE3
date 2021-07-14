@@ -9,23 +9,23 @@ import org.apache.logging.log4j.Logger;
 public class GoToJail implements Field{
     private static final Logger log = LogManager.getLogger(GoToJail.class);
 
-    private final String name;
+    private final String fieldName;
 
-    public GoToJail(String name){
-        this.name = name;
+    public GoToJail(String fieldName){
+        this.fieldName = fieldName;
         log.info("New Object 'GoToJail' created");
     }
 
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
         player.setPosition(6);
-        player.getArrested();
+        player.setArrested();
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to go to jail.");
         log.info(player.getName() + " moves into jail");
     }
 
     @Override
     public String getFieldName() {
-        return name;
+        return fieldName;
     }
 }

@@ -118,7 +118,7 @@ public class Player {
     /**
      * to be called when the player gets arrested
      */
-    public void getArrested(){
+    public void setArrested(){
         jailTime = 3;
         log.info(name + " get arrested");
     }

@@ -17,11 +17,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Component("createPlayer")
-public class CreatePlayers {
-    private static final Logger log = LogManager.getLogger(CreatePlayers.class);
+@Component
+public class CreatePlayer {
+    private static final Logger log = LogManager.getLogger(CreatePlayer.class);
     private int playerNumber;
-    private final PlayerColours PlayerColours = new PlayerColours();
+    private final PlayerColour PlayerColour = new PlayerColour();
     private Boolean isPartyFull = false;
     private final String[] sessionIds;
     private final Player[] players;
@@ -31,8 +31,8 @@ public class CreatePlayers {
     private final Countdown countdown;
 
     @Autowired
-    public CreatePlayers(Player[] players, SendMessage sendMessage, String[] sessionIds,
-                         ActivateButton activateButton, Notify notify, Countdown countdown) {
+    public CreatePlayer(Player[] players, SendMessage sendMessage, String[] sessionIds,
+                        ActivateButton activateButton, Notify notify, Countdown countdown) {
         this.players = players;
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
@@ -48,7 +48,7 @@ public class CreatePlayers {
      * @param sessionId will be stored in an array to send messages to the player individually
      */
     @MessageMapping("/playerName")
-    public void addPlayer(Player message, @Header("simpSessionId") String sessionId)
+    private void addPlayer(Player message, @Header("simpSessionId") String sessionId)
             throws JsonProcessingException {
 
         if (playerNumber < ConstantInteger.PLAYER_COUNT) {
@@ -58,7 +58,7 @@ public class CreatePlayers {
             players[playerNumber] = new Player(
                     playerNumber,
                     message.getName(),
-                    PlayerColours.getPlayerColour(playerNumber)
+                    PlayerColour.getPlayerColour(playerNumber)
             );
 
             playerNumber++;
@@ -83,7 +83,7 @@ public class CreatePlayers {
      */
     @MessageMapping("/isPartyFull")
     @SendToUser("/client/reply")
-    public String processMessageFromClient() throws Exception {
+    private String processMessageFromClient() throws Exception {
         Thread.sleep(1000);
 
         return new ObjectMapper().writeValueAsString(isPartyFull);

@@ -63,7 +63,7 @@ public class Street implements Field {
      *
      * @return true if owner owns all streets with the same color
      */
-    public boolean colorCheck(){
+    private boolean colorCheck(){
         Iterator<Colour> streetIterator = this.owner.getOwnedColors().iterator();
         int colorCount = 0;
         while (streetIterator.hasNext()){

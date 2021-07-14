@@ -18,16 +18,11 @@ public class Account {
         return bankBalance;
     }
 
-    public void setBankBalance(int bankBalance) {
-        this.bankBalance = bankBalance;
-    }
-
     public void getMoney(int amount){
-        setBankBalance(getBankBalance() + amount);
+        bankBalance += amount;
     }
 
     public void payMoney(int amount){
-        setBankBalance(getBankBalance() - amount);
+        bankBalance -= amount;
     }
-
 }

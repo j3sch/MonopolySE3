@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class FreeParking implements Field{
     private static final Logger log = LogManager.getLogger();
 
-    private final String name;
+    private final String fieldName;
     private int credit;
 
     public void setCredit(int amount) {
@@ -20,8 +20,8 @@ public class FreeParking implements Field{
         return credit;
     }
 
-    public FreeParking(String name){
-        this.name = name;
+    public FreeParking(String fieldName){
+        this.fieldName = fieldName;
         log.info("New Object 'FreeParking' created");
     }
 
@@ -40,6 +40,6 @@ public class FreeParking implements Field{
 
     @Override
     public String getFieldName() {
-        return name;
+        return fieldName;
     }
 }

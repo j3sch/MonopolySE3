@@ -48,7 +48,7 @@ public class ButtonEvents {
      */
     @MessageMapping("/diceNumberBtnClicked")
     @SendToUser("/client/toggleDiceNumberBtn")
-    public String diceNumberBtnClicked() throws JsonProcessingException {
+    private String diceNumberBtnClicked() throws JsonProcessingException {
         int diceNumber = diceRandomNumber();
         log.info(game.getCurrentPlayer().getName() + " has rolled number " + diceNumber);
 
@@ -89,7 +89,7 @@ public class ButtonEvents {
      */
     @MessageMapping("/nextPlayerBtnClicked")
     @SendToUser("/client/toggleNextPlayerBtn")
-    public String nextPlayerBtnClicked() throws JsonProcessingException {
+    private String nextPlayerBtnClicked() throws JsonProcessingException {
         countdown.resetCountdown();
         game.endOfTurn();
         return new ObjectMapper().writeValueAsString(true);
@@ -102,7 +102,7 @@ public class ButtonEvents {
      */
     @MessageMapping("/buyEstateBtnClicked")
     @SendToUser("/client/toggleBuyEstateBtn")
-    public String buyEstateBtnClicked() throws JsonProcessingException {
+    private String buyEstateBtnClicked() throws JsonProcessingException {
         Player player = game.getCurrentPlayer();
         Street street = (Street)game.getBoard().getField(player.getPosition());
         EstateColourToHex estateColourToHex = new EstateColourToHex();

@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("sendPlayerData")
+@Component
 public class SendPlayerData {
     private static final Logger log = LogManager.getLogger(SendPlayerData.class);
 
@@ -26,10 +26,11 @@ public class SendPlayerData {
      */
     public void sendPlayerToClient() throws JsonProcessingException {
         sendMessage.sendToAll("/client/playerList", new ObjectMapper().writeValueAsString(players));
-        log.info(players);
+        log.info("Player array sent to client");
     }
 
     public void sendDicedNumber(int dicedNumber) throws JsonProcessingException {
         sendMessage.sendToAll("/client/diceNumber", new ObjectMapper().writeValueAsString(dicedNumber));
+        log.info("Dice number sent to client");
     }
 }

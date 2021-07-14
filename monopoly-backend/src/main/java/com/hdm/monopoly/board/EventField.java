@@ -11,10 +11,10 @@ import org.apache.logging.log4j.Logger;
 public class EventField implements Field{
     private static final Logger log = LogManager.getLogger(EventField.class);
 
-    private final String name;
+    private final String fieldName;
 
-    public EventField(String name){
-        this.name = name;
+    public EventField(String fieldName){
+        this.fieldName = fieldName;
         log.info("New Object 'EventField' created");
     }
 
@@ -104,6 +104,6 @@ public class EventField implements Field{
 
     @Override
     public String getFieldName() {
-        return name;
+        return fieldName;
     }
 }

@@ -9,11 +9,11 @@ import org.apache.logging.log4j.Logger;
 public class Go implements Field {
     private static final Logger log = LogManager.getLogger(Go.class);
 
-    private final String name;
+    private final String fieldName;
     private final int goValue;
 
-    public Go(String name,int goValue){
-        this.name = name;
+    public Go(String fieldName,int goValue){
+        this.fieldName = fieldName;
         this.goValue = goValue;
         log.info("New Object 'Go' created");
     }
@@ -30,7 +30,7 @@ public class Go implements Field {
 
     @Override
     public String getFieldName() {
-        return name;
+        return fieldName;
     }
 
 }
