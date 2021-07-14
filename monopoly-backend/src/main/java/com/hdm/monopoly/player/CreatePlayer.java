@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 public class CreatePlayer {
     private static final Logger log = LogManager.getLogger(CreatePlayer.class);
     private int playerNumber;
-    private final PlayerColour PlayerColour = new PlayerColour();
+    private final SwitchPlayerColour SwitchPlayerColour = new SwitchPlayerColour();
     private Boolean isPartyFull = false;
     private final String[] sessionIds;
     private final Player[] players;
@@ -58,7 +58,7 @@ public class CreatePlayer {
             players[playerNumber] = new Player(
                     playerNumber,
                     message.getName(),
-                    PlayerColour.getPlayerColour(playerNumber)
+                    SwitchPlayerColour.getPlayerColour(playerNumber)
             );
 
             playerNumber++;

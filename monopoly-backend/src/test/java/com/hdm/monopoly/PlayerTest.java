@@ -1,17 +1,17 @@
 package com.hdm.monopoly;
 
-import com.hdm.monopoly.player.PlayerColour;
+import com.hdm.monopoly.player.SwitchPlayerColour;
 import com.hdm.monopoly.player.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
 public class PlayerTest {
-    PlayerColour PlayerColour = new PlayerColour();
+    SwitchPlayerColour SwitchPlayerColour = new SwitchPlayerColour();
 
-    Player Player1 = new Player(0, "Spieler1", PlayerColour.getPlayerColour(0) );
-    Player Player2 = new Player(1, "Spieler2", PlayerColour.getPlayerColour(1) );
-    Player Player3 = new Player(2, "Spieler3", PlayerColour.getPlayerColour(2) );
-    Player Player4 = new Player(3, "Spieler4", PlayerColour.getPlayerColour(3) );
+    Player Player1 = new Player(0, "Spieler1", SwitchPlayerColour.getPlayerColour(0) );
+    Player Player2 = new Player(1, "Spieler2", SwitchPlayerColour.getPlayerColour(1) );
+    Player Player3 = new Player(2, "Spieler3", SwitchPlayerColour.getPlayerColour(2) );
+    Player Player4 = new Player(3, "Spieler4", SwitchPlayerColour.getPlayerColour(3) );
 
     @Test
     public void MoneyTest(){
