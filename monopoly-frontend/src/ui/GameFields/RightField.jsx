@@ -8,7 +8,7 @@ export const Right = (props) => {
 
 	return (
 		<div className={`${borderColor} h-full flex col-span-2`}>
-			<div className={`${color} w-1/4 flex items-center text-center`}>
+			<div className={`${color} w-1/4 flex items-center justify-center`}>
 				{boughtEstates !== undefined &&
 					boughtEstates.map(
 						(field) =>
@@ -19,7 +19,7 @@ export const Right = (props) => {
 							),
 					)}
 			</div>
-			<div className="w-3/4 bg-green-200 grid justify-items-center">
+			<div className="w-3/4 bg-green-200 grid text-center">
 				<p className="text-xl font-bold">{title}</p>
 				<p className="text-xl font-semibold">{price}</p>
 			</div>
