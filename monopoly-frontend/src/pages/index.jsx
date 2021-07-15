@@ -94,6 +94,7 @@ const Home = () => {
 			},
 		);
 		stompClient.subscribe('/client/notification', function (greeting) {
+			setNotification(false);
 			setNotification(true);
 			setMessage(greeting.body);
 		});
