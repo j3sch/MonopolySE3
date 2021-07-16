@@ -6,6 +6,10 @@ import com.hdm.monopoly.sendmessage.SendPlayerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * implemented field type that represents the free parking field
+ */
+
 public class FreeParking implements Field{
     private static final Logger log = LogManager.getLogger();
 
@@ -25,6 +29,13 @@ public class FreeParking implements Field{
         log.info("New Object 'FreeParking' created");
     }
 
+    /***
+     * function that defines what happens when a player steps on the field. if free parking has money, the player gets the money
+     * @param player player who moved on this street
+     * @param sendMessage to send messages to players and updates to this street
+     * @param SessionIds of all players
+     * @param board to get every other field
+     */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
