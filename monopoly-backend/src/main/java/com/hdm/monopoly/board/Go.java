@@ -6,6 +6,9 @@ import com.hdm.monopoly.sendmessage.SendPlayerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * implemented field type that represents the start of the map
+ */
 public class Go implements Field {
     private static final Logger log = LogManager.getLogger(Go.class);
 

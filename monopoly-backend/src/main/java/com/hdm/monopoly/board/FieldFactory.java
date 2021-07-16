@@ -2,6 +2,10 @@ package com.hdm.monopoly.board;
 
 import com.hdm.monopoly.errors.WrongFieldError;
 
+/**
+ *A Factory that creates the uniformly Field Interface as implemented fieldtypes.
+ */
+
 public class FieldFactory {
     protected static Field createField(String fieldType, String fieldName, int price, int rent, Colour colour, int goValue) throws WrongFieldError {
         switch (fieldType){
