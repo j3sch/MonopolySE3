@@ -8,7 +8,10 @@ public class Account {
 
     private int bankBalance;
 
-
+    /**
+     *
+     * @param bankBalance the current bank balance
+     */
     public Account(int bankBalance) {
         this.bankBalance = bankBalance;
         log.info("New Object 'Account' created");

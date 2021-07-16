@@ -15,12 +15,20 @@ public class Go implements Field {
     private final String fieldName;
     private final int goValue;
 
+
     public Go(String fieldName,int goValue){
         this.fieldName = fieldName;
         this.goValue = goValue;
         log.info("New Object 'Go' created");
     }
 
+    /***
+     * Method pays amount X for crossing or hitting the go field
+     * @param player player who moved on the Go field
+     * @param sendMessage send messages to players and updates the
+     * @param SessionIds of all players
+     * @param board to get every other field
+     */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
         player.playerGetsMoney(goValue);
