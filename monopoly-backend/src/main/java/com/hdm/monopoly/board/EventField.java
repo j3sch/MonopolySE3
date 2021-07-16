@@ -8,6 +8,9 @@ import com.hdm.monopoly.utility.FieldPosition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * implemented field type that represents the event fields
+ */
 public class EventField implements Field{
     private static final Logger log = LogManager.getLogger(EventField.class);
 
@@ -18,6 +21,14 @@ public class EventField implements Field{
         log.info("New Object 'EventField' created");
     }
 
+    /**
+     * function that defines what happens when a player steps on the field. a switch statement activate the different event field actions with a random number
+     * @param player player who moved on this street
+     * @param sendMessage to send messages to players and updates to this street
+     * @param SessionIds of all players
+     * @param board to get every other field
+     * @param sendPlayerData to client
+     */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
