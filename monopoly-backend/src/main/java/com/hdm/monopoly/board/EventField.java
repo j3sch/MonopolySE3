@@ -60,8 +60,8 @@ public class EventField implements Field{
                 break;
         }
     }
-    //Player move to Go
-    public void playerToGo(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+
+    private void playerToGo(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to go");
         new Thread(() -> {
             try {
@@ -75,8 +75,7 @@ public class EventField implements Field{
         }).start();
     }
 
-    //Player move to Park Place
-    public void playerToParkPlace(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+    private void playerToParkPlace(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to Park Place");
         new Thread(() -> {
             try {
@@ -90,34 +89,31 @@ public class EventField implements Field{
         }).start();
     }
 
-    //Money to Free Parking 2$
-    public void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
+    private void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
         player.playerPaysMoney(2);
         freeParking.setCredit(2);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
         sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
     }
 
-    //Money to Free Parking 1$
-    public void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
+    private void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
         player.playerPaysMoney(1);
         freeParking.setCredit(1);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
         sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
     }
 
-    //current player gets money
-    public void moneyToPlayer(SendMessage sendMessage, String[] SessionIds, Player player){
+    private void moneyToPlayer(SendMessage sendMessage, String[] SessionIds, Player player){
         player.playerGetsMoney(2);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
     }
 
-    public void playerPaysToBank(SendMessage sendMessage, String[] SessionIds, Player player){
+    private void playerPaysToBank(SendMessage sendMessage, String[] SessionIds, Player player){
         player.playerPaysMoney(1);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the bank");
     }
 
-    public void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+    private void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
         new Thread(() -> {
             try {
