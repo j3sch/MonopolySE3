@@ -101,6 +101,7 @@ public class Street implements Field {
         if(newOwner!=owner){
             this.owner = newOwner;
             this.owner.addStreet(this.colour);
+            log.info( newOwner.getName() + " is the new owner");
         }
     }
 }

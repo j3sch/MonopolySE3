@@ -68,8 +68,12 @@ public class CreatePlayer {
                 activateButton.diceNumber();
                 notify.playerXOnTurn();
                 countdown.startCountdown();
+                log.info("Party is now full. Number of players: " + playerNumber);
             }
+        }else{
+            log.info("Party is already full. Number of players: " + playerNumber);
         }
+
         for (String id: sessionIds) {
             if (id != null) {
                 sendMessage.sendToPlayer(id, "/client/playerList", new ObjectMapper().writeValueAsString(players));

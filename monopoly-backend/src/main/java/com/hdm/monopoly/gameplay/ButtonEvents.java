@@ -50,7 +50,7 @@ public class ButtonEvents {
     @SendToUser("/client/toggleDiceNumberBtn")
     private String diceNumberBtnClicked() throws JsonProcessingException {
         int diceNumber = diceRandomNumber();
-        log.info(game.getCurrentPlayer().getName() + " has rolled number " + diceNumber);
+        log.info(game.getCurrentPlayer().getName() + ": has rolled number " + diceNumber);
 
         if(game.getCurrentPlayer().getJailTime() > 0) {
             playerInJail(diceNumber);
@@ -68,9 +68,11 @@ public class ButtonEvents {
         if(diceNumber == 6){
             game.getCurrentPlayer().getReleased();
             notify.currentPlayer("You're free from prison!");
+            log.info(game.getCurrentPlayer().getName() + ": has rolled a 6 and is free from jail");
         }else{
             game.getCurrentPlayer().jailed();
             notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
+            log.info(game.getCurrentPlayer().getName() + ": new jail time is " + game.getCurrentPlayer().getJailTime());
         }
     }
 
@@ -92,6 +94,7 @@ public class ButtonEvents {
     private String nextPlayerBtnClicked() throws JsonProcessingException {
         countdown.resetCountdown();
         game.endOfTurn();
+        log.info("next player is on turn");
         return new ObjectMapper().writeValueAsString(true);
     }
 
@@ -112,9 +115,14 @@ public class ButtonEvents {
         packet [2] = player.getColour();
         packet[3] = estateColourToHex.getHexOfColour(street.getColour().toString());
 
-
+        for(int i = 0; i <= packet.length; i++){
+            if (packet[i] == null) {
+                log.info("Packet could not be created correctly, value on Index " + i + " is null" );
+                break;}
+        }
         player.playerPaysMoney(street.getPrice());
         street.setOwner(player);
+        log.info(player.getName() + " pays " + street.getPrice() + " to buy " + street.getFieldName());
 
         sendMessage.sendToAll("/client/buyEstate", new ObjectMapper().writeValueAsString(packet));
         notify.allPlayers(player.getName() + " bought " + street.getFieldName());
