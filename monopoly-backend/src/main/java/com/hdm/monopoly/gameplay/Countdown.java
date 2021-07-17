@@ -14,8 +14,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class Countdown {
 
     private static final Logger log = LogManager.getLogger(Countdown.class);
-    int timeInSeconds = 1800;
 
+    int timeInSeconds = 1800; //30m
+
+    /**
+     * After all players joined the countdown starts.
+     * When the countdown is finished, the server will be restarted.
+     */
     public void startCountdown() {
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         log.info("start Countdown");
@@ -24,7 +29,7 @@ public class Countdown {
 
             timeInSeconds--;
             if (timeInSeconds < 0) {
-                log.info("Maximum length of 2 hours reached");
+                log.info("Maximum length of 30m reached");
                 MonopolyApplication.restart();
                 scheduler.shutdown();
             }
@@ -32,6 +37,9 @@ public class Countdown {
         scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
     }
 
+    /**
+     * When a player interacts, the countdown is reset to 30m
+     */
     public void resetCountdown() {
         timeInSeconds = 1800;
         log.info("Countdown reset");
