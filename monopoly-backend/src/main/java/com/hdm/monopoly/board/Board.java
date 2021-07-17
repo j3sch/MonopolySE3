@@ -30,12 +30,12 @@ public class Board {
     /**
      * the board gets created and all the fields are implemented into the map in the right order
      */
-    public void setBoard(){
+    private void setBoard(){
         for(int i = 0; i < fieldName.length; ++i) {
             board[i] = FieldFactory.createField(fieldType[i], fieldName[i], price[i], rent[i], colour[i], goValue[i]);
         }
         if (fieldName.length == board.length){
-            log.info("Map successfully created");
+            log.info("Board successfully created");
         }else{
             log.warn("Not all fields are correct implemented");
         }
