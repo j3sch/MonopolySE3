@@ -115,11 +115,13 @@ public class ButtonEvents {
         packet [2] = player.getColour();
         packet[3] = estateColourToHex.getHexOfColour(street.getColour().toString());
 
-        for(int i = 0; i <= packet.length; i++){
+        for(int i = 0; i <= 3; i++){
             if (packet[i] == null) {
                 log.info("Packet could not be created correctly, value on Index " + i + " is null" );
                 break;}
         }
+
+
         player.playerPaysMoney(street.getPrice());
         street.setOwner(player);
         log.info(player.getName() + " pays " + street.getPrice() + " to buy " + street.getFieldName());
