@@ -62,14 +62,6 @@ public class Player {
     }
 
     /**
-     * @param name set the players name
-     *             is only used aat the beginning of the game
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * @return save colours of the streets to maybe double the rent price
      */
     public ArrayList<Colour> getOwnedColors() {
