@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * Class that starts and manages the game, is implemented as a singleton
  */
-@Component("game")
+@Component
 public class Game {
     private static final Logger log = LogManager.getLogger(Game.class);
 
@@ -60,7 +60,7 @@ public class Game {
             getCurrentPlayer().playerGetsMoney(2);
         }
         getCurrentPlayer().setPosition(newPosition);
-        log.info(getCurrentPlayer().getName() + "moves to field number: " + newPosition);
+        log.info(getCurrentPlayer().getName() + " moves to field number: " + newPosition);
 
         //activates the moveOnField function which is the field action
         board.getField(newPosition).moveOnField(getCurrentPlayer(), sendMessage, sessionIds, board, sendPlayerData);
