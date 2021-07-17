@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdm.monopoly.helper.EstateColourToHex;
 import com.hdm.monopoly.player.Player;
-import com.hdm.monopoly.sendmessage.ActivateButton;
 import com.hdm.monopoly.sendmessage.Notify;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
@@ -24,17 +23,17 @@ public class ButtonEvents {
 
     private final Game game;
     private final SendPlayerData sendPlayerData;
-    private final ActivateButton activateButton;
+    private final String[] sessionIds;
     private final SendMessage sendMessage;
     private final Notify notify;
     private final Countdown countdown;
 
     @Autowired
-    public ButtonEvents(Game game, SendPlayerData sendPlayerData, ActivateButton activateButton,
+    public ButtonEvents(Game game, SendPlayerData sendPlayerData, String[] sessionIds,
                         SendMessage sendMessage, Notify notify, Countdown countdown) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
-        this.activateButton = activateButton;
+        this.sessionIds = sessionIds;
         this.sendMessage = sendMessage;
         this.notify = notify;
         this.countdown = countdown;
@@ -60,7 +59,7 @@ public class ButtonEvents {
             sendPlayerData.sendPlayerToClient();
         }
 
-        activateButton.nextPlayer();
+        activatedNextPlayerBtn();
         return new ObjectMapper().writeValueAsString(true);
     }
 
@@ -74,6 +73,11 @@ public class ButtonEvents {
             notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
             log.info(game.getCurrentPlayer().getName() + ": new jail time is " + game.getCurrentPlayer().getJailTime());
         }
+    }
+
+    public void activatedNextPlayerBtn() {
+        sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
+        log.info("Next player button is now active");
     }
 
     /**
