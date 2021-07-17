@@ -85,16 +85,8 @@ public class Street implements Field {
         return price;
     }
 
-    public int getRent() {
-        return rent;
-    }
-
     public Colour getColour() {
         return colour;
-    }
-
-    public Player getOwner() {
-        return owner;
     }
 
     public void setOwner(Player newOwner) {
