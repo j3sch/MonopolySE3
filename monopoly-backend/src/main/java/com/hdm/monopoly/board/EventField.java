@@ -22,7 +22,7 @@ public class EventField implements Field{
     }
 
     /**
-     * function that defines what happens when a player steps on the field. a switch statement activate the different event field actions with a random number
+     * function that defines what happens when a player steps on the field. a switch statement activate the different event field functions with a random number
      * @param player player who moved on this street
      * @param sendMessage to send messages to players and updates to this street
      * @param SessionIds of all players
@@ -37,80 +37,98 @@ public class EventField implements Field{
 
         // switch activate the different event field actions with a random number
         switch (randomNumber){
-
-            //Player move to Go
             case 0:
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to go");
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(2000);
-                        player.setPosition(FieldPosition.GO_FIELD);
-                        sendPlayerData.sendPlayerToClient();
-                        board.getField(FieldPosition.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
-                    } catch (InterruptedException | JsonProcessingException e) {
-                        e.printStackTrace();
-                    }
-                }).start();
+                playerToGo(sendMessage,SessionIds,player,sendPlayerData,board);
                 break;
-
-            //Player move to Park Place
             case 1:
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to Park Place");
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(2000);
-                        player.setPosition(FieldPosition.PARK_PALACE_FIELD);
-                        sendPlayerData.sendPlayerToClient();
-                        board.getField(FieldPosition.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
-                    } catch (InterruptedException | JsonProcessingException e) {
-                        e.printStackTrace();
-                    }
-                }).start();
+                playerToParkPlace(sendMessage,SessionIds,player,sendPlayerData,board);
                 break;
-
-            //Money to Free Parking 2$
             case 2:
-                player.playerPaysMoney(2);
-                freeParking.setCredit(2);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
-                sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
-                break;
-
-            //Money to Free Parking 1$
+                moneyToFreeParkingTwo(sendMessage, SessionIds, player, freeParking);
+               break;
             case 3:
-                player.playerPaysMoney(1);
-                freeParking.setCredit(1);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
-                sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
+                moneyToFreeParkingOne(sendMessage, SessionIds, player, freeParking);
                 break;
-
-            //current player gets money
             case 4:
-                player.playerGetsMoney(2);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
+                moneyToPlayer(sendMessage,SessionIds,player);
                 break;
-
-            //player pays 1$ to the bank
             case 5:
-                player.playerPaysMoney(1);
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the bank");
+                playerPaysToBank(sendMessage,SessionIds,player);
                 break;
-
-            //player to jail
             case 6:
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(2000);
-                        player.setPosition(FieldPosition.JAIL_FIELD);
-                        sendPlayerData.sendPlayerToClient();
-                        board.getField(FieldPosition.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
-                    } catch (InterruptedException | JsonProcessingException e) {
-                        e.printStackTrace();
-                    }
-                }).start();
+                playerToJail(sendMessage,SessionIds,player,sendPlayerData,board);
                 break;
         }
+    }
+    //Player move to Go
+    public void playerToGo(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to go");
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                player.setPosition(FieldPosition.GO_FIELD);
+                sendPlayerData.sendPlayerToClient();
+                board.getField(FieldPosition.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+            } catch (InterruptedException | JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    //Player move to Park Place
+    public void playerToParkPlace(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to Park Place");
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                player.setPosition(FieldPosition.PARK_PALACE_FIELD);
+                sendPlayerData.sendPlayerToClient();
+                board.getField(FieldPosition.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+            } catch (InterruptedException | JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    //Money to Free Parking 2$
+    public void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
+        player.playerPaysMoney(2);
+        freeParking.setCredit(2);
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
+        sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
+    }
+
+    //Money to Free Parking 1$
+    public void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
+        player.playerPaysMoney(1);
+        freeParking.setCredit(1);
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
+        sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
+    }
+
+    //current player gets money
+    public void moneyToPlayer(SendMessage sendMessage, String[] SessionIds, Player player){
+        player.playerGetsMoney(2);
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
+    }
+
+    public void playerPaysToBank(SendMessage sendMessage, String[] SessionIds, Player player){
+        player.playerPaysMoney(1);
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the bank");
+    }
+
+    public void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                player.setPosition(FieldPosition.JAIL_FIELD);
+                sendPlayerData.sendPlayerToClient();
+                board.getField(FieldPosition.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
+            } catch (InterruptedException | JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @Override
