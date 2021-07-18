@@ -80,22 +80,11 @@ public class Game {
     /**
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
-    public void endOfTurn(){
+    public void endOfTurn() {
         if (getCurrentPlayer().getPlayerBankBalance() < 0) {
             sendMessage.sendToAll("/client/notification", "Player: " + getCurrentPlayer().getName() + " ran out of money");
-            int amountMoney = getCurrentPlayer().getPlayerBankBalance() ;
-            int winner = 0;
-            for(int i = 0; i <= 3; i++){
-                if(players[i].getPlayerBankBalance() >= amountMoney ){
-                    amountMoney = players[i].getPlayerBankBalance();
-                    winner = i;
-                }
-            }
-            sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
             log.info(getCurrentPlayer().getName() + " ran out of money and lost the game");
-            log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
-            log.info("restarting server");
-            MonopolyApplication.restart();
+            getWinner();
         } else {
             log.info(getCurrentPlayer().getName() + " ends his turn");
             sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleBuyEstateBtn", "true");
@@ -106,6 +95,21 @@ public class Game {
             sendMessage.sendToAll("/client/notification", "Player " + getCurrentPlayer().getName() + " is on turn");
             sendMessage.sendToPlayer(sessionIds[getCurrentPlayerIndex()], "/client/toggleDiceNumberBtn", "false");
         }
+    }
+
+    private void getWinner() {
+        int amountMoney = getCurrentPlayer().getPlayerBankBalance() ;
+        int winner = 0;
+        for(int i = 0; i <= 3; i++){
+            if(players[i].getPlayerBankBalance() >= amountMoney ){
+                amountMoney = players[i].getPlayerBankBalance();
+                winner = i;
+            }
+        }
+        sendMessage.sendToAll("/client/notification", "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+        log.info( "Player: " + players[winner].getName() + " won the game with an amount of $ " + players[winner].getPlayerBankBalance());
+        log.info("restarting server");
+        MonopolyApplication.restart();
     }
 }
 
