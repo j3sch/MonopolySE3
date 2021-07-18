@@ -25,31 +25,32 @@ public class Street implements Field {
     }
 
     /**
+     * if there is no owner, the player could buy this field or he has to pay rent
      * @param player player who moved on this street
      * @param sendMessage to send messages to players and updates to this street
      * @param SessionIds of all players
      * @param board to get every other field
-     * if there is no owner, the player could buy this field or he has to pay rent
      */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
         if (owner == null) {
-            if(player.getPlayerBankBalance()-price >=0){
+            if(player.getPlayerBankBalance() - price >= 0) {
 
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/toggleBuyEstateBtn", "false" );
-                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Buy " + streetName + " for $" + price);
-                log.info(player.getName() + " Buy " + streetName + " for " + price);
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "Buy " + streetName + " for " + price + "$");
+                log.info(player.getName() + " buy " + streetName + " for " + price + "$");
             }
         } else {
             //player on field has to pay rent to the owner
-            if(player != owner){
+            if (player != owner){
                 int rentPrice = rent;
 
                 //if the owner owns all Streets of the same color double the rent price
-                if(colorCheck()){
+                if (allEstatesOfColour()) {
                     rentPrice *= 2;
                 }
+
                 player.playerPaysMoney(rentPrice);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay $" + rentPrice + " rent to " + owner.getName());
                 owner.playerGetsMoney(rentPrice);
@@ -63,7 +64,7 @@ public class Street implements Field {
      *
      * @return true if owner owns all streets with the same color
      */
-    private boolean colorCheck(){
+    private boolean allEstatesOfColour(){
         Iterator<Colour> streetIterator = this.owner.getOwnedColors().iterator();
         int colorCount = 0;
         while (streetIterator.hasNext()){
