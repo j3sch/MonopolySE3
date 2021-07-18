@@ -68,7 +68,7 @@ public class ButtonEvents {
 
     private void playerInJail(int diceNumber) {
         if(diceNumber == 6){
-            game.getCurrentPlayer().getReleased();
+            game.getCurrentPlayer().setReleased();
             notify.currentPlayer("You're free from prison!");
             log.info(game.getCurrentPlayer().getName() + ": has rolled a 6 and is free from jail");
         }else{
