@@ -56,6 +56,8 @@ public class Street implements Field {
                 owner.playerGetsMoney(rentPrice);
                 sendMessage.sendToPlayer(SessionIds[owner.getID()], "/client/notification", "You received $" + rentPrice + " rent from " + player.getName());
                 log.info(player.getName() + " pays " + rentPrice + " rent to " + owner.getName());
+            } else {
+                sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay nothing, because " + owner.getName() + " is in Jail");
             }
         }
     }
