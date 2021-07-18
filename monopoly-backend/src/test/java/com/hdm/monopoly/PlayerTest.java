@@ -5,12 +5,6 @@ import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.utility.PlayerColour;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.*;
-
 
 public class PlayerTest {
     SwitchPlayerColour SwitchPlayerColour = new SwitchPlayerColour();
@@ -53,6 +47,4 @@ public class PlayerTest {
         Assertions.assertEquals(Player4.getColour(), PlayerColour.ORANGE);
 
     }
-
-
 }
