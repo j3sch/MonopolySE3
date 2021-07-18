@@ -2,8 +2,15 @@ package com.hdm.monopoly;
 
 import com.hdm.monopoly.player.SwitchPlayerColour;
 import com.hdm.monopoly.player.Player;
+import com.hdm.monopoly.utility.PlayerColour;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import static org.junit.Assert.*;
+
 
 public class PlayerTest {
     SwitchPlayerColour SwitchPlayerColour = new SwitchPlayerColour();
@@ -15,35 +22,35 @@ public class PlayerTest {
 
     @Test
     public void MoneyTest(){
-        assertEquals(Player1.getPlayerBankBalance(), 31);
+        Assertions.assertEquals(Player1.getPlayerBankBalance(), 31);
 
         Player2.playerGetsMoney(2);
-        assertEquals(Player2.getPlayerBankBalance(), 33);
-        assertNotEquals(Player3.getPlayerBankBalance(), 33);
+        Assertions.assertEquals(Player2.getPlayerBankBalance(), 33);
+        Assertions.assertNotEquals(Player3.getPlayerBankBalance(), 33);
 
         Player3.playerPaysMoney(2);
-        assertEquals(Player3.getPlayerBankBalance(), 29);
-        assertNotEquals(Player4.getPlayerBankBalance(), 29);
+        Assertions.assertEquals(Player3.getPlayerBankBalance(), 29);
+        Assertions.assertNotEquals(Player4.getPlayerBankBalance(), 29);
 
         Player3.playerGetsMoney(4);
-        assertEquals(Player3.getPlayerBankBalance(), 33);
+        Assertions.assertEquals(Player3.getPlayerBankBalance(), 33);
     }
 
     @Test
     public void CreatePlayersTest(){
-        assertEquals(Player1.getPosition(), 0);
+        Assertions.assertEquals(Player1.getPosition(), 0);
 
         Player2.setPosition(2);
-        assertEquals(Player2.getPosition(), 2);
-        assertNotEquals(Player3.getPosition(), 2);
+        Assertions.assertEquals(Player2.getPosition(), 2);
+        Assertions.assertNotEquals(Player3.getPosition(), 2);
     }
 
     @Test
     public void ColoursTest(){
-        assertEquals(Player1.getColour(), "#f44336");
-        assertEquals(Player2.getColour(), "#2196f3");
-        assertEquals(Player3.getColour(), "#4caf50");
-        assertEquals(Player4.getColour(), "#FF6F00");
+        Assertions.assertEquals(Player1.getColour(), PlayerColour.RED);
+        Assertions.assertEquals(Player2.getColour(), PlayerColour.BLUE);
+        Assertions.assertEquals(Player3.getColour(), PlayerColour.GREEN);
+        Assertions.assertEquals(Player4.getColour(), PlayerColour.ORANGE);
 
     }
 
