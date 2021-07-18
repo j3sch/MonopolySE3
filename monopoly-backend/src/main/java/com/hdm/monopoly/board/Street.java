@@ -50,7 +50,6 @@ public class Street implements Field {
                 if (allEstatesOfColour()) {
                     rentPrice *= 2;
                 }
-
                 player.playerPaysMoney(rentPrice);
                 sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to pay $" + rentPrice + " rent to " + owner.getName());
                 owner.playerGetsMoney(rentPrice);

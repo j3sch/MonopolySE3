@@ -40,7 +40,7 @@ public class Countdown {
     /**
      * When a player interacts, the countdown is reset to 30m
      */
-    public void resetCountdown() {
+    protected void resetCountdown() {
         timeInSeconds = 1800;
         log.info("Countdown reset");
     }

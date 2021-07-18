@@ -66,6 +66,10 @@ public class ButtonEvents {
         return new ObjectMapper().writeValueAsString(true);
     }
 
+    /**
+     * Player has diced a 6, then he comes free from the prison, otherwise his prison time decreases by 1.
+     * @param diceNumber the diced number from the player
+     */
     private void playerInJail(int diceNumber) {
         if(diceNumber == 6){
             game.getCurrentPlayer().setReleased();
@@ -85,7 +89,7 @@ public class ButtonEvents {
 
     public void activatedNextPlayerBtn() {
         sendMessage.sendToPlayer(sessionIds[game.getCurrentPlayerIndex()], "/client/toggleNextPlayerBtn", "false" );
-        log.info("Next player button is now active");
+        log.info("Next player button is now active for player " + game.getCurrentPlayer().getName());
     }
 
     /**
@@ -125,15 +129,22 @@ public class ButtonEvents {
         street.setOwner(player);
         log.info(player.getName() + " pays " + street.getPrice() + " to buy " + street.getFieldName());
 
-        sendMessage.sendToAll("/client/buyEstate", new ObjectMapper().writeValueAsString(generateMessageBuyEstate(street, player)));
+        sendMessage.sendToAll("/client/buyEstate", new ObjectMapper().writeValueAsString(generateMessageBuyEstate()));
         notify.allPlayers(player.getName() + " bought " + street.getFieldName());
         sendPlayerData.sendPlayerToClient();
 
         return new ObjectMapper().writeValueAsString(true);
     }
 
-    private String[] generateMessageBuyEstate(Street street, Player player) {
+    /**
+     * Message with the values position, field name, player color and estate color is created.
+     * @return String array with values values position, field name, player color and estate.
+     */
+    private String[] generateMessageBuyEstate() {
         EstateColourToHex estateColourToHex = new EstateColourToHex();
+        Player player = game.getCurrentPlayer();
+        Street street = (Street) board.getField(player.getPosition());
+
         String[] packet = new String[4];
         packet[0] = String.valueOf(player.getPosition());
         packet[1] = street.getFieldName();

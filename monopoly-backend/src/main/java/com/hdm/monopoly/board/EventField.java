@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
+import com.hdm.monopoly.utility.ConstantInteger;
 import com.hdm.monopoly.utility.FieldPosition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,7 +68,7 @@ public class EventField implements Field{
         log.info("Event Field: Move player to 'Go' field");
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(ConstantInteger.MOVE_PLAYER_BREAK_TIME);
                 player.setPosition(FieldPosition.GO_FIELD);
                 sendPlayerData.sendPlayerToClient();
                 board.getField(FieldPosition.GO_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
@@ -85,7 +86,7 @@ public class EventField implements Field{
         log.info("Event Field: Move player to 'Park Palace' field");
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(ConstantInteger.MOVE_PLAYER_BREAK_TIME);
                 player.setPosition(FieldPosition.PARK_PALACE_FIELD);
                 sendPlayerData.sendPlayerToClient();
                 board.getField(FieldPosition.PARK_PALACE_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
@@ -123,8 +124,8 @@ public class EventField implements Field{
      *player gets 2$ from the bank
      */
     private void moneyToPlayer(SendMessage sendMessage, String[] SessionIds, Player player){
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the Bank");
-        log.info("Event Field: Player gets 2$ from the 'Bank'");
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
+        log.info("Event Field: Player gets 2$ from the 'bank'");
         player.playerGetsMoney(2);
     }
 
@@ -132,8 +133,8 @@ public class EventField implements Field{
      *player pays 1$ to the bank
      */
     private void playerPaysToBank(SendMessage sendMessage, String[] SessionIds, Player player){
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the Bank");
-        log.info("Event Field: Player pays 1$ to the 'Bank'");
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the bank");
+        log.info("Event Field: Player pays 1$ to the 'bank'");
         player.playerPaysMoney(1);
     }
 
@@ -141,11 +142,11 @@ public class EventField implements Field{
      *method sends player to Jail
      */
     private void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData){
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to Jail");
-        log.info("Event Field: Move player to 'Jail'");
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
+        log.info("Event Field: Move player to 'jail'");
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(ConstantInteger.MOVE_PLAYER_BREAK_TIME);
                 player.setPosition(FieldPosition.JAIL_FIELD);
                 player.setArrested();
                 sendPlayerData.sendPlayerToClient();

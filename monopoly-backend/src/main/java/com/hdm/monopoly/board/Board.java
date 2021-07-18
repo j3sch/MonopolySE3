@@ -37,7 +37,7 @@ public class Board {
 
     }
 
-    public int size(){
+    public int getBoardSize(){
         return board.length;
     }
 
@@ -47,7 +47,7 @@ public class Board {
      * @return we get the field for the position
      */
     public Field getField(int position){
-        if(position<0 || position>size()){
+        if(position <0 || position> getBoardSize()){
             log.error("position " + position + " is outside of the Gameboard length!");
         }
         return board[position];

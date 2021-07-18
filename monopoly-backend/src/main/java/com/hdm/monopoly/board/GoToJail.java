@@ -33,7 +33,7 @@ public class GoToJail implements Field{
         player.setPosition(FieldPosition.JAIL_FIELD);
         player.setArrested();
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to go to jail.");
-        log.info(player.getName() + " moves into jail");
+        log.info(player.getName() + " moves into Jail");
     }
 
     @Override

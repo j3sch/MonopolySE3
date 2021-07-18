@@ -41,9 +41,9 @@ public class Game {
      * This method does not take the action of rolling the dice. It has to happen before.
      * @param steps Number of fields the player should be moved
      */
-    public void movePlayer(int steps) {
+    protected void movePlayer(int steps) {
         //Calculating players new position and checking if he made a whole round around the map and is at the start again
-        int newPosition = (getCurrentPlayer().getPosition() + steps) % board.size();
+        int newPosition = (getCurrentPlayer().getPosition() + steps) % board.getBoardSize();
         if (getCurrentPlayer().getPosition() > newPosition && newPosition != 0) {
             getCurrentPlayer().playerGetsMoney(2);
         }
@@ -68,7 +68,7 @@ public class Game {
     /**
      * method which controls the end of the turn and sets the currentPlayer to the next
      */
-    public void endOfTurn() {
+    protected void endOfTurn() {
         if (getCurrentPlayer().getPlayerBankBalance() < 0) {
             sendMessage.sendToAll("/client/notification", "Player: " + getCurrentPlayer().getName() + " ran out of money");
             log.info(getCurrentPlayer().getName() + " ran out of money and lost the game");

@@ -38,7 +38,7 @@ public class FreeParking implements Field{
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
-        if(credit >=1 ){
+        if(credit >= 1){
             sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You get " + credit + " from Free Parking");
             player.playerGetsMoney(credit);
             credit = 0;
