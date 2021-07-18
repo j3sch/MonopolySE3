@@ -125,7 +125,7 @@ public class Player {
     /**
      * if JailTime is over, player gets released
      */
-    public void getReleased(){
+    public void setReleased(){
         jailTime = 0;
         log.info(name + " get released from jail");
     }

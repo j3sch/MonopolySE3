@@ -38,10 +38,10 @@ public class EventField implements Field{
         // switch activate the different event field actions with a random number
         switch (randomNumber){
             case 0:
-                playerToGo(sendMessage,SessionIds,player,sendPlayerData,board);
+                playerToGo(sendMessage, SessionIds, player, sendPlayerData, board);
                 break;
             case 1:
-                playerToParkPlace(sendMessage,SessionIds,player,sendPlayerData,board);
+                playerToParkPlace(sendMessage, SessionIds ,player, sendPlayerData ,board);
                 break;
             case 2:
                 moneyToFreeParkingTwo(sendMessage, SessionIds, player, freeParking);
@@ -50,13 +50,13 @@ public class EventField implements Field{
                 moneyToFreeParkingOne(sendMessage, SessionIds, player, freeParking);
                 break;
             case 4:
-                moneyToPlayer(sendMessage,SessionIds,player);
+                moneyToPlayer(sendMessage,SessionIds, player);
                 break;
             case 5:
-                playerPaysToBank(sendMessage,SessionIds,player);
+                playerPaysToBank(sendMessage, SessionIds, player);
                 break;
             case 6:
-                playerToJail(sendMessage,SessionIds,player,sendPlayerData,board);
+                playerToJail(sendMessage, SessionIds, player, sendPlayerData);
                 break;
         }
     }
@@ -96,7 +96,7 @@ public class EventField implements Field{
     }
 
     /**
-     *player pays 2$ to free praking
+     *player pays 2$ to free parking
      */
     private void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
         player.playerPaysMoney(2);
@@ -106,7 +106,7 @@ public class EventField implements Field{
     }
 
     /**
-     *player pays 1$ to free praking
+     *player pays 1$ to free parking
      */
     private void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
         player.playerPaysMoney(1);
@@ -134,14 +134,14 @@ public class EventField implements Field{
     /**
      *method sends player to Jail
      */
-    private void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
+    private void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData){
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
                 player.setPosition(FieldPosition.JAIL_FIELD);
+                player.setArrested();
                 sendPlayerData.sendPlayerToClient();
-                board.getField(FieldPosition.JAIL_FIELD).moveOnField(player, sendMessage, SessionIds, board, sendPlayerData);
             } catch (InterruptedException | JsonProcessingException e) {
                 e.printStackTrace();
             }

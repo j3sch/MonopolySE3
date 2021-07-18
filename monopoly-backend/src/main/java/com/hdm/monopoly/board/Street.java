@@ -43,7 +43,7 @@ public class Street implements Field {
             }
         } else {
             //player on field has to pay rent to the owner
-            if (player != owner){
+            if (player != owner && owner.getJailTime() == 0) {
                 int rentPrice = rent;
 
                 //if the owner owns all Streets of the same color double the rent price
