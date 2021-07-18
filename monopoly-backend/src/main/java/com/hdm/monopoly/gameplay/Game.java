@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class that starts and manages the game, is implemented as a singleton
+ */
 @Component
 public class Game {
     private static final Logger log = LogManager.getLogger(Game.class);

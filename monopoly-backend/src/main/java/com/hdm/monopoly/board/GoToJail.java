@@ -3,6 +3,7 @@ package com.hdm.monopoly.board;
 import com.hdm.monopoly.sendmessage.SendMessage;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.SendPlayerData;
+import com.hdm.monopoly.utility.FieldPosition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +30,7 @@ public class GoToJail implements Field{
      */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
-        player.setPosition(6);
+        player.setPosition(FieldPosition.JAIL_FIELD);
         player.setArrested();
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/notification", "You have to go to jail.");
         log.info(player.getName() + " moves into jail");

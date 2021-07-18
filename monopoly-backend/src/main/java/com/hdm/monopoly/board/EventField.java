@@ -60,10 +60,11 @@ public class EventField implements Field{
     }
 
     /**
-     *method sends player to go field
+     *method move player to go field
      */
     private void playerToGo(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to go");
+        log.info("Event Field: Move player to 'Go' field");
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
@@ -77,10 +78,11 @@ public class EventField implements Field{
     }
 
     /**
-     *method sends player to park place
+     *method move player to park place
      */
     private void playerToParkPlace(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData, Board board){
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Move to Park Place");
+        log.info("Event Field: Move player to 'Park Palace' field");
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
@@ -97,10 +99,11 @@ public class EventField implements Field{
      *player pays 2$ to free parking
      */
     private void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player, Board board){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
+        log.info("Event Field: Player pays 2$ to 'Free Parking'");
         FreeParking freeParking = (FreeParking) board.getField(FieldPosition.FREE_PARKING);
         player.playerPaysMoney(2);
         freeParking.setCredit(2);
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
         sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
     }
 
@@ -108,34 +111,38 @@ public class EventField implements Field{
      *player pays 1$ to free parking
      */
     private void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player, Board board){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
+        log.info("Event Field: Player pays 1$ to 'Free Parking'");
         FreeParking freeParking = (FreeParking) board.getField(FieldPosition.FREE_PARKING);
         player.playerPaysMoney(1);
         freeParking.setCredit(1);
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");
         sendMessage.sendToAll("/client/freeParkingCredit", String.valueOf(freeParking.getCredit()));
     }
 
     /**
-     *player gets Money from the bank
+     *player gets 2$ from the bank
      */
     private void moneyToPlayer(SendMessage sendMessage, String[] SessionIds, Player player){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the Bank");
+        log.info("Event Field: Player gets 2$ from the 'Bank'");
         player.playerGetsMoney(2);
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You get 2$ from the bank");
     }
 
     /**
-     *player pays money to the bank
+     *player pays 1$ to the bank
      */
     private void playerPaysToBank(SendMessage sendMessage, String[] SessionIds, Player player){
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the Bank");
+        log.info("Event Field: Player pays 1$ to the 'Bank'");
         player.playerPaysMoney(1);
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: You pay 1$ to the bank");
     }
 
     /**
      *method sends player to Jail
      */
     private void playerToJail(SendMessage sendMessage, String[] SessionIds, Player player, SendPlayerData sendPlayerData){
-        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to jail");
+        sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Go to Jail");
+        log.info("Event Field: Move player to 'Jail'");
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
