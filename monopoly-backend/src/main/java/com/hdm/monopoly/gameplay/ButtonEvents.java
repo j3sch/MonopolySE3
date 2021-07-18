@@ -72,7 +72,7 @@ public class ButtonEvents {
             notify.currentPlayer("You're free from prison!");
             log.info(game.getCurrentPlayer().getName() + ": has rolled a 6 and is free from jail");
         }else{
-            game.getCurrentPlayer().jailed();
+            game.getCurrentPlayer().reduceJailTime();
             notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
             log.info(game.getCurrentPlayer().getName() + ": new jail time is " + game.getCurrentPlayer().getJailTime());
         }
@@ -115,27 +115,31 @@ public class ButtonEvents {
     private String buyEstateBtnClicked() throws JsonProcessingException {
         Player player = game.getCurrentPlayer();
         Street street = (Street) board.getField(player.getPosition());
-        EstateColourToHex estateColourToHex = new EstateColourToHex();
-        String[] packet = new String[4];
-        packet[0] = String.valueOf(player.getPosition());
-        packet[1] = street.getFieldName();
-        packet [2] = player.getColour();
-        packet[3] = estateColourToHex.getHexOfColour(street.getColour().toString());
-
-        for(int i = 0; i <= 3; i++){
-            if (packet[i] == null) {
-                log.info("Packet could not be created correctly, value on Index " + i + " is null" );
-                break;}
-        }
 
         player.playerPaysMoney(street.getPrice());
         street.setOwner(player);
         log.info(player.getName() + " pays " + street.getPrice() + " to buy " + street.getFieldName());
 
-        sendMessage.sendToAll("/client/buyEstate", new ObjectMapper().writeValueAsString(packet));
+        sendMessage.sendToAll("/client/buyEstate", new ObjectMapper().writeValueAsString(generateMessageBuyEstate(street, player)));
         notify.allPlayers(player.getName() + " bought " + street.getFieldName());
         sendPlayerData.sendPlayerToClient();
 
         return new ObjectMapper().writeValueAsString(true);
+    }
+
+    private String[] generateMessageBuyEstate(Street street, Player player) {
+        EstateColourToHex estateColourToHex = new EstateColourToHex();
+        String[] packet = new String[4];
+        packet[0] = String.valueOf(player.getPosition());
+        packet[1] = street.getFieldName();
+        packet[2] = player.getColour();
+        packet[3] = estateColourToHex.getHexOfColour(street.getColour().toString());
+
+        for(int i = 0; i <= 3; i++) {
+            if (packet[i] == null) {
+                log.info("Packet could not be created correctly, value on Index " + i + " is null" );
+                break;}
+        }
+        return packet;
     }
 }

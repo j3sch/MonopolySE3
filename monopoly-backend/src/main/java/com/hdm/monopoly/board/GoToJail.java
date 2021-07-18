@@ -21,11 +21,11 @@ public class GoToJail implements Field{
 
     /**
      * function that defines what happens when a player steps on the field
-     * @param player
-     * @param sendMessage
-     * @param SessionIds
-     * @param board
-     * @param sendPlayerData
+     * @param player player who moved on "go to jail"
+     * @param sendMessage to send Messages to all Players or a specific player
+     * @param SessionIds with this id we can send a message to a specific player
+     * @param board let us access the fields
+     * @param sendPlayerData to update the player data on client side
      */
     @Override
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {

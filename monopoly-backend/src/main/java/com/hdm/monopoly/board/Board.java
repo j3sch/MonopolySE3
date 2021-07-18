@@ -5,11 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-/**
- * Class is creating the Game board. Multiple Arrays for the fieldtypes and fieldnames.
- * Also the price, rent, color,... are in Arrays sorted to all the fields.
- *
- */
 public class Board {
     private static final Logger log = LogManager.getLogger(Board.class);
 
@@ -48,8 +43,8 @@ public class Board {
 
     /**
      *
-     * @param position
-     * @return Getter for the position
+     * @param position the position of the field
+     * @return we get the field for the position
      */
     public Field getField(int position){
         if(position<0 || position>size()){

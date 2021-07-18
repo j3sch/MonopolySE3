@@ -29,6 +29,10 @@ public class SendPlayerData {
         log.info("Player array sent to client");
     }
 
+    /**
+     *
+     * @param dicedNumber the number diced by player
+     */
     public void sendDicedNumber(int dicedNumber) throws JsonProcessingException {
         sendMessage.sendToAll("/client/diceNumber", new ObjectMapper().writeValueAsString(dicedNumber));
         log.info("Dice number sent to client");

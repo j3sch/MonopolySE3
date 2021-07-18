@@ -11,7 +11,7 @@ public class Player {
 
     private int position;
     private final Account account;
-    private String name;
+    private final String name;
     private final String colour;
 
     private final int ID;
@@ -118,7 +118,7 @@ public class Player {
     /**
      * used if player is in Jail
      */
-    public void jailed(){
+    public void reduceJailTime(){
         --jailTime;
     }
 

@@ -11,16 +11,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Class that starts and manages the game, is implemented as a singleton
- */
 @Component
 public class Game {
     private static final Logger log = LogManager.getLogger(Game.class);
 
-    // These two attributes enable a connection between a map and players
-    private final Player[] players; /*we assume the game knows on its creation how many players there are.
-    That could be achieved by a controller class that manages the network communication*/
+    private final Player[] players;
     private final Board board;
     SendMessage sendMessage;
     String[] sessionIds;
@@ -35,7 +30,6 @@ public class Game {
         this.sendMessage = sendMessage;
         this.sessionIds = sessionIds;
         this.sendPlayerData = sendPlayerData;
-        //based on the playerCount the Players are created and gets put into the players ArrayList
         log.info("New Object 'Game' created");
     }
 
@@ -44,7 +38,6 @@ public class Game {
      * This method does not take the action of rolling the dice. It has to happen before.
      * @param steps Number of fields the player should be moved
      */
-
     public void movePlayer(int steps) {
         //Calculating players new position and checking if he made a whole round around the map and is at the start again
         int newPosition = (getCurrentPlayer().getPosition() + steps) % board.size();
@@ -89,6 +82,9 @@ public class Game {
         }
     }
 
+    /**
+     * Look which player has the most money, and then name that player as the winner.
+     */
     private void getWinner() {
         int amountMoney = getCurrentPlayer().getPlayerBankBalance() ;
         int winner = 0;
