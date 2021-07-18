@@ -73,8 +73,13 @@ public class ButtonEvents {
             log.info(game.getCurrentPlayer().getName() + ": has rolled a 6 and is free from jail");
         }else{
             game.getCurrentPlayer().reduceJailTime();
-            notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
-            log.info(game.getCurrentPlayer().getName() + ": new jail time is " + game.getCurrentPlayer().getJailTime());
+            if (game.getCurrentPlayer().getJailTime() > 0) {
+                notify.currentPlayer("Your prison time is " + game.getCurrentPlayer().getJailTime());
+                log.info(game.getCurrentPlayer().getName() + ": new jail time is " + game.getCurrentPlayer().getJailTime());
+            } else {
+                notify.currentPlayer("You're free from prison!");
+                log.info("You're free from prison!");
+            }
         }
     }
 
