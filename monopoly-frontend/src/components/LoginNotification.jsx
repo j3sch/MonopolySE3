@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const LoginNotification = ({ message, closeLoginNotification, backgroundColor }) => {
+const LoginNotification = ({
+	message,
+	closeLoginNotification,
+	backgroundColor,
+}) => {
 	useEffect(() => {
-		let loginNotificationTime = setTimeout(() => {
+		const loginNotificationTime = setTimeout(() => {
 			closeLoginNotification();
 		}, 4000);
 		return () => {

@@ -1,9 +1,9 @@
+import React, { useContext } from 'react';
 import { GameField } from './GameFields';
 import { gameFieldData } from '~/data/gameFieldData';
 import { borderColor } from '~/utils/borderColor';
 import { EventFieldCard } from './EventFieldCard';
 import NotificationMessage from './NotificationMessage';
-import React, { useContext } from 'react';
 import { PlayerContext } from '~/utils/PlayerContext';
 
 export function GameBoard() {

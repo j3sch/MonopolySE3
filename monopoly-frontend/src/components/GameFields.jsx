@@ -23,8 +23,7 @@ const fields = {
 	chanceX: ChanceXField,
 	chanceY: ChanceYField,
 };
-
-export const GameField = (props) => {
+export function GameField(props) {
 	const { condition } = props;
 
 	const Fields = fields[condition];
