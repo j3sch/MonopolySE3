@@ -40,14 +40,6 @@ public class Game {
     }
 
     /**
-     * Standard getter for the board.
-     * @return Board of the running game.
-     */
-    public Board getBoard(){
-        return board;
-    }
-
-    /**
      * This method moves the player to his new position and executes the field action.
      * This method does not take the action of rolling the dice. It has to happen before.
      * @param steps Number of fields the player should be moved

@@ -2,6 +2,7 @@ package com.hdm.monopoly.gameplay;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdm.monopoly.board.Board;
 import com.hdm.monopoly.helper.EstateColourToHex;
 import com.hdm.monopoly.player.Player;
 import com.hdm.monopoly.sendmessage.Notify;
@@ -27,16 +28,18 @@ public class ButtonEvents {
     private final SendMessage sendMessage;
     private final Notify notify;
     private final Countdown countdown;
+    private final Board board;
 
     @Autowired
     public ButtonEvents(Game game, SendPlayerData sendPlayerData, String[] sessionIds,
-                        SendMessage sendMessage, Notify notify, Countdown countdown) {
+                        SendMessage sendMessage, Notify notify, Countdown countdown, Board board) {
         this.game = game;
         this.sendPlayerData = sendPlayerData;
         this.sessionIds = sessionIds;
         this.sendMessage = sendMessage;
         this.notify = notify;
         this.countdown = countdown;
+        this.board = board;
         log.info("New Object 'DiceNumber' created");
     }
 
@@ -111,7 +114,7 @@ public class ButtonEvents {
     @SendToUser("/client/toggleBuyEstateBtn")
     private String buyEstateBtnClicked() throws JsonProcessingException {
         Player player = game.getCurrentPlayer();
-        Street street = (Street)game.getBoard().getField(player.getPosition());
+        Street street = (Street) board.getField(player.getPosition());
         EstateColourToHex estateColourToHex = new EstateColourToHex();
         String[] packet = new String[4];
         packet[0] = String.valueOf(player.getPosition());
@@ -124,7 +127,6 @@ public class ButtonEvents {
                 log.info("Packet could not be created correctly, value on Index " + i + " is null" );
                 break;}
         }
-
 
         player.playerPaysMoney(street.getPrice());
         street.setOwner(player);
