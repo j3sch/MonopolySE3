@@ -7,7 +7,6 @@ import com.hdm.monopoly.sendmessage.SendPlayerData;
 /**
  * Interface with the function that defines what happens when an player steps on it
  */
-
 public interface Field {
     void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData);
 

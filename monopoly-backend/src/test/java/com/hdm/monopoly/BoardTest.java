@@ -110,6 +110,4 @@ public class BoardTest {
         assertEquals(board.getField(0).getFieldName(), "Go");
         assertEquals(go.getGoValue(), 2);
     }
-
-
 }

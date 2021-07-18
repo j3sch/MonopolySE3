@@ -33,8 +33,6 @@ public class EventField implements Field{
     public void moveOnField(Player player, SendMessage sendMessage, String[] SessionIds, Board board, SendPlayerData sendPlayerData) {
 
         int randomNumber = (int) (Math.random() * 7);
-        FreeParking freeParking = (FreeParking) board.getField(FieldPosition.FREE_PARKING);
-
         // switch activate the different event field actions with a random number
         switch (randomNumber){
             case 0:
@@ -44,10 +42,10 @@ public class EventField implements Field{
                 playerToParkPlace(sendMessage, SessionIds ,player, sendPlayerData ,board);
                 break;
             case 2:
-                moneyToFreeParkingTwo(sendMessage, SessionIds, player, freeParking);
+                moneyToFreeParkingTwo(sendMessage, SessionIds, player, board);
                break;
             case 3:
-                moneyToFreeParkingOne(sendMessage, SessionIds, player, freeParking);
+                moneyToFreeParkingOne(sendMessage, SessionIds, player, board);
                 break;
             case 4:
                 moneyToPlayer(sendMessage,SessionIds, player);
@@ -98,7 +96,8 @@ public class EventField implements Field{
     /**
      *player pays 2$ to free parking
      */
-    private void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
+    private void moneyToFreeParkingTwo(SendMessage sendMessage, String[] SessionIds, Player player, Board board){
+        FreeParking freeParking = (FreeParking) board.getField(FieldPosition.FREE_PARKING);
         player.playerPaysMoney(2);
         freeParking.setCredit(2);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 2$ to Free Parking");
@@ -108,7 +107,8 @@ public class EventField implements Field{
     /**
      *player pays 1$ to free parking
      */
-    private void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player,FreeParking freeParking){
+    private void moneyToFreeParkingOne(SendMessage sendMessage, String[] SessionIds, Player player, Board board){
+        FreeParking freeParking = (FreeParking) board.getField(FieldPosition.FREE_PARKING);
         player.playerPaysMoney(1);
         freeParking.setCredit(1);
         sendMessage.sendToPlayer(SessionIds[player.getID()], "/client/eventFieldMessage", "Event Field: Pay 1$ to Free Parking");

@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 /**
  * implemented field type that represents the free parking field
  */
-
 public class FreeParking implements Field{
     private static final Logger log = LogManager.getLogger();
 
